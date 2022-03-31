@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WithWheel">
         <activity
+            android:name=".res_information"
+            android:exported="false" />
+        <activity
+            android:name=".res_search"
+            android:exported="false" />
+        <activity
+            android:name=".map_search"
+            android:exported="false" />
+        <activity
+            android:name=".mypagee"
+            android:exported="false" />
+        <activity
             android:name=".mypage"
             android:exported="false" />
         <activity
