@@ -21,6 +21,27 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <include  layout="@layout/toolbar"/>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onButton1clicked"
+            android:text="로그인" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onButton2Clicked"
+            android:text="교통편 안내" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onButton3Clicked"
+            android:text="휠체어 급속 충전기 위치 찾기" />
     </LinearLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
