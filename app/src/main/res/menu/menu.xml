@@ -2,16 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_person"
-        android:title="person"
+        android:id="@+id/menu1"
+        android:title="마이페이지"
         app:showAsAction="always"/>
     <item
-        android:id="@+id/menu_android"
-        android:title="android"
+        android:id="@+id/menu2"
+        android:title="편리시설 찾기"
         app:showAsAction="always"/>
     <item
-        android:id="@+id/menu_bookmark"
-        android:title="bookmark"
+        android:id="@+id/menu3"
+        android:title="휠체어 관련 정보 안내"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/menu4"
+        android:title="설정"
         app:showAsAction="always"/>
 
 </menu>

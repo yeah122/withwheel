@@ -1,75 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
     <include  layout="@layout/toolbar"/>
 
-    <TextView
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/login_password"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="LOGIN"/>
-    <!--layout_gravity: view를 감싸는 상위 뷰(Linear Layout)를 기준으로 할때 뷰의 위치-->
-    <!--gravity: view 내부의 content의 위치 설정-->
-    <!--사진 넣고싶으면 되도록 src에 집어넣기-->
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@null"
-        android:src="@mipmap/ic_launcher" />
+        android:layout_marginBottom="44dp"
+        android:ems="10"
+        android:hint="비밀번호"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/login_button"
+        app:layout_constraintStart_toStartOf="@+id/login_email" />
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="50dp"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="50dp"/>
+        android:id="@+id/login_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:ems="10"
+        android:hint="이메일"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/login_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Log in"/>
-    <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/join_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="or"/>
+        android:layout_marginBottom="208dp"
+        android:text="가입"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:onClick="joinbutton"
+        app:layout_constraintEnd_toEndOf="@+id/login_password" />
+
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Facebook"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:weightSum="1">
-        <!--자식들을 중앙정렬 하고 싶으면 부모에게 속성을 준다.-->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="24sp"
-            android:text="Find Password"
-            android:layout_weight="0.5"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="24sp"
-            android:text="Sign Up"
-            android:layout_weight="0.5"/>
+        android:onClick="joinbotton"
+        android:text="로그인"
+        app:layout_constraintBaseline_toBaselineOf="@+id/join_button"
+        app:layout_constraintStart_toStartOf="@+id/login_password" />
 
-    </LinearLayout>
-</LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

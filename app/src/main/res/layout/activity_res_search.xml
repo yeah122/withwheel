@@ -23,16 +23,15 @@
             android:id="@+id/search_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:translationY="50"
+            android:translationY="50dp"
             app:iconifiedByDefault="false"
-            app:queryHint="검색어를 입력하시오" />
+            app:queryHint="주소 검색" />
     </LinearLayout>
 
     <LinearLayout
 
         android:layout_width="413dp"
         android:layout_height="100dp"
-        android:background="@color/colorPrimary"
         android:gravity="bottom"
         android:orientation="horizontal">
 
@@ -58,25 +57,7 @@
             android:layout_weight="1"
             android:text="관광지" />
 
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="관광지" />
 
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="대여소" />
-
-        <Button
-            android:id="@+id/button6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="급속충전기" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

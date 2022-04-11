@@ -20,7 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <include  layout="@layout/toolbar"/>
+
+        <include layout="@layout/toolbar" />
 
         <Button
             android:id="@+id/button"
@@ -33,15 +34,32 @@
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="onButton2Clicked"
-            android:text="교통편 안내" />
+            android:onClick="onButton2clicked"
+            android:text="편의시설 찾기" />
+
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onButton3Clicked"
+            android:text="경로 추천" />
 
         <Button
             android:id="@+id/button4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="onButton3Clicked"
-            android:text="휠체어 급속 충전기 위치 찾기" />
+            android:onClick="onButton4clicked"
+            android:text="휠체어 급속 충전기 및 휠체어 대여소 찾기" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="map"
+            android:text="지도띄우기" />
+
+
     </LinearLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

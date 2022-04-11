@@ -10,6 +10,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WithWheel">
         <activity
+            android:name=".mypage"
+            android:exported="false" />
+        <activity
+            android:name=".setting"
+            android:exported="false" />
+        <activity
+            android:name=".route"
+            android:exported="false" />
+        <activity
+            android:name=".review"
+            android:exported="false" />
+        <activity
+            android:name=".rental_charge"
+            android:exported="false" />
+        <activity
+            android:name=".like_it"
+            android:exported="false" />
+        <activity
             android:name=".res_information"
             android:exported="false" />
         <activity
@@ -17,12 +35,6 @@
             android:exported="false" />
         <activity
             android:name=".map_search"
-            android:exported="false" />
-        <activity
-            android:name=".mypagee"
-            android:exported="false" />
-        <activity
-            android:name=".mypage"
             android:exported="false" />
         <activity
             android:name=".login_main"

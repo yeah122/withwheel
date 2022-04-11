@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:baselineAligned="false">
+    android:background="#FFFFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,22 +14,27 @@
         tools:layout_editor_absoluteX="-90dp"
         tools:layout_editor_absoluteY="16dp">
 
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include  layout="@layout/toolbar"/>
+
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:translationY="50dp"
             app:iconifiedByDefault="false"
-            app:queryHint="검색어를 입력하시오" />
+            app:queryHint="주소 검색" />
 
     </LinearLayout>
 
-    <include  layout="@layout/toolbar"/>
-
     <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="413dp"
+        android:layout_height="100dp"
         android:gravity="bottom"
         android:orientation="horizontal">
 
@@ -39,37 +43,18 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="주출입구&#10;접근로" />
+            android:layout_weight="0.2"
+            android:text="전동 휠체어 급속충전기 위치" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="장애인&#10;주차장"/>
+            android:text="휠체어 대여소 찾기" />
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="장애인&#10;승강기" />
 
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="안내&#10;서비스" />
 
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="장애인&#10;화장실" />
 
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
