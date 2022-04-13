@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".setting">
 
-    <include  layout="@layout/toolbar"/>
+    <include
+        android:id="@+id/include2"
+        layout="@layout/toolbar" />
 
     <Switch
         android:id="@+id/switch1"
@@ -15,7 +17,10 @@
         android:text="위치 정보 동의"
         android:translationY="1dp"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="67dp" />
+        tools:layout_editor_absoluteY="67dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/textView25"
@@ -24,7 +29,10 @@
         android:text="문의하기"
         android:translationY="1dp"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="104dp" />
+        tools:layout_editor_absoluteY="104dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

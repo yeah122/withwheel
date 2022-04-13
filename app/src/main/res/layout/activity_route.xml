@@ -12,45 +12,50 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <fragment
+            android:id="@+id/map_fragment"
+            android:name="com.naver.maps.map.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="400dp" />
 
         <TextView
             android:id="@+id/textView14"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:layout_marginBottom="35px"
             android:layout_marginLeft="60px"
             android:layout_marginRight="120px"
+            android:layout_marginBottom="35px"
+            android:gravity="center_horizontal"
             android:text="청계천&#10;서울특별시 종로구 청계천로 1"
-            android:translationY="80dp"
-            />
+            android:textAlignment="center"
+            android:translationY="20dp" />
 
         <TextView
             android:id="@+id/textView15"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:gravity="center"
+            android:gravity="center_horizontal"
             android:layout_marginBottom="35px"
             android:layout_marginLeft="60px"
             android:layout_marginRight="120px"
             android:text="명동할머니국수&#10;서울특별시 종로구 ..."
-            android:translationY="140dp"/>
+            android:translationY="90dp"/>
 
         <TextView
             android:id="@+id/textView16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="center_horizontal"
             android:layout_marginBottom="35px"
             android:layout_marginLeft="60px"
             android:layout_marginRight="120px"
             android:text="00호텔&#10;서울특별시 종로구 ..."
             android:textAlignment="center"
-            android:translationY="200dp" />
+            android:translationY="160dp" />
     </LinearLayout>
 
     <include  layout="@layout/toolbar"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
