@@ -16,8 +16,8 @@ public class login extends AppCompatActivity {
     }
 
     public void joinbutton(View view) {
-        Toast.makeText(getApplicationContext(), "회원가입 완료!", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, login_main.class);
         startActivity(intent);
+        Toast.makeText(getApplicationContext(), "회원가입 완료!", Toast.LENGTH_LONG).show();
     }
 }
