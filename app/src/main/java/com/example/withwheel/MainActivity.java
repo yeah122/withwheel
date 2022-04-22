@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -15,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 public class MainActivity extends AppCompatActivity {
+    
     private static final String TAG = "Main_Activity";
 
     private ImageView ivMenu;
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onButton1clicked(View view) {
-        Intent intent = new Intent(this, login_main.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 
