@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1072397128008",
+    "project_id": "withwheel-ec34a",
+    "storage_bucket": "withwheel-ec34a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1072397128008:android:347bb73d5b029981bba37d",
+        "android_client_info": {
+          "package_name": "com.example.withwheel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1072397128008-0skt0rr1ab51ouogun3lq0japniq6fm4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnOOfH36z7i0CrWFI-bzzDdvHlgX-eeJs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1072397128008-0skt0rr1ab51ouogun3lq0japniq6fm4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
