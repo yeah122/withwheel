@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.drawerlayout.widget.DrawerLayout
-    android:id="@+id/drawer"
+<LinearLayout
+    android:id="@+id/linear"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    tools:context=".home">
+
 
 
     <LinearLayout
@@ -17,50 +19,103 @@
 
         <include layout="@layout/toolbar" />
 
-        <Button
-            android:id="@+id/button"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="onButton1clicked"
-            android:text="로그인" />
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginVertical="20dp">
 
-        <Button
-            android:id="@+id/button2"
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="이메일을 입력하세요"
+                android:inputType="textEmailAddress"
+                android:layout_marginVertical="10dp"/>
+
+            <EditText
+                android:id="@+id/et_pwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="비밀번호를 입력하세요"
+                android:inputType="textPassword"
+                android:layout_marginVertical="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btn_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:text="로그인"/>
+
+
+                <Button
+                    android:id="@+id/btn_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:text="회원가입"
+                    android:backgroundTint="@color/purple_200"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="onButton2clicked"
-            android:text="편의시설 찾기" />
+            android:orientation="vertical"
+            android:layout_marginHorizontal="10dp">
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onButton2clicked"
+                android:text="편의시설 찾기" />
 
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onButton3Clicked"
-            android:text="경로 추천" />
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onButton3Clicked"
+                android:text="경로 추천" />
 
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onButton4clicked"
-            android:text="휠체어 급속 충전기 및 휠체어 대여소 찾기" />
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onButton4clicked"
+                android:text="휠체어 급속 충전기 및 휠체어 대여소 찾기" />
 
-        <Button
-            android:id="@+id/button6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="map"
-            android:text="지도띄우기" />
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="map"
+                android:text="지도띄우기" />
 
-        <!-- 탭호스트 창으로 넘어가기 -->
-        <Button
-            android:id="@+id/btnTabHost"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="탭호스트 창으로 넘어가기"/>
+            <!-- 탭호스트 창으로 넘어가기 -->
+            <Button
+                android:id="@+id/btnTabHost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="탭호스트 창으로 넘어가기"/>
+        </LinearLayout>
+
+
 
 
     </LinearLayout>
 
-</androidx.drawerlayout.widget.DrawerLayout>
+</LinearLayout>

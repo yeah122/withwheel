@@ -46,7 +46,9 @@ import java.security.PublicKey;
 public class map_search extends AppCompatActivity implements OnMapReadyCallback, Overlay.OnClickListener {
 
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference mConditionRef = mDatabase.child("records").child("0");
+    DatabaseReference mConditionRef = mDatabase.child("DATA").child("3");
+
+    Marker marker = new Marker();
 
     private static final String TAG = "MainActivity";
 
@@ -56,7 +58,7 @@ public class map_search extends AppCompatActivity implements OnMapReadyCallback,
             Manifest.permission.ACCESS_COARSE_LOCATION
     };
 
-    Marker marker = new Marker();
+
     public FusedLocationSource mLocationSource;
     public NaverMap mNaverMap;
 
@@ -64,8 +66,14 @@ public class map_search extends AppCompatActivity implements OnMapReadyCallback,
 
     TextView textView;
     String name1, name2, name, address;
-    public static Double lat = 37.5666805, lng = 126.9783740;
+    public static Double lat, lng; // lat = 37.5670135, lng = 126.9783740
 
+    Callback callback;
+
+    public interface Callback{
+        void success(String data);
+        void fail(String errorMessage);
+    }
 
 
     @Override
@@ -90,10 +98,10 @@ public class map_search extends AppCompatActivity implements OnMapReadyCallback,
                 new FusedLocationSource(this, PERMISSION_REQUEST_CODE);
 
         textView = (TextView) findViewById(R.id.title) ;
-        mConditionRef.child("경도").addValueEventListener(new ValueEventListener() {
+        mConditionRef.child("longitude").addValueEventListener(new ValueEventListener() {
 
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {//위도
                 name1 = dataSnapshot.getValue(String.class);
                 lng = Double.parseDouble(name1);
                 //textView.setText(name);
@@ -101,11 +109,11 @@ public class map_search extends AppCompatActivity implements OnMapReadyCallback,
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                callback.fail(error.getMessage());
             }
         });
 
-        mConditionRef.child("위도").addValueEventListener(new ValueEventListener() {
+        mConditionRef.child("latitude").addValueEventListener(new ValueEventListener() {//경도
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -116,11 +124,11 @@ public class map_search extends AppCompatActivity implements OnMapReadyCallback,
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                callback.fail(error.getMessage());
             }
         });
 
-        mConditionRef.child("시설명").addValueEventListener(new ValueEventListener() {
+        mConditionRef.child("fcltynm").addValueEventListener(new ValueEventListener() { //시설명
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -131,11 +139,11 @@ public class map_search extends AppCompatActivity implements OnMapReadyCallback,
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                callback.fail(error.getMessage());
             }
         });
 
-        mConditionRef.child("소재지도로명주소").addValueEventListener(new ValueEventListener() {
+        mConditionRef.child("rdnmadr").addValueEventListener(new ValueEventListener() {//도로명주소
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -144,6 +152,7 @@ public class map_search extends AppCompatActivity implements OnMapReadyCallback,
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                callback.fail(error.getMessage());
 
             }
         });
@@ -162,7 +171,7 @@ public class map_search extends AppCompatActivity implements OnMapReadyCallback,
 
         marker.setWidth(100);
         marker.setHeight(100);
-        marker.setIcon(OverlayImage.fromResource(R.drawable.img));
+        marker.setIcon(OverlayImage.fromResource(R.drawable.location_pin));
         marker.setOnClickListener(this);
 
         // NaverMap 객체 받아서 NaverMap 객체에 위치 소스 지정
@@ -173,7 +182,7 @@ public class map_search extends AppCompatActivity implements OnMapReadyCallback,
         UiSettings uiSettings = mNaverMap.getUiSettings();
         uiSettings.setCompassEnabled(false); // 기본값 : true
         uiSettings.setScaleBarEnabled(false); // 기본값 : true
-        uiSettings.setZoomControlEnabled(false); // 기본값 : true
+        //uiSettings.setZoomControlEnabled(false); // 기본값 : true
         uiSettings.setLocationButtonEnabled(false); // 기본값 : false
         uiSettings.setLogoGravity(Gravity.RIGHT | Gravity.BOTTOM);
 
@@ -218,14 +227,17 @@ public class map_search extends AppCompatActivity implements OnMapReadyCallback,
             Marker marker = (Marker) overlay;
             if (marker.getInfoWindow() != null) {
                 mInfoWindow.close();
-                Toast.makeText(this.getApplicationContext(), "InfoWindow Close.", Toast.LENGTH_LONG).show();
+                //Toast.makeText(this.getApplicationContext(), "InfoWindow Close.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this.getApplicationContext(), "InfoWindow Close", Toast.LENGTH_SHORT).show();
             }
             else {
                 mInfoWindow.open(marker);
-                Toast.makeText(this.getApplicationContext(), "InfoWindow Open.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this.getApplicationContext(), "InfoWindow Open.", Toast.LENGTH_SHORT).show();
             }
             return true;
         }
         return false;
     }
+
+
 }

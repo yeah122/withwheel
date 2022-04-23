@@ -1,5 +1,6 @@
 package com.example.withwheel;
 
+import android.app.TabActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,77 +8,83 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TabHost;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends TabActivity {
 
-    private static final String TAG = "Main_Activity";
-    Button btnTabHost;
-
-    private DrawerLayout drawerLayout;
-    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.tab_host);
 
-        btnTabHost = (Button) findViewById(R.id.btnTabHost);
-        drawerLayout = findViewById(R.id.drawer);
-        toolbar = findViewById(R.id.toolbar);
 
-        //액션바 변경하기(들어갈 수 있는 타입 : Toolbar type
-        setSupportActionBar(toolbar);
+        TabHost tabHost = getTabHost(); //탭 호스트 객체 생성
 
-        //-----------------------------------
-        //탭호스트 버튼
-        btnTabHost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, tabHost.class);
-                startActivity(intent);
-            }
-        });
+        // 탭스팩 선언하고, 탭의 내부 명칭, 탭에 출력될 글 작성
+        TabHost.TabSpec spec;
+        Intent intent; //객체
 
-        //탭호스트 버튼
-        //------------------------------------
+
+        //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
+        intent = new Intent().setClass(this, home.class);
+        spec = tabHost.newTabSpec("home"); // 객체를 생성
+        spec.setIndicator("메인"); //탭의 이름 설정
+        spec.setContent(intent);
+        tabHost.addTab(spec);
+
+        //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
+        intent = new Intent().setClass(this, map_search.class);
+        spec = tabHost.newTabSpec("map_search"); // 객체를 생성
+        spec.setIndicator("시설"); //탭의 이름 설정
+        spec.setContent(intent);
+        tabHost.addTab(spec);
+
+
+        //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
+        intent = new Intent().setClass(this, route.class);
+        spec = tabHost.newTabSpec("route"); // 객체를 생성
+        spec.setIndicator("경로추천"); //탭의 이름 설정
+        spec.setContent(intent);
+        tabHost.addTab(spec);
+
+
+        //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
+        intent = new Intent().setClass(this, rental_charge.class);
+        spec = tabHost.newTabSpec("rental_charge"); // 객체를 생성
+        spec.setIndicator("휠체어 충전기"); //탭의 이름 설정
+        spec.setContent(intent);
+        tabHost.addTab(spec);
+
+
+        //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
+        intent = new Intent().setClass(this, mypage.class);
+        spec = tabHost.newTabSpec("mypage"); // 객체를 생성
+        spec.setIndicator("마이페이지"); //탭의 이름 설정
+        spec.setContent(intent);
+        tabHost.addTab(spec);
+
+
+        tabHost.setCurrentTab(0); //먼저 열릴 탭을 선택!(설정 순서대로 0부터 시작)
+
+
     }
 
-    public void onButton1clicked(View view) {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-    }
 
-    public void onButton2clicked(View view) {
-        Intent intent = new Intent(this, res_search.class);
-        startActivity(intent);
-    }
-
-    public void onButton3Clicked(View view) {
-        Intent intent = new Intent(this, route.class);
-        startActivity(intent);
-    }
-
-    public void onButton4clicked(View view) {
-        Intent intent = new Intent(this, rental_charge.class);
-        startActivity(intent);
-    }
-
-    public void onButton5clicked(View view) {
-        Toast.makeText(this, "급속충전기 위치", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://data.seoul.go.kr/dataList/OA-15813/S/1/datasetView.do"));
-        startActivity(intent);
-    }
-
-    public void map(View view) {
-        Intent intent = new Intent(MainActivity.this, map_search.class);
-        startActivity(intent);
-    }
 }
