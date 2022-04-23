@@ -9,12 +9,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="end"
-        app:menu="@menu/menu" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -58,6 +52,13 @@
             android:layout_height="wrap_content"
             android:onClick="map"
             android:text="지도띄우기" />
+
+        <!-- 탭호스트 창으로 넘어가기 -->
+        <Button
+            android:id="@+id/btnTabHost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="탭호스트 창으로 넘어가기"/>
 
 
     </LinearLayout>

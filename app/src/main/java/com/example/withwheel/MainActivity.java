@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -13,36 +14,41 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-public class MainActivity extends AppCompatActivity {
-    
-    private static final String TAG = "Main_Activity";
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-    private ImageView ivMenu;
+public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "Main_Activity";
+    Button btnTabHost;
+
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
 
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ivMenu = findViewById(R.id.iv_menu);
+        btnTabHost = (Button) findViewById(R.id.btnTabHost);
         drawerLayout = findViewById(R.id.drawer);
         toolbar = findViewById(R.id.toolbar);
 
         //액션바 변경하기(들어갈 수 있는 타입 : Toolbar type
         setSupportActionBar(toolbar);
 
-        ivMenu.setOnClickListener(new View.OnClickListener() {
+        //-----------------------------------
+        //탭호스트 버튼
+        btnTabHost.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                //Log.d(TAG, "onClick: 클릭됨"); //이게 뭘까
-                drawerLayout.openDrawer(Gravity.RIGHT);
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, tabHost.class);
+                startActivity(intent);
             }
         });
-    }
 
+        //탭호스트 버튼
+        //------------------------------------
+    }
 
     public void onButton1clicked(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
@@ -74,28 +80,4 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, map_search.class);
         startActivity(intent);
     }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu1:
-                Intent intent = new Intent(this, mypage.class);
-                startActivity(intent);
-                break;
-
-            case R.id.menu2:
-                Intent intent1 = new Intent(this, res_information.class);
-                startActivity(intent1);
-                break;
-
-            case R.id.menu3:
-                Intent intent2 = new Intent(this, rental_charge.class);
-                startActivity(intent2);
-                break;
-
-            case R.id.menu4:
-                Intent intent3 = new Intent(this, setting.class);
-                startActivity(intent3);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }}
+}

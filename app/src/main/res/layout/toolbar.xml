@@ -32,20 +32,5 @@
         android:text -> 쓸 말
         -->
 
-        <ImageView
-            android:id="@+id/iv_menu"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            app:tint="@color/white"
-            app:srcCompat="@drawable/menu" />
-        <!--
-        app:tint -> 검정색 메뉴 이미지를 흰색으로 바꿈
-        -->
     </RelativeLayout>
 </androidx.appcompat.widget.Toolbar>
