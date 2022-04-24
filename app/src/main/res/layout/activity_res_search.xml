@@ -57,21 +57,21 @@
 
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/restaurant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="식당" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/hotel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="숙박" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/attractive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -3,6 +3,8 @@ package com.example.withwheel;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.util.Printer;
 import android.view.Gravity;
@@ -42,13 +44,24 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.PublicKey;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class map_search extends AppCompatActivity implements OnMapReadyCallback, Overlay.OnClickListener {
 
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference mConditionRef = mDatabase.child("DATA").child("3");
+    DatabaseReference mConditionRef = mDatabase.child("DATA");
 
+    List<Marker> markerArr = new ArrayList<>();
     Marker marker = new Marker();
+
+
+    //Executor excutor = new SomeExcutor();
+    //Handler handler = new Handler(Looper.getMainLooper());
+
 
     private static final String TAG = "MainActivity";
 
@@ -58,14 +71,16 @@ public class map_search extends AppCompatActivity implements OnMapReadyCallback,
             Manifest.permission.ACCESS_COARSE_LOCATION
     };
 
-
     public FusedLocationSource mLocationSource;
-    public NaverMap mNaverMap;
+    private static NaverMap mNaverMap;
 
     public InfoWindow mInfoWindow;
 
     TextView textView;
-    String name1, name2, name, address;
+    String name1, name2, name, address, call;
+
+    //final Double[] latArr = new Double[5];
+    //final Double[] lngArr = new Double[5];
     public static Double lat, lng; // lat = 37.5670135, lng = 126.9783740
 
     Callback callback;
@@ -81,6 +96,7 @@ public class map_search extends AppCompatActivity implements OnMapReadyCallback,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_search);
 
+
         // 지도 객체 생성
         FragmentManager fm = getSupportFragmentManager();
         MapFragment mapFragment = (MapFragment) fm.findFragmentById(R.id.map_fragment);
@@ -94,60 +110,75 @@ public class map_search extends AppCompatActivity implements OnMapReadyCallback,
         mapFragment.getMapAsync(this);
 
         // 위치를 반환하는 구현체인 FusedLocationSource 생성
-        mLocationSource =
-                new FusedLocationSource(this, PERMISSION_REQUEST_CODE);
+        mLocationSource = new FusedLocationSource(this, PERMISSION_REQUEST_CODE);
 
         textView = (TextView) findViewById(R.id.title) ;
-        mConditionRef.child("longitude").addValueEventListener(new ValueEventListener() {
+        //for (Integer i = 0; i <5; i++){
+            //Integer index = i;
+            mConditionRef.child("0").child("longitude").addValueEventListener(new ValueEventListener() {
 
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {//위도
-                name1 = dataSnapshot.getValue(String.class);
-                lng = Double.parseDouble(name1);
-                //textView.setText(name);
-            }
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {//위도
+                    name1 = dataSnapshot.getValue(String.class);
+                    lng = Double.parseDouble(name1);
+                    //lngArr[index] = lng;
+                    //textView.setText(name);
+                }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                callback.fail(error.getMessage());
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    callback.fail(error.getMessage());
+                }
+            });
 
-        mConditionRef.child("latitude").addValueEventListener(new ValueEventListener() {//경도
+            mConditionRef.child("0").child("latitude").addValueEventListener(new ValueEventListener() {//경도
+
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    name2 = dataSnapshot.getValue(String.class);
+                    lat = Double.parseDouble(name2);
+                    //latArr[index] = lat;
+                    //textView.setText(name);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    callback.fail(error.getMessage());
+                }
+            });
+
+            mConditionRef.child("0").child("fcltynm").addValueEventListener(new ValueEventListener() { //시설명
+
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    name = dataSnapshot.getValue(String.class);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    callback.fail(error.getMessage());
+                }
+            });
+
+            mConditionRef.child("0").child("rdnmadr").addValueEventListener(new ValueEventListener() {//도로명주소
+
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    address = dataSnapshot.getValue(String.class);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    callback.fail(error.getMessage());
+
+                }
+            });
+
+        mConditionRef.child("0").child("institutionphonenumber").addValueEventListener(new ValueEventListener() {//전화번호
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                name2 = dataSnapshot.getValue(String.class);
-                lat = Double.parseDouble(name2);
-                //textView.setText(name);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                callback.fail(error.getMessage());
-            }
-        });
-
-        mConditionRef.child("fcltynm").addValueEventListener(new ValueEventListener() { //시설명
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                name = dataSnapshot.getValue(String.class);
-                //lat = Double.parseDouble(name2);
-                //textView.setText(name);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                callback.fail(error.getMessage());
-            }
-        });
-
-        mConditionRef.child("rdnmadr").addValueEventListener(new ValueEventListener() {//도로명주소
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                address = dataSnapshot.getValue(String.class);
+                call = dataSnapshot.getValue(String.class);
             }
 
             @Override
@@ -156,6 +187,8 @@ public class map_search extends AppCompatActivity implements OnMapReadyCallback,
 
             }
         });
+        //}
+
     }
 
 
@@ -163,16 +196,15 @@ public class map_search extends AppCompatActivity implements OnMapReadyCallback,
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         Log.d(TAG, "onMapReady");
-
         // 지도상에 마커 표시
-
         marker.setPosition(new LatLng(lat, lng));
         marker.setMap(naverMap);
 
         marker.setWidth(100);
         marker.setHeight(100);
         marker.setIcon(OverlayImage.fromResource(R.drawable.location_pin));
-        marker.setOnClickListener(this);
+        markerArr.add(marker);
+        marker.setMap(naverMap);
 
         // NaverMap 객체 받아서 NaverMap 객체에 위치 소스 지정
         mNaverMap = naverMap;
@@ -200,7 +232,8 @@ public class map_search extends AppCompatActivity implements OnMapReadyCallback,
                 PlaceInfo info = (PlaceInfo) marker.getTag();
                 View view = View.inflate(map_search.this, R.layout.mapsearch_infowindow, null);
                 ((TextView) view.findViewById(R.id.title)).setText(name);
-                ((TextView) view.findViewById(R.id.details)).setText("도로명 주소: " + address);
+                ((TextView) view.findViewById(R.id.address)).setText("도로명 주소: " + address);
+                ((TextView) view.findViewById(R.id.call)).setText("전화번호: " + call);
 
                 return view;
             }
@@ -208,6 +241,7 @@ public class map_search extends AppCompatActivity implements OnMapReadyCallback,
     }
 
     /*
+    // 현재위치로 이동
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

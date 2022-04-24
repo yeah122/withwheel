@@ -76,41 +76,10 @@
             android:orientation="vertical"
             android:layout_marginHorizontal="10dp">
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
+            <ImageView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="onButton2clicked"
-                android:text="편의시설 찾기" />
-
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="onButton3Clicked"
-                android:text="경로 추천" />
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="onButton4clicked"
-                android:text="휠체어 급속 충전기 및 휠체어 대여소 찾기" />
-
-            <Button
-                android:id="@+id/button6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="map"
-                android:text="지도띄우기" />
-
-            <!-- 탭호스트 창으로 넘어가기 -->
-            <Button
-                android:id="@+id/btnTabHost"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="탭호스트 창으로 넘어가기"/>
+                android:src="@drawable/map"/>
         </LinearLayout>
 
 

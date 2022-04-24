@@ -61,6 +61,7 @@
 
         <activity android:name=".RegisterActivity" />
         <activity android:name=".home"/>
+        <activity android:name=".after_login"/>
 
     </application>
 
