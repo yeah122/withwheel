@@ -200,11 +200,12 @@ public class map_search extends AppCompatActivity implements OnMapReadyCallback,
         marker.setPosition(new LatLng(lat, lng));
         marker.setMap(naverMap);
 
-        marker.setWidth(100);
-        marker.setHeight(100);
-        marker.setIcon(OverlayImage.fromResource(R.drawable.location_pin));
-        markerArr.add(marker);
-        marker.setMap(naverMap);
+        marker.setWidth(100); //마커 크기 지정
+        marker.setHeight(100);// 마커 크기지정
+        marker.setIcon(OverlayImage.fromResource(R.drawable.location_pin)); // 마커 아이콘 설정
+        marker.setOnClickListener(this); // 인포윈도우 실행
+        //markerArr.add(marker); // 마커 리스트에 마커 추가
+        marker.setMap(naverMap); // 마커 지도에 띄우기
 
         // NaverMap 객체 받아서 NaverMap 객체에 위치 소스 지정
         mNaverMap = naverMap;
@@ -220,21 +221,17 @@ public class map_search extends AppCompatActivity implements OnMapReadyCallback,
 
         // 권한확인. 결과는 onRequestPermissionsResult 콜백 매서드 호출
         ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_REQUEST_CODE);
-
         mInfoWindow = new InfoWindow();
-
         mInfoWindow.setAdapter(new InfoWindow.DefaultViewAdapter(this) {
             @NonNull
             @Override
             public View getContentView(@NonNull InfoWindow infoWindow) {
-
                 Marker marker = infoWindow.getMarker();
-                PlaceInfo info = (PlaceInfo) marker.getTag();
+                //PlaceInfo info = (PlaceInfo) marker.getTag();
                 View view = View.inflate(map_search.this, R.layout.mapsearch_infowindow, null);
                 ((TextView) view.findViewById(R.id.title)).setText(name);
                 ((TextView) view.findViewById(R.id.address)).setText("도로명 주소: " + address);
                 ((TextView) view.findViewById(R.id.call)).setText("전화번호: " + call);
-
                 return view;
             }
         });
@@ -259,14 +256,14 @@ public class map_search extends AppCompatActivity implements OnMapReadyCallback,
     public boolean onClick(@NonNull Overlay overlay) {
         if (overlay instanceof Marker) {
             Marker marker = (Marker) overlay;
-            if (marker.getInfoWindow() != null) {
+            if (marker.getInfoWindow() != null) { // 마커 재클릭시 인포윈도우 없애기
                 mInfoWindow.close();
                 //Toast.makeText(this.getApplicationContext(), "InfoWindow Close.", Toast.LENGTH_LONG).show();
                 Toast.makeText(this.getApplicationContext(), "InfoWindow Close", Toast.LENGTH_SHORT).show();
             }
-            else {
+            else { // 마커 클릭시 인포윈도우 띄우기
                 mInfoWindow.open(marker);
-                Toast.makeText(this.getApplicationContext(), "InfoWindow Open.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this.getApplicationContext(), name, Toast.LENGTH_SHORT).show();
             }
             return true;
         }

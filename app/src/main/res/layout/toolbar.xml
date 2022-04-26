@@ -20,12 +20,12 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
+            android:layout_marginVertical="5dp"
+            android:padding="5dp"
             android:gravity="center"
             android:text="위드휠"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
+            android:textSize="20dp"
             android:textStyle="bold" />
         <!-- 주석은 태그 밖에만 둘 수 있음
         android:id -> 각 요소에 정해주는 id, 클릭했을 때 기능 넣어주기 위해선 id 필요, id는 중복 설정 불가

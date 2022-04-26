@@ -42,7 +42,7 @@ public class after_login extends AppCompatActivity {
             // authenticate with your backend server, if you have one. Use
             // FirebaseUser.getIdToken() instead.
             String uid = user.getUid();
-            textID.setText(email);
+            textID.setText(name);
 
         }
     }
