@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".scrollview"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="-50dp"
+        android:layout_marginBottom="0dp"
+        android:translationY="55dp"
+        >
+
+
+        <Button
+            android:id="@+id/btn_res"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="btn_res"
+            android:text="식당" />
+
+
+        <Button
+            android:id="@+id/btn_hotel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="btn_hotel"
+            android:text="숙박" />
+
+        <Button
+            android:id="@+id/btn_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="btn_place"
+            android:text="관광지"/>
+        <Button
+            android:id="@+id/btn_rental"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="대여소"
+            android:onClick="btn_rental"/>
+        <Button
+            android:id="@+id/btn_charge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="급속충전기"
+            android:onClick="btn_charge"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:orientation="vertical"
+        android:translationY="60dp">
+
+        <LinearLayout
+            android:id="@+id/res_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:textSize="20sp"
+                android:text="식당 정보라능"
+                android:layout_gravity="center" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:textSize="20sp"
+                android:text="식당 정보라능2"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:textSize="20sp"
+                android:text="식당 정보라능3"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:textSize="20sp"
+                android:text="식당 정보라능4"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:textSize="20sp"
+                android:text="식당 정보라능5"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="97dp"
+                android:layout_gravity="center"
+                android:text="식당 정보라능6"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:textSize="20sp"
+                android:text="식당 정보라능7"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:textSize="20sp"
+                android:text="식당 정보라능8"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+    </ScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:translationY="130dp">
+
+        <Button
+            android:id="@+id/btn_map"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:onClick="btn_map"
+            android:text="지도로 보기" />
+    </LinearLayout>
+
+
+</LinearLayout>

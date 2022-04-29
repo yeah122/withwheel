@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.withwheel">
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,6 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WithWheel">
+        <activity
+            android:name=".scrollview"
+            android:exported="false" />
         <activity
             android:name=".mypage"
             android:exported="false" />
@@ -37,7 +42,6 @@
         <activity
             android:name=".map_search"
             android:exported="false" />
-
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -47,24 +51,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="kju7s5d1h8" />
 
-        <activity android:name=".LoginActivity" android:exported="true" >
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".home"/>
-        <activity android:name=".after_login"/>
-
+        <activity android:name=".home" />
+        <activity android:name=".after_login" />
     </application>
-
-
 
 </manifest>
