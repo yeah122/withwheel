@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WithWheel">
         <activity
+            android:name=".sangpe"
+            android:exported="false" />
+        <activity
             android:name=".scrollview"
             android:exported="false" />
         <activity
