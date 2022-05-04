@@ -114,65 +114,65 @@ public class map_search extends AppCompatActivity implements OnMapReadyCallback,
 
         textView = (TextView) findViewById(R.id.title) ;
         //for (Integer i = 0; i <5; i++){
-            //Integer index = i;
-            mConditionRef.child("0").child("longitude").addValueEventListener(new ValueEventListener() {
+        //Integer index = i;
+        mConditionRef.child("0").child("longitude").addValueEventListener(new ValueEventListener() {
 
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {//위도
-                    name1 = dataSnapshot.getValue(String.class);
-                    lng = Double.parseDouble(name1);
-                    //lngArr[index] = lng;
-                    //textView.setText(name);
-                }
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {//위도
+                name1 = dataSnapshot.getValue(String.class);
+                lng = Double.parseDouble(name1);
+                //lngArr[index] = lng;
+                //textView.setText(name);
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    callback.fail(error.getMessage());
-                }
-            });
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                callback.fail(error.getMessage());
+            }
+        });
 
-            mConditionRef.child("0").child("latitude").addValueEventListener(new ValueEventListener() {//경도
+        mConditionRef.child("0").child("latitude").addValueEventListener(new ValueEventListener() {//경도
 
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    name2 = dataSnapshot.getValue(String.class);
-                    lat = Double.parseDouble(name2);
-                    //latArr[index] = lat;
-                    //textView.setText(name);
-                }
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                name2 = dataSnapshot.getValue(String.class);
+                lat = Double.parseDouble(name2);
+                //latArr[index] = lat;
+                //textView.setText(name);
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    callback.fail(error.getMessage());
-                }
-            });
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                callback.fail(error.getMessage());
+            }
+        });
 
-            mConditionRef.child("0").child("fcltynm").addValueEventListener(new ValueEventListener() { //시설명
+        mConditionRef.child("0").child("fcltynm").addValueEventListener(new ValueEventListener() { //시설명
 
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    name = dataSnapshot.getValue(String.class);
-                }
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                name = dataSnapshot.getValue(String.class);
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    callback.fail(error.getMessage());
-                }
-            });
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                callback.fail(error.getMessage());
+            }
+        });
 
-            mConditionRef.child("0").child("rdnmadr").addValueEventListener(new ValueEventListener() {//도로명주소
+        mConditionRef.child("0").child("rdnmadr").addValueEventListener(new ValueEventListener() {//도로명주소
 
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    address = dataSnapshot.getValue(String.class);
-                }
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                address = dataSnapshot.getValue(String.class);
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    callback.fail(error.getMessage());
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                callback.fail(error.getMessage());
 
-                }
-            });
+            }
+        });
 
         mConditionRef.child("0").child("institutionphonenumber").addValueEventListener(new ValueEventListener() {//전화번호
 
