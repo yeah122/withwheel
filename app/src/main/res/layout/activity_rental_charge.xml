@@ -26,6 +26,19 @@
 
     </LinearLayout>
 
+    <EditText
+        android:id="@+id/sample_EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:inputType="text"
+        android:translationY="50dp"
+        tools:ignore="MissingConstraints"
+        android:maxLines="1"
+        android:imeOptions="actionSearch"
+        android:hint="검색어를 입력하시오"/>
+
     <LinearLayout
         android:id="@+id/linearLayout7"
         android:layout_width="0dp"
@@ -38,12 +51,6 @@
 
         <include layout="@layout/toolbar" />
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:iconifiedByDefault="false"
-            app:queryHint="주소 검색" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

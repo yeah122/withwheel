@@ -12,11 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WithWheel">
+        <activity
+            android:name=".sisul"
+            android:exported="false" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA_DHw1jp3ncMGYJ7fBTcjynqiAURYzabg">
+            android:value="AIzaSyA_DHw1jp3ncMGYJ7fBTcjynqiAURYzabg" />
 
-        </meta-data>
         <activity
             android:name=".sangpe"
             android:exported="false" />
@@ -67,7 +69,6 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

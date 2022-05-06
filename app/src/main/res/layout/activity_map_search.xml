@@ -9,37 +9,96 @@
     android:background="#FFFFFF"
     tools:context=".MainActivity">
 
-    <fragment
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/map"
-        tools:context=".MapsActivity"
-        android:name="com.google.android.gms.maps.SupportMapFragment" />
+        android:orientation="vertical">
+
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".MapsActivity" />
+
+
+
+    <EditText
+        android:id="@+id/sample_EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:inputType="text"
+        android:translationY="150dp"
+        tools:ignore="MissingConstraints"
+        android:maxLines="1"
+        android:imeOptions="actionSearch"
+        android:hint="검색어를 입력하시오"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="리스트로 보기"
+            android:translationY="100dp"
+            android:onClick="toolist">
+
+        </Button>
 
 
     <LinearLayout
+        android:id="@+id/linearLayout8"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".MainActivity"
-        >
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-50dp"
+        android:layout_marginBottom="0dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:translationY="100dp"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_view"
-            android:layout_width="match_parent"
+
+        <Button
+            android:id="@+id/btn_ress"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:translationY="50dp"
-            app:iconifiedByDefault="false"
-            app:queryHint="주소 검색" />
+            android:layout_weight="1"
+            android:text="식당" />
 
+        <Button
+            android:id="@+id/btn_hotell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="숙박" />
 
+        <Button
+            android:id="@+id/btn_placee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="관광지" />
 
+        <Button
+            android:id="@+id/btn_rentall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="대여소" />
+
+        <Button
+            android:id="@+id/btn_chargee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="급속충전기" />
 
 
     </LinearLayout>
 
-    <include  layout="@layout/toolbar"/>
+    <include
+        android:id="@+id/include3"
+        layout="@layout/toolbar" />
 
 
-
+</FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

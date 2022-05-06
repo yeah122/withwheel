@@ -31,14 +31,18 @@
         android:id="@+id/include"
         layout="@layout/toolbar" />
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_view"
+    <EditText
+        android:id="@+id/sample_EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:inputType="text"
         android:translationY="50dp"
-        app:iconifiedByDefault="false"
-        app:queryHint="검색어를 입력하시오"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:maxLines="1"
+        android:imeOptions="actionSearch"
+        android:hint="검색어를 입력하시오"/>
 
     <LinearLayout
 

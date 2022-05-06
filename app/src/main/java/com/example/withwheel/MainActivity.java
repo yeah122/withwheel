@@ -51,7 +51,7 @@ public class MainActivity extends TabActivity {
         tabHost.addTab(spec);
 
         //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
-        intent = new Intent().setClass(this, map_search.class);
+        intent = new Intent().setClass(this, sisul.class);
         spec = tabHost.newTabSpec("map_search"); // 객체를 생성
         spec.setIndicator("시설"); //탭의 이름 설정
         spec.setContent(intent);

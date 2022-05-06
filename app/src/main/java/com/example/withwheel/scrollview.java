@@ -14,7 +14,7 @@ public class scrollview extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrollview);
     }
-    LinearLayout res = (LinearLayout) findViewById(R.id.res_scroll);
+
 
     public void btn_res(View view){
 
@@ -31,7 +31,7 @@ public class scrollview extends AppCompatActivity {
     public void btn_charge(View view) {
 
     }
-    public void btn_map(View view) {
+    public void toomap(View view) {
         Intent intent = new Intent(this, map_search.class);
         startActivity(intent);
     }

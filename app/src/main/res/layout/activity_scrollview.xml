@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,7 +9,6 @@
     android:orientation="vertical">
 
     <include layout="@layout/toolbar" />
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,86 +57,118 @@
             android:onClick="btn_charge"/>
 
     </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:translationY="50dp"
+        android:text="지도로 보기"
+        android:onClick="toomap">
+    </Button>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:translationY="60dp">
+        android:translationY="50dp"
+        android:id="@+id/res_scroll">
 
         <LinearLayout
-            android:id="@+id/res_scroll"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:textSize="20sp"
-                android:text="식당 정보라능"
-                android:layout_gravity="center" />
+                android:layout_height="wrap_content"
+                android:text="식당정보1"
+                android:textSize="32dp"/>
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:textSize="20sp"
-                android:text="식당 정보라능2"
-                android:layout_gravity="center"/>
+                android:layout_height="wrap_content"
+                android:text="식당정보2"
+                android:textSize="32dp"/>
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:textSize="20sp"
-                android:text="식당 정보라능3"
-                android:layout_gravity="center"/>
+                android:layout_height="wrap_content"
+                android:text="식당정보3"
+                android:textSize="32dp"/>
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:textSize="20sp"
-                android:text="식당 정보라능4"
-                android:layout_gravity="center"/>
+                android:layout_height="wrap_content"
+                android:text="식당정보4"
+                android:textSize="32dp"/>
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:textSize="20sp"
-                android:text="식당 정보라능5"
-                android:layout_gravity="center" />
+                android:layout_height="wrap_content"
+                android:text="식당정보5"
+                android:textSize="32dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="식당정보6"
+                android:textSize="32dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="식당정보7"
+                android:textSize="32dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="식당정보8"
+                android:textSize="32dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="식당정보9"
+                android:textSize="32dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="식당정보10"
+                android:textSize="32dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="식당정보11"
+                android:textSize="32dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="식당정보12"
+                android:textSize="32dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="식당정보13"
+                android:textSize="32dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="식당정보14"
+                android:textSize="32dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="식당정보15"
+                android:textSize="32dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="식당정보16"
+                android:textSize="32dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="식당정보17"
+                android:textSize="32dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="식당정보18"
+                android:textSize="32dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="97dp"
-                android:layout_gravity="center"
-                android:text="식당 정보라능6"
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:textSize="20sp"
-                android:text="식당 정보라능7"
-                android:layout_gravity="center"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:textSize="20sp"
-                android:text="식당 정보라능8"
-                android:layout_gravity="center"/>
         </LinearLayout>
+
     </ScrollView>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:translationY="130dp">
-
-        <Button
-            android:id="@+id/btn_map"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:onClick="btn_map"
-            android:text="지도로 보기" />
-    </LinearLayout>
-
 
 </LinearLayout>
