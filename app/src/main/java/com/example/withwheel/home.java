@@ -1,12 +1,19 @@
 package com.example.withwheel;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,136 +22,224 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class home extends AppCompatActivity {
 
-    private static FirebaseAuth mFirebaseAuth;//파이어베이스 인증
-    private DatabaseReference mDatabaseRef;//실시간 데이터베이스
-    private EditText mEtEmail, mEtPwd;//회원가입 입력필드
+    private static String TAG = "home";
 
-    private static final String TAG = "Main_Activity";
+    private static final String TAG_JSON = "person";
+    private static final String TAG_ID = "userid";
+    private static final String TAG_PASS = "password";
+    private static final String TAG_NAME = "nickname";
 
-    private LinearLayout linearLayout;
-    private Toolbar toolbar;
+    private TextView mTextViewResult;
+    ArrayList<HashMap<String, String>> mArrayList;
+    ListView mListViewList;
+    private EditText mEditTextID, mEditTextPass;
+    Button btn_login, btn_register;
+    public String mJsonString;
+    private AlertDialog dialog;
 
-    TextView textID;
-    Button btnLogout;
+    String loginSort;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("withwheel");
+        TextView forgotText = (TextView) findViewById(R.id.forgotText);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        mTextViewResult = (TextView)findViewById(R.id.textView_main_result);
+        mEditTextID = (EditText) findViewById(R.id.et_id);
+        mEditTextPass = (EditText) findViewById(R.id.et_pass);
 
-        linearLayout = findViewById(R.id.linear);
-        toolbar = findViewById(R.id.toolbar);
+        mEditTextPass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
-        //액션바 변경하기(들어갈 수 있는 타입 : Toolbar type
-        setSupportActionBar(toolbar);
-
-        // 유저정보 없으면 로그인창
-        if (user == null) {
-            setContentView(R.layout.activity_main);
-
-            mEtEmail = findViewById(R.id.et_email);
-            mEtPwd = findViewById(R.id.et_pwd);
+        btn_register = findViewById(R.id.btn_register);
+        btn_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
-            Button btn_login = findViewById(R.id.btn_login);
-            btn_login.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View view)
-                {
-                    //로그인 요청
-                    String strEmail = mEtEmail.getText().toString();
-                    String strPwd = mEtPwd.getText().toString();
+        btn_login = findViewById(R.id.btn_login);
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
 
-                    mFirebaseAuth.signInWithEmailAndPassword(strEmail, strPwd).addOnCompleteListener(home.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task)
-                        {
-                            if(task.isSuccessful()){
-                                //  로그인 성공
-                                //Intent intent = new Intent(home.this, after_login.class);
-                                //startActivity(intent);
-                                //finish();//현재 액티비티 파괴
+                mArrayList.clear();
 
-                                textID = (TextView) findViewById(R.id.textID);
-                                // Name, email address, and profile photo Url
-                                String name = user.getDisplayName();
-                                String email = user.getEmail();
-                                Uri photoUrl = user.getPhotoUrl();
 
-                                // Check if user's email is verified
-                                boolean emailVerified = user.isEmailVerified();
+                home.GetData task = new home.GetData();
+                task.execute("http://10.0.2.2/login.php", mEditTextID.getText().toString(), mEditTextPass.getText().toString());
 
-                                // The user's ID, unique to the Firebase project. Do NOT use this value to
-                                // authenticate with your backend server, if you have one. Use
-                                // FirebaseUser.getIdToken() instead.
-                                String uid = user.getUid();
-                                textID.setText(email + " 님");
-                            }
-                            else{
-                                Toast.makeText(home.this, "로그인에 실패하였습니다", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                }
-            });
+            }
+        });
 
-            Button btn_register = findViewById(R.id.btn_register);
-            btn_register.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view)
-                {
-                    //회원가입 화면으로 이동
-                    Intent intent = new Intent(home.this, RegisterActivity.class);
-                    startActivity(intent);
-                }
-            });
+
+        mArrayList = new ArrayList<>();
+
+    }
+
+    private class GetData extends AsyncTask<String, Void, String> {
+
+        ProgressDialog progressDialog;
+        String errorString = null;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = ProgressDialog.show(home.this,
+                    "Please Wait", null, true, true);
         }
 
-        //유저정보 있으면 프로필창
-        else {
-            setContentView(R.layout.after_login);
 
-            textID = (TextView) findViewById(R.id.textID);
-            btnLogout = (Button) findViewById(R.id.btnLogout);
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
 
-            // Name, email address, and profile photo Url
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-            Uri photoUrl = user.getPhotoUrl();
+            progressDialog.dismiss();
+            //mTextViewResult.setText(result);
+            Log.d(TAG, "response - " + result);
 
-            // Check if user's email is verified
-            boolean emailVerified = user.isEmailVerified();
+            if (result == null){
 
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getIdToken() instead.
-            String uid = user.getUid();
-            textID.setText(email + " 님");
+                mTextViewResult.setText(errorString);
+            }
+            else {
+                mJsonString = result;
+                showResult();
+            }
+        }
 
-            //logout button event
-            btnLogout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mFirebaseAuth.signOut();
-                    setContentView(R.layout.activity_main);
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String userid = (String)params[1];
+            String password = (String)params[2];
+
+            String serverURL = (String)params[0];//"http://10.0.2.2/login.php";
+            String postParameters = "userid=" + userid + "&password=" + password;
+
+
+            try {
+
+                URL url = new URL(serverURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.connect();
+
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d(TAG, "POST response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
                 }
-            });
+                else{
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line;
+
+                while((line = bufferedReader.readLine()) != null){
+                    sb.append(line);
+                }
+
+
+                bufferedReader.close();
+
+
+                return sb.toString();
+
+
+            } catch (Exception e) {
+
+                Log.d(TAG, "InsertData: Error ", e);
+
+                return new String("Error: " + e.getMessage());
+            }
+
         }
     }
+
+    private void showResult(){
+
+        try {
+            JSONObject jsonObject = new JSONObject(mJsonString);
+            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
+            //JSONArray jsonArray = new JSONArray(TAG_JSON);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+
+                JSONObject item = jsonArray.getJSONObject(i);
+
+                String userid = item.getString(TAG_ID);
+                String password = item.getString(TAG_PASS);
+
+                HashMap<String,String> hashMap = new HashMap<>();
+
+                hashMap.put(TAG_ID, userid);
+                hashMap.put(TAG_PASS, password);
+
+                mArrayList.add(hashMap);
+
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                AlertDialog.Builder builder = new AlertDialog.Builder(home.this);
+                dialog = builder.setMessage(userid + "님 로그인 되었습니다.")
+                        .setNegativeButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                intent.putExtra("loginID", mEditTextID.getText().toString());
+                                startActivity(intent);
+                            }
+                        })
+
+                        .create();
+                dialog.show();
+
+
+                return;
+            }
+        } catch (JSONException e) {
+            Toast.makeText(getApplicationContext(), mJsonString, Toast.LENGTH_LONG).show();
+            Log.d(TAG, "showResult: ", e);
+        }
+
+    }
+
 
 }

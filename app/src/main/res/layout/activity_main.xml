@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout
     android:id="@+id/linear"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -10,81 +9,76 @@
     android:orientation="vertical"
     tools:context=".home">
 
-
+    <include layout="@layout/toolbar" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginVertical="20dp">
 
-        <include layout="@layout/toolbar" />
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/loginText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_gravity="center"
             android:gravity="center"
-            android:layout_marginVertical="20dp">
+            android:text="LOG-IN"
+            android:textSize="25dp">
 
-            <EditText
-                android:id="@+id/et_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="이메일을 입력하세요"
-                android:inputType="textEmailAddress"
-                android:layout_marginVertical="10dp"/>
+        </TextView>
 
-            <EditText
-                android:id="@+id/et_pwd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="비밀번호를 입력하세요"
-                android:inputType="textPassword"
-                android:layout_marginVertical="10dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
-
-                <Button
-                    android:id="@+id/btn_login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:text="로그인"/>
-
-
-                <Button
-                    android:id="@+id/btn_register"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:text="회원가입"
-                    android:backgroundTint="@color/purple_200"/>
-            </LinearLayout>
-
-
-        </LinearLayout>
+        <EditText
+            android:id="@+id/et_id"
+            android:layout_width="match_parent"
+            android:hint="아이디를 입력하세요."
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="16dp">
+        </EditText>
+        <EditText
+            android:id="@+id/et_pass"
+            android:layout_width="match_parent"
+            android:hint="비밀번호를 입력하세요."
+            android:layout_height="50dp"
+            android:layout_marginBottom="16dp">
+        </EditText>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginHorizontal="10dp">
+            android:orientation="horizontal">
 
-            <ImageView
+            <Button
+                android:id="@+id/btn_login"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/map"/>
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="로그인">
+            </Button>
+
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="회원가입">
+            </Button>
+
         </LinearLayout>
 
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="10dp">
 
-
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/map"/>
     </LinearLayout>
 
 </LinearLayout>
