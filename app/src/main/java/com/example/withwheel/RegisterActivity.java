@@ -1,10 +1,15 @@
 package com.example.withwheel;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,62 +23,160 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity
 {
-    private FirebaseAuth mFirebaseAuth;//파이어베이스 인증
-    private DatabaseReference mDatabaseRef;//실시간 데이터베이스
-    private EditText mEtEmail, mEtPwd, mEtName;//회원가입 입력필드
-    private Button mBtnRegister;//회원가입 버튼
+    private static String IP_ADDRESS = "10.0.2.2";//다음 줄에 있는 IP 주소를 아파치 웹서버가 설치된  컴퓨터의 IP
+    private static String TAG = "withwheel";//
+
+    private EditText mEditTextID;
+    private EditText mEditTextPassword;
+    private EditText mEditTextPassword2;
+    private EditText mEditTextNickname;
+    private TextView mTextViewResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("withwheel");
+        mEditTextID = (EditText)findViewById(R.id.editText_main_name);
+        mEditTextPassword = (EditText)findViewById(R.id.editText_main_Password);
+        mEditTextPassword2 = (EditText) findViewById(R.id.editText_main_Password2);
+        mEditTextNickname = (EditText) findViewById(R.id.editText_main_nickname);
 
-        mEtEmail = findViewById(R.id.et_email);
-        mEtPwd = findViewById(R.id.et_pwd);
-        mEtName = findViewById(R.id.et_name);//닉네임
-        mBtnRegister = findViewById(R.id.btn_register);
+        mTextViewResult = (TextView)findViewById(R.id.textView_main_result);
 
-        mBtnRegister.setOnClickListener(new View.OnClickListener()
-        {
+        mTextViewResult.setMovementMethod(new ScrollingMovementMethod());
+
+
+        Button buttonInsert = (Button)findViewById(R.id.button_main_insert);
+        buttonInsert.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-                //회원가입 처리 시작
-                String strEmail = mEtEmail.getText().toString();
-                String strPwd = mEtPwd.getText().toString();
-                String strName = mEtName.getText().toString();
+            public void onClick(View v) {
 
-                //Firebase Auth 진행
-                mFirebaseAuth.createUserWithEmailAndPassword(strEmail, strPwd).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task)
-                    {
+                String userid = mEditTextID.getText().toString();
+                String password = mEditTextPassword.getText().toString();
+                String password2 = mEditTextPassword2.getText().toString();
+                String nickname = mEditTextNickname.getText().toString();
 
-                        if(task.isSuccessful()) {
-                            FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-                            UserAccount account = new UserAccount();
-                            account.setIdToken(firebaseUser.getUid());
-                            account.setEmailId(firebaseUser.getEmail());
-                            account.setPassword(strPwd);
+                // 비밀번호 확인
+                if(password.equals(password2)){
+                    InsertData task = new InsertData();
+                    task.execute("http://" + IP_ADDRESS + "/insert.php", userid, password, nickname);
 
-                            //setValue : database에 insert (삽입) 행위
-                            mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).setValue(account);
-                            mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).setValue("name", strName);
+                    mEditTextID.setText("");
+                    mEditTextPassword.setText("");
+                    mEditTextPassword2.setText("");
+                    mEditTextNickname.setText("");
+                    Toast.makeText(RegisterActivity.this, "회원가입 완료.", Toast.LENGTH_SHORT).show();
 
-                            Toast.makeText(RegisterActivity.this, "회원가입에 성공하였습니다.", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(RegisterActivity.this, "회원가입에 실패하셨습니다.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                }
+
+                else {
+                    Toast.makeText(RegisterActivity.this, "비밀번호가 다릅니다.", Toast.LENGTH_SHORT).show();
+                    mEditTextPassword.setText("");
+                    mEditTextPassword2.setText("");
+                }
+
             }
         });
+    }
+
+    class InsertData extends AsyncTask<String, Void, String> {
+        ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            progressDialog = ProgressDialog.show(RegisterActivity.this,
+                    "Please Wait", null, true, true);
+        }
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            progressDialog.dismiss();
+            mTextViewResult.setText(result);
+            Log.d(TAG, "POST response  - " + result);
+        }
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String userid = (String)params[1];
+            String password = (String)params[2];
+            String nickname = (String)params[3];
+
+            String serverURL = (String)params[0];
+            String postParameters = "userid=" + userid + "&password=" + password + "&nickname=" + nickname;
+
+
+            try {
+
+                URL url = new URL(serverURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+
+                httpURLConnection.setReadTimeout(5000);
+                httpURLConnection.setConnectTimeout(5000);
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.connect();
+
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                outputStream.write(postParameters.getBytes("UTF-8"));
+                outputStream.flush();
+                outputStream.close();
+
+
+                int responseStatusCode = httpURLConnection.getResponseCode();
+                Log.d(TAG, "POST response code - " + responseStatusCode);
+
+                InputStream inputStream;
+                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                    inputStream = httpURLConnection.getInputStream();
+                }
+                else{
+                    inputStream = httpURLConnection.getErrorStream();
+                }
+
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+
+                while((line = bufferedReader.readLine()) != null){
+                    sb.append(line);
+                }
+
+
+                bufferedReader.close();
+
+
+                return sb.toString();
+
+
+            } catch (Exception e) {
+
+                Log.d(TAG, "InsertData: Error ", e);
+
+                return new String("Error: " + e.getMessage());
+            }
+
+        }
     }
 }
