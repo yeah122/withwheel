@@ -1,6 +1,8 @@
 package com.example.withwheel;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,6 +25,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -41,6 +47,8 @@ public class RegisterActivity extends AppCompatActivity
     private EditText mEditTextPassword2;
     private EditText mEditTextNickname;
     private TextView mTextViewResult;
+
+    public String insert_result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,12 +80,6 @@ public class RegisterActivity extends AppCompatActivity
                     InsertData task = new InsertData();
                     task.execute("http://" + IP_ADDRESS + "/insert.php", userid, password, nickname);
 
-                    mEditTextID.setText("");
-                    mEditTextPassword.setText("");
-                    mEditTextPassword2.setText("");
-                    mEditTextNickname.setText("");
-                    Toast.makeText(RegisterActivity.this, "회원가입 완료.", Toast.LENGTH_SHORT).show();
-
                 }
 
                 else {
@@ -92,6 +94,7 @@ public class RegisterActivity extends AppCompatActivity
 
     class InsertData extends AsyncTask<String, Void, String> {
         ProgressDialog progressDialog;
+        String errorString = null;
 
         @Override
         protected void onPreExecute() {
@@ -107,8 +110,15 @@ public class RegisterActivity extends AppCompatActivity
             super.onPostExecute(result);
 
             progressDialog.dismiss();
-            mTextViewResult.setText(result);
+
             Log.d(TAG, "POST response  - " + result);
+
+            if (result == "새로운 사용자를 추가했습니다."){
+                showResult();
+            }
+            else {
+                mTextViewResult.setText(result);
+            }
         }
 
 
@@ -178,5 +188,30 @@ public class RegisterActivity extends AppCompatActivity
             }
 
         }
+    }
+
+    private void showResult(){
+
+                mEditTextID.setText("");
+                mEditTextPassword.setText("");
+                mEditTextPassword2.setText("");
+                mEditTextNickname.setText("");
+                Toast.makeText(RegisterActivity.this, "회원가입 완료.", Toast.LENGTH_SHORT).show();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                builder.setTitle("회원가입").setMessage("방가방가");
+                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+
+                return;
+
     }
 }

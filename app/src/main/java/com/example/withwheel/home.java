@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -39,7 +40,7 @@ public class home extends AppCompatActivity {
 
     private static String TAG = "home";
 
-    private static final String TAG_JSON = "person";
+    private static final String TAG_JSON = "persons";
     private static final String TAG_ID = "userid";
     private static final String TAG_PASS = "password";
     private static final String TAG_NAME = "nickname";
@@ -54,6 +55,10 @@ public class home extends AppCompatActivity {
 
     String loginSort;
 
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,11 +72,15 @@ public class home extends AppCompatActivity {
 
         mEditTextPass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
+
+        preferences = getSharedPreferences("UserInfo", MODE_PRIVATE);
+        editor = preferences.edit();
+
         btn_register = findViewById(R.id.btn_register);
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(intent);
             }
         });
@@ -86,11 +95,8 @@ public class home extends AppCompatActivity {
 
                 home.GetData task = new home.GetData();
                 task.execute("http://10.0.2.2/login.php", mEditTextID.getText().toString(), mEditTextPass.getText().toString());
-
             }
         });
-
-
         mArrayList = new ArrayList<>();
 
     }
