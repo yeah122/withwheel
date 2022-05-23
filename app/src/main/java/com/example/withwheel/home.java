@@ -64,7 +64,6 @@ public class home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView forgotText = (TextView) findViewById(R.id.forgotText);
 
         mTextViewResult = (TextView)findViewById(R.id.textView_main_result);
         mEditTextID = (EditText) findViewById(R.id.et_id);
@@ -94,7 +93,7 @@ public class home extends AppCompatActivity {
 
 
                 home.GetData task = new home.GetData();
-                task.execute("http://10.0.2.2/login.php", mEditTextID.getText().toString(), mEditTextPass.getText().toString());
+                task.execute("http://192.168.0.2/login.php", mEditTextID.getText().toString(), mEditTextPass.getText().toString());
             }
         });
         mArrayList = new ArrayList<>();
