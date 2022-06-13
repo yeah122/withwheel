@@ -24,27 +24,20 @@
             android:layout_height="match_parent"
             tools:context=".MapsActivity" />
 
-
-
-    <EditText
-        android:id="@+id/sample_EditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="10"
-        android:inputType="text"
-        android:translationY="150dp"
-        tools:ignore="MissingConstraints"
-        android:maxLines="1"
-        android:imeOptions="actionSearch"
-        android:hint="검색어를 입력하시오"/>
+        <androidx.appcompat.widget.SearchView
+            android:layout_marginTop="150dp"
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:iconifiedByDefault="false"
+            app:queryHint="주소 검색" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="리스트로 보기"
             android:translationY="100dp"
-            android:onClick="toolist">
+            android:id="@+id/toolist">
 
         </Button>
 
@@ -72,25 +65,17 @@
             android:id="@+id/btn_hotell"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="숙박" />
 
         <Button
             android:id="@+id/btn_placee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="관광지" />
 
-        <Button
-            android:id="@+id/btn_rentall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="대여소" />
 
-        <Button
-            android:id="@+id/btn_chargee"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="급속충전기" />
 
 
     </LinearLayout>

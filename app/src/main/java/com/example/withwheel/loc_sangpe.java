@@ -36,30 +36,32 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class res_sangpe extends FragmentActivity{
+public class loc_sangpe extends FragmentActivity{
 
-    private static String TAG = "res_sangpe";
+    private static String TAG = "loc";
 
-    private static final String TAG_JSON = "hotel";
+    private static final String TAG_JSON = "place";
     private static final String TAG_PLACE_NAME = "place_name";
     private static final String TAG_PLACE_ADDRESS = "place_address";
     private static final String TAG_PLACE_NUMBER = "place_number";
     private static final String TAG_PLACE_HOMEPAGE = "place_homepage";
+    private static final String TAG_PLACE_LIKES = "place_likes";
     private static final String TAG_PLACE_ENTER = "place_enter";
-    private static final String TAG_PLACE_PARKING = "place_parking";
     private static final String TAG_PLACE_ELEVATOR = "place_elevator";
     private static final String TAG_PLACE_REST = "place_rest";
-    private static final String TAG_PLACE_INFO = "place_info";
+    private static final String TAG_PLACE_PARKING = "place_parking";
+    private static final String TAG_PLACE_BGO = "place_bgo";
 
     String place_address;
     String place_name;
     String place_number;
     String place_homepage;
+    String place_likes;
     String place_enter ;
     String place_parking;
-    String place_elevator ;
+    String place_elevator;
     String place_rest;
-    String place_info;
+    String place_bgo;
     TextView t1;
     TextView t2;
     TextView t3;
@@ -70,8 +72,6 @@ public class res_sangpe extends FragmentActivity{
     TextView t8;
     TextView t9;
     TextView t10;
-    TextView t11;
-
 
     private AlertDialog dialog;
 
@@ -85,20 +85,20 @@ public class res_sangpe extends FragmentActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_res_sangpe);
+        setContentView(R.layout.activity_loc_sangpe);
         Intent intent = getIntent();
-        String location = intent.getStringExtra("location");
+        String place_location = intent.getStringExtra("place_location");
 
 
         mArrayList = new ArrayList<>();
 
         // 서치뷰 검색 버튼 눌렸을 때
         // 검색한 지역이 제대로 입력 되었으면
-        if (location != null || !location.equals("")) {
+        if (place_location != null || !place_location.equals("")) {
             mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
-            res_sangpe.GetData task = new res_sangpe.GetData();
-            task.execute("http://192.168.0.2/res_location.php", location);
+            loc_sangpe.GetData task = new loc_sangpe.GetData();
+            task.execute("http://192.168.0.2/place_location.php", place_location);
             t1 = (TextView) findViewById(R.id.textview1);
             t1.setText(place_name);
             t1.setTextSize(30);
@@ -109,16 +109,17 @@ public class res_sangpe extends FragmentActivity{
             t4 = (TextView) findViewById(R.id.textview4);
             t4.setText(place_homepage);
             t5 = (TextView) findViewById(R.id.textview5);
-            t5.setText(place_enter);
+            t5.setText(place_likes);
             t6 = (TextView) findViewById(R.id.textview6);
-            t6.setText(place_parking);
+            t6.setText(place_enter);
             t7 = (TextView) findViewById(R.id.textview7);
-            t7.setText(place_elevator);
+            t7.setText(place_parking);
             t8 = (TextView) findViewById(R.id.textview8);
-            t8.setText(place_rest);
+            t8.setText(place_elevator);
             t9 = (TextView) findViewById(R.id.textview9);
-            t9.setText(place_info);
-
+            t9.setText(place_rest);
+            t10 = (TextView) findViewById(R.id.textview11);
+            t10.setText(place_bgo);
 
             return;
 
@@ -136,7 +137,7 @@ public class res_sangpe extends FragmentActivity{
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressDialog = ProgressDialog.show(res_sangpe.this,
+            progressDialog = ProgressDialog.show(loc_sangpe.this,
                     "Please Wait", null, true, true);
         }
 
@@ -160,10 +161,10 @@ public class res_sangpe extends FragmentActivity{
         @Override
         protected String doInBackground(String... params) {
 
-            String location = (String) params[1];
+            String place_location = (String) params[1];
 
             String serverURL = (String) params[0];//"http://10.0.2.2/charger.php";
-            String postParameters = "location=" + location;
+            String postParameters = "place_location=" + place_location;
 
             try {
 
@@ -228,11 +229,12 @@ public class res_sangpe extends FragmentActivity{
                 place_address = item.getString(TAG_PLACE_ADDRESS);
                 place_number = item.getString(TAG_PLACE_NUMBER);
                 place_homepage = item.getString(TAG_PLACE_HOMEPAGE);
+                place_likes = item.getString(TAG_PLACE_LIKES);
                 place_enter = item.getString(TAG_PLACE_ENTER);
                 place_parking = item.getString(TAG_PLACE_PARKING);
                 place_elevator = item.getString(TAG_PLACE_ELEVATOR);
                 place_rest = item.getString(TAG_PLACE_REST);
-                place_info = item.getString(TAG_PLACE_INFO);
+                place_bgo = item.getString(TAG_PLACE_BGO);
 
 
 
@@ -242,11 +244,12 @@ public class res_sangpe extends FragmentActivity{
                 locationData.setAddress(place_address);
                 locationData.setAddress(place_number);
                 locationData.setAddress(place_homepage);
+                locationData.setAddress(place_likes);
                 locationData.setAddress(place_enter);
                 locationData.setAddress(place_parking);
                 locationData.setAddress(place_elevator);
                 locationData.setAddress(place_rest);
-                locationData.setAddress(place_info);
+                locationData.setAddress(place_bgo);
 
 
                 mArrayList.add(locationData);
@@ -264,25 +267,28 @@ public class res_sangpe extends FragmentActivity{
             t4.setText("홈페이지 : " +place_homepage);
             t4.setTextSize(20);
             t5 = (TextView) findViewById(R.id.textview5);
-            t5.setText("주출입구 접근로 여부 : " + place_enter);
+            t5.setText("추천수 : " + place_likes);
             t5.setTextSize(20);
             t6 = (TextView) findViewById(R.id.textview6);
-            t6.setText("장애인 전용 주차 구역 여부 : " + place_parking);
+            t6.setText("주출입구 접근로 여부 : " + place_enter);
             t6.setTextSize(20);
             t7 = (TextView) findViewById(R.id.textview7);
-            t7.setText("장애인 전용 승강기 여부 : " + place_elevator);
+            t7.setText("장애인 전용 주차 구역 여부 : " + place_parking);
             t7.setTextSize(20);
             t8 = (TextView) findViewById(R.id.textview8);
-            t8.setText("장애인 전용 화장실 여부 : " + place_rest);
+            t8.setText("장애인 전용 승강기 여부 : " + place_elevator);
             t8.setTextSize(20);
             t9 = (TextView) findViewById(R.id.textview9);
-            t9.setText("안내 서비스 여부 : " + place_info);
+            t9.setText("장애인 화장실 여부 : " + place_rest);
             t9.setTextSize(20);
-
+            t10 = (TextView) findViewById(R.id.textview10);
+            t10.setText("비고 : " + place_bgo);
+            t10.setTextSize(20);
+            //정보갖고와서 띄울거
 
 
         } catch (JSONException e) {
-            Toast.makeText(res_sangpe.this, mJsonString, Toast.LENGTH_LONG).show();
+            Toast.makeText(loc_sangpe.this, mJsonString, Toast.LENGTH_LONG).show();
             Log.d(TAG, "showResult: ", e);
         }
 

@@ -25,12 +25,7 @@ public class scrollview extends AppCompatActivity {
     public void btn_place(View view) {
 
     }
-    public void btn_rental(View view) {
 
-    }
-    public void btn_charge(View view) {
-
-    }
     public void toomap(View view) {
         Intent intent = new Intent(this, map_search.class);
         startActivity(intent);

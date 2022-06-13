@@ -115,6 +115,7 @@
             android:text="키워드"
             android:textSize="20dp"/>
 
+
     </LinearLayout>
 
 </LinearLayout>

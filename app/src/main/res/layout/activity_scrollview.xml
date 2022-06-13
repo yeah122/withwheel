@@ -35,6 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="btn_hotel"
+            android:layout_weight="1"
             android:text="숙박" />
 
         <Button
@@ -42,19 +43,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="btn_place"
+            android:layout_weight="1"
             android:text="관광지"/>
-        <Button
-            android:id="@+id/btn_rental"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="대여소"
-            android:onClick="btn_rental"/>
-        <Button
-            android:id="@+id/btn_charge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="급속충전기"
-            android:onClick="btn_charge"/>
+
 
     </LinearLayout>
     <Button
