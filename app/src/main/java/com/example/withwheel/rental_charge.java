@@ -40,7 +40,7 @@ public class rental_charge extends FragmentActivity implements OnMapReadyCallbac
 
     private static String TAG = "charger";
 
-    private static final String TAG_JSON = "charger";
+    private static final String TAG_JSON = "chargered";
     private static final String TAG_LAT = "lat";
     private static final String TAG_LNG = "lng";
     private static final String TAG_PLACE_NAME = "place_name";
@@ -82,7 +82,7 @@ public class rental_charge extends FragmentActivity implements OnMapReadyCallbac
                     mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
                     rental_charge.GetData task = new rental_charge.GetData();
-                    task.execute("http://192.168.0.2/charger.php", location);
+                    task.execute("http://10.0.2.2/charger.php", location);
                 }
 
                 return false;

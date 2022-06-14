@@ -95,7 +95,7 @@ public class map_search extends FragmentActivity implements OnMapReadyCallback {
                                                     mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
                                                     map_search.GetData task = new map_search.GetData();
-                                                    task.execute("http://192.168.0.2/res_location.php", location);
+                                                    task.execute("http://10.0.2.2/res_location.php", location);
                                                 }
                                                 return false;
                                             }
@@ -124,7 +124,7 @@ public class map_search extends FragmentActivity implements OnMapReadyCallback {
                                                       mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
                                                       map_search.GetData task = new map_search.GetData();
-                                                      task.execute("http://192.168.0.2/hotel_location.php", location);
+                                                      task.execute("http://10.0.2.2/hotel_location.php", location);
                                                   }
                                                   return false;
                                               }
@@ -152,7 +152,7 @@ public class map_search extends FragmentActivity implements OnMapReadyCallback {
                                                       mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
                                                       map_search.GetData task = new map_search.GetData();
-                                                      task.execute("http://192.168.0.2/place_location.php", location);
+                                                      task.execute("http://10.0.2.2/place_location.php", location);
                                                   }
                                                   return false;
                                               }
@@ -191,7 +191,7 @@ public class map_search extends FragmentActivity implements OnMapReadyCallback {
                     mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
                     map_search.GetData task = new map_search.GetData();
-                    task.execute("http://192.168.0.2/res_location.php", location);
+                    task.execute("http://10.0.2.2/res_location.php", location);
                 }
 
                 return false;

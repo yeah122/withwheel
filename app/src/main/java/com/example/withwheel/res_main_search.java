@@ -80,25 +80,18 @@ public class res_main_search extends FragmentActivity implements OnMapReadyCallb
                 // 검색한 지역이 제대로 입력 되었으면
                 if (res_location != null || !res_location.equals("")){
                     mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
-
                     res_main_search.GetData task = new res_main_search.GetData();
-                    task.execute("http://192.168.0.2/res_location.php", res_location);
+                    task.execute("http://10.0.2.2/res_location.php", res_location);
                 }
-
                 return false;
             };
-
             @Override
             public boolean onQueryTextChange(String s) {
                 return false;
             }
         });
-
         mapFragment.getMapAsync(this);
-
     }
-
-
     class GetData extends AsyncTask<String, Void, String> {
 
         ProgressDialog progressDialog;
