@@ -6,122 +6,184 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
     <include  layout="@layout/toolbar"/>
 
     <LinearLayout
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
+        android:id="@+id/contextmenu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_height="656dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:orientation="vertical">
 
 
         <TextView
             android:id="@+id/textview1"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="키워드"
-            android:textSize="20dp"/>
+            android:layout_marginTop="10dp"
+            android:text="시설명"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
         <TextView
             android:id="@+id/textview2"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="키워드"
-            android:textSize="20dp"/>
+            android:layout_marginTop="10dp"
+            android:text="도로명주소"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
         <TextView
             android:id="@+id/textview3"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="키워드"
-            android:textSize="20dp"/>
+            android:layout_marginTop="10dp"
+            android:text="설치장소설명"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
         <TextView
-            android:id="@+id/textview4"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="평일"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="키워드"
-            android:textSize="20dp"/>
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textview4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="시작 시각"
+                android:textColor="@color/black"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/textview5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="공기 주입 가능 여부"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+
         <TextView
-            android:id="@+id/textview5"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="주말"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="키워드"
-            android:textSize="20dp"/>
-        <TextView
-            android:id="@+id/textview6"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textview7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="시작시각"
+                android:textColor="@color/black"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/textview6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:text="종료 시각"
+                android:textColor="@color/black"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/textview8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:text="종료시각"
+                android:textColor="@color/black"
+                android:textSize="10dp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="키워드"
-            android:textSize="20dp"/>
-        <TextView
-            android:id="@+id/textview7"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="키워드"
-            android:textSize="20dp"/>
-        <TextView
-            android:id="@+id/textview8"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="키워드"
-            android:textSize="20dp"/>
-        <TextView
-            android:id="@+id/textview9"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="키워드"
-            android:textSize="20dp"/>
-        <TextView
-            android:id="@+id/textview10"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="키워드"
-            android:textSize="20dp"/>
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textview9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="시작시각"
+                android:textColor="@color/black"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/textview10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:text="종료시각"
+                android:textColor="@color/black"
+                android:textSize="10dp" />
+
+
+        </LinearLayout>
+
         <TextView
             android:id="@+id/textview11"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="키워드"
-            android:textSize="20dp"/>
+            android:layout_marginTop="10dp"
+            android:text="동시 사용 가능 대수"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
+
         <TextView
             android:id="@+id/textview12"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="키워드"
-            android:textSize="20dp"/>
+            android:layout_marginTop="10dp"
+            android:text="휴대전화 충전 가능 여부"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
         <TextView
             android:id="@+id/textview13"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="키워드"
-            android:textSize="20dp"/>
+            android:layout_marginTop="10dp"
+            android:text="관리기관 전화번호"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+        <TextView
+            android:id="@+id/textview14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="userid"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
+
 
     </LinearLayout>
 

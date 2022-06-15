@@ -78,7 +78,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
         btn_login = findViewById(R.id.btn_login);
         btn_login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -161,7 +160,6 @@ public class LoginActivity extends AppCompatActivity {
                 else{
                     inputStream = httpURLConnection.getErrorStream();
                 }
-
 
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);

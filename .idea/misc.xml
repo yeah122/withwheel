@@ -81,7 +81,10 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/activity_mypage.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_mypage_logout_ver.xml" value="0.36041666666666666" />
+        <entry key="app/src/main/res/layout/activity_res_sangpe.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/activity_sangpe.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/after_login.xml" value="0.36041666666666666" />
+        <entry key="app/src/main/res/menu/bookmark.xml" value="0.34479166666666666" />
       </map>
     </option>
   </component>

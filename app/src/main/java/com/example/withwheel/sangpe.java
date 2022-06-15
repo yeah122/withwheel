@@ -7,9 +7,15 @@ import androidx.appcompat.widget.SearchView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +42,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class sangpe extends FragmentActivity{
+public class sangpe extends FragmentActivity {
 
     private static String TAG = "sangpe";
 
@@ -54,20 +60,30 @@ public class sangpe extends FragmentActivity{
     private static final String TAG_PLACE_AIR = "place_air";
     private static final String TAG_PLACE_PHONE = "place_phone";
     private static final String TAG_PLACE_NUMBER = "place_number";
+    private static final String TAG_PLACE_LAT = "place_lat";
+    private static final String TAG_PLACE_LNG = "place_lng";
+
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+
+    String place_lat;
+    String place_lng;
+    String PLT,PLG;
 
     String place_address;
     String place_name;
     String place_info;
     String place_start;
     String place_close;
-    String place_sat_start ;
+    String place_sat_start;
     String place_sat_close;
-    String place_sun_start ;
+    String place_sun_start;
     String place_sun_close;
     String place_use;
     String place_air;
     String place_phone;
     String place_number;
+
     TextView t1;
     TextView t2;
     TextView t3;
@@ -81,30 +97,34 @@ public class sangpe extends FragmentActivity{
     TextView t11;
     TextView t12;
     TextView t13;
+    TextView t14;
 
-
-    private AlertDialog dialog;
 
     private TextView mTextViewResult;
     ArrayList<locationData> mArrayList;
-
     public String mJsonString;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        SharedPreferences preference = getSharedPreferences("UserInfo", MODE_PRIVATE);
+        String userid = preference.getString("id", "");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sangpe);
         Intent intent = getIntent();
         String jooso = intent.getStringExtra("jooso");
 
+        LinearLayout Conmenu = (LinearLayout)findViewById(R.id.contextmenu);
+        registerForContextMenu(Conmenu);
 
         mArrayList = new ArrayList<>();
 
         // 서치뷰 검색 버튼 눌렸을 때
-                // 검색한 지역이 제대로 입력 되었으면
-        if (jooso != null || !jooso.equals("")) {
+        // 검색한 지역이 제대로 입력 되었으면
+        if (jooso != null) {
             mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
             sangpe.GetData task = new sangpe.GetData();
@@ -136,13 +156,33 @@ public class sangpe extends FragmentActivity{
             t12.setText(place_phone);
             t13 = (TextView) findViewById(R.id.textview13);
             t13.setText(place_number);
-
+            t14 = (TextView) findViewById(R.id.textview14);
+            t14.setText(userid);
             return;
-
         }
-
     }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu,
+                                    View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.bookmark, menu);
+    }
+
+    public boolean onContextItemSelected(MenuItem item) {
+
+        SharedPreferences preference = getSharedPreferences("UserInfo", MODE_PRIVATE);
+        String userid = preference.getString("id", "");
+
+        switch (item.getItemId()) {
+            case R.id.bookmark:
+                sangpe.GetData task = new sangpe.GetData();
+                task.execute("http://10.0.2.2/bookmark_hotel.php", userid, mArrayList.get(0).getName(), place_lat, place_lng);
+
+        }
+        return true;
+    }
 
     class GetData extends AsyncTask<String, Void, String> {
 
@@ -177,10 +217,25 @@ public class sangpe extends FragmentActivity{
         @Override
         protected String doInBackground(String... params) {
 
-            String jooso = (String) params[1];
+            String serverURL;
+            String postParameters;
 
-            String serverURL = (String) params[0];//"http://10.0.2.2/charger.php";
-            String postParameters = "jooso=" + jooso;
+            if(params.length <= 2) {
+                String jooso = (String) params[1];
+
+                serverURL = (String) params[0];
+                postParameters = "jooso=" + jooso;
+            }
+            else{
+                String userid = (String) params[1];
+                String place_name = (String) params[2];
+                String lat = (String) params[3];
+                String lng = (String) params[4];
+
+                serverURL = (String) params[0];//"http://10.0.2.2/bookmark_hotel.php";
+                postParameters = "userid=" + userid + "&place_name=" + place_name + "&lat=" + lat + "&lng=" + lng;
+            }
+
 
             try {
 
@@ -254,7 +309,8 @@ public class sangpe extends FragmentActivity{
                 place_air = item.getString(TAG_PLACE_AIR);
                 place_phone = item.getString(TAG_PLACE_PHONE);
                 place_number = item.getString(TAG_PLACE_NUMBER);
-
+                place_lat = item.getString("lat");
+                place_lng = item.getString("lng");
 
 
                 locationData locationData = new locationData();
@@ -272,10 +328,14 @@ public class sangpe extends FragmentActivity{
                 locationData.setAddress(place_air);
                 locationData.setAddress(place_phone);
                 locationData.setAddress(place_number);
+                locationData.setLat(place_lat);
+                locationData.setLng(place_lng);
 
 
                 mArrayList.add(locationData);
             }
+            Toast.makeText(getApplicationContext(), String.valueOf(jsonArray.length()), Toast.LENGTH_SHORT).show();
+
             t1 = (TextView) findViewById(R.id.textview1);
             t1.setText("시설명 : " + place_name);
             t1.setTextSize(20);
@@ -322,6 +382,9 @@ public class sangpe extends FragmentActivity{
             Toast.makeText(sangpe.this, mJsonString, Toast.LENGTH_LONG).show();
             Log.d(TAG, "showResult: ", e);
         }
+
+
+
 
     }
 

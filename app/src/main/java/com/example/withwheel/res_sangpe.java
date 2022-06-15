@@ -37,6 +37,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class res_sangpe extends FragmentActivity{
+    public boolean isCheck[] = new boolean[50];
 
     private static String TAG = "res_sangpe";
 
@@ -98,7 +99,7 @@ public class res_sangpe extends FragmentActivity{
             mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
             res_sangpe.GetData task = new res_sangpe.GetData();
-            task.execute("http://192.168.0.2/res_location.php", location);
+            task.execute("http://10.0.2.2/res_location.php", location);
             t1 = (TextView) findViewById(R.id.textview1);
             t1.setText(place_name);
             t1.setTextSize(30);

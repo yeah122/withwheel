@@ -105,7 +105,7 @@ public class hotel_sangpe extends FragmentActivity{
             mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
             hotel_sangpe.GetData task = new hotel_sangpe.GetData();
-            task.execute("http://192.168.0.2/hotel_location.php", hotel_location);
+            task.execute("http://10.0.2.2/hotel_location.php", hotel_location);
             t1 = (TextView) findViewById(R.id.textview1);
             t1.setText(place_name);
             t1.setTextSize(30);
