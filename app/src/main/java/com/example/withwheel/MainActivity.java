@@ -57,14 +57,12 @@ public class MainActivity extends TabActivity {
         spec.setContent(intent);
         tabHost.addTab(spec);
 
-
         //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
         intent = new Intent().setClass(this, route.class);
         spec = tabHost.newTabSpec("route"); // 객체를 생성
         spec.setIndicator("경로\n추천"); //탭의 이름 설정
         spec.setContent(intent);
         tabHost.addTab(spec);
-
 
         //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
         intent = new Intent().setClass(this, rental_charge.class);
@@ -81,11 +79,8 @@ public class MainActivity extends TabActivity {
         spec.setContent(intent);
         tabHost.addTab(spec);
 
-
         tabHost.setCurrentTab(0); //먼저 열릴 탭을 선택!(설정 순서대로 0부터 시작)
 
-
     }
-
 
 }

@@ -40,6 +40,9 @@
             android:name=".route"
             android:exported="false" />
         <activity
+            android:name=".route_result"
+            android:exported="false" />
+        <activity
             android:name=".review"
             android:exported="false" />
         <activity

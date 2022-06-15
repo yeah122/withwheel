@@ -27,9 +27,21 @@
         <entry key="..\:/Users/syw/Desktop/WithWheel/app/src/main/res/menu/bottom_menu.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/syw/Desktop/WithWheel/app/src/main/res/menu/menu.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/syw/Desktop/WithWheel/app/src/main/res/menu/menu_mypage.xml" value="0.24947916666666667" />
-        <entry key="..\:/Users/wooyu/AndroidStudioProjects/tlq/app/src/main/res/layout/activity_home.xml" value="0.18229166666666666" />
+        <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/activity_like_it.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/activity_login.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/activity_main.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/activity_map_search.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/activity_register.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/activity_rental_charge.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/activity_review.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/activity_route.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/activity_route1.xml" value="0.264" />
+        <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/activity_route2.xml" value="0.264" />
+        <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/activity_route_result.xml" value="0.2" />
+        <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/after_login.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/route_result_listview.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/toolbar.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/wooyu/AndroidStudioProjects/tlq/app/src/main/res/layout/activity_listlayout.xml" value="0.15572916666666667" />
-        <entry key="..\:/Users/wooyu/AndroidStudioProjects/tlq/app/src/main/res/layout/activity_login.xml" value="0.12318840579710146" />
         <entry key="..\:/Users/wooyu/AndroidStudioProjects/tlq/app/src/main/res/layout/activity_main.xml" value="0.17604166666666668" />
         <entry key="..\:/Users/wooyu/AndroidStudioProjects/tlq/app/src/main/res/layout/activity_main2.xml" value="0.23385416666666667" />
         <entry key="..\:/Users/wooyu/AndroidStudioProjects/tlq/app/src/main/res/layout/activity_map_search.xml" value="0.2" />
@@ -78,13 +90,6 @@
         <entry key="..\:/Users/wooyu/OneDrive/tlqkf/app/src/main/res/layout/layout.xml" value="0.13632246376811594" />
         <entry key="..\:/Users/wooyu/OneDrive/tlqkf/app/src/main/res/layout/toolbar.xml" value="0.15670289855072464" />
         <entry key="..\:/Users/wooyu/OneDrive/tlqkf/app/src/main/res/menu/menu.xml" value="0.24791666666666667" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.36041666666666666" />
-        <entry key="app/src/main/res/layout/activity_mypage.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_mypage_logout_ver.xml" value="0.36041666666666666" />
-        <entry key="app/src/main/res/layout/activity_res_sangpe.xml" value="0.2125" />
-        <entry key="app/src/main/res/layout/activity_sangpe.xml" value="0.2125" />
-        <entry key="app/src/main/res/layout/after_login.xml" value="0.36041666666666666" />
-        <entry key="app/src/main/res/menu/bookmark.xml" value="0.34479166666666666" />
       </map>
     </option>
   </component>

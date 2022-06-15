@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include  layout="@layout/toolbar"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginVertical="10dp"
+        android:text="경로추천"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="키워드를 2~4개 골라주세요."/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="선택한 키워드에 관련된 장소가 추천됩니다."/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btn_outside"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="야외"/>
+
+        <Button
+            android:id="@+id/btn_inside"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="실내"/>
+
+        <Button
+            android:id="@+id/btn_shopping"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="쇼핑"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btn_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="역사유적"/>
+
+        <Button
+            android:id="@+id/btn_nature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="자연경관"/>
+
+        <Button
+            android:id="@+id/btn_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="도시경관"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btn_themepark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="테마파크"/>
+
+        <Button
+            android:id="@+id/btn_art"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="문화예술"/>
+
+        <Button
+            android:id="@+id/btn_food"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="식도락"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/send_keyword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="선택완료"/>
+
+</LinearLayout>
