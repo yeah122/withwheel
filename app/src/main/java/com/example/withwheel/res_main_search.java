@@ -1,7 +1,6 @@
 package com.example.withwheel;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 import androidx.appcompat.widget.SearchView;
 
@@ -13,7 +12,6 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.withwheel.locationData;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -285,7 +283,7 @@ public class res_main_search extends FragmentActivity implements OnMapReadyCallb
 
             Toast.makeText(res_main_search.this,name,Toast.LENGTH_LONG).show();
 
-            Intent intent = new Intent(res_main_search.this, res_sangpe.class);
+            Intent intent = new Intent(res_main_search.this, detailPage.class);
 
 
 

@@ -3,34 +3,12 @@ package com.example.withwheel;
 import java.io.Serializable;
 
 public class locationData implements Serializable {
-    private String lat;
-    private String lng;
-    private String place_name;
-    private String place_address;
-    private String place_call;
-    private String homepage;
-    private String guide;
-    private String entrance;
-    private String elevator;
-    private String toilet;
-    private String parking;
-    private String introdution;
-    private String outside;
-    private String inside;
-    private String history;
-    private String nature;
-    private String shopping;
-    private String art;
-    private String themepark;
-    private String city;
-    private String food;
-    private String google_rating;
-    private String google_ratings_total;
-    private String kakao_rating;
-    private String kakao_ratings_total;
+    private String place_name, place_address, place_call, homepage ,lat, lng;
+    private String guide, entrance, elevator, toilet, parking, introdution, rentalWheel, room;
+    private String outside, inside, history, nature, shopping, art, themepark, city, food;
+    private String google_rating, google_ratings_total, kakao_rating, kakao_ratings_total;
 
-    public String distFromFirst;
-    public String totalScore;
+    public String distFromFirst, totalScore;
 
     public String getLat(){
         return lat;
@@ -76,6 +54,14 @@ public class locationData implements Serializable {
 
     public String getIntrodution(){
         return introdution;
+    }
+
+    public String getRoom(){
+        return room;
+    }
+
+    public String getRentalWheel(){
+        return rentalWheel;
     }
 
     public String getOutside(){
@@ -179,6 +165,14 @@ public class locationData implements Serializable {
 
     public void setIntrodution(String introdution) {
         this.introdution = introdution;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
+    }
+
+    public void setRentalWheel(String rentalWheel) {
+        this.rentalWheel = rentalWheel;
     }
 
     public void setOutside(String outside){

@@ -4,10 +4,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -66,18 +66,14 @@ public class route_result extends AppCompatActivity implements OnMapReadyCallbac
     private static final String TAG_KAKAO_RATING = "kakao_rating";
     private static final String TAG_KAKAO_TOTAL = "kakao_ratings_total";
 
-    private TextView mTextViewResult;
     public String mJsonString;
 
     GoogleMap map;
-    SupportMapFragment mapFragment;
 
     Button restart, oneMore, other;
     ListView listView;
 
-    String selectedAttr;
-
-    CustomListView adapter;
+    route_result_CustomListView adapter;
     ArrayList<locationData> mArrayList;
     ArrayList<locationData> newAttrList = new ArrayList<>();
     ArrayList<String> deleteAttr = new ArrayList<>();
@@ -90,7 +86,7 @@ public class route_result extends AppCompatActivity implements OnMapReadyCallbac
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_route_result);
+        setContentView(R.layout.route_result);
 
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -221,7 +217,7 @@ public class route_result extends AppCompatActivity implements OnMapReadyCallbac
     private void addListView(ArrayList<locationData> list) {
         if (cnt < list.size()){
 
-            adapter = new CustomListView(list, cnt+1);
+            adapter = new route_result_CustomListView(list, cnt+1);
             listView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
 
@@ -257,18 +253,18 @@ public class route_result extends AppCompatActivity implements OnMapReadyCallbac
     private void setListView(ArrayList<locationData> list) {
 
         if(list.size() < cnt){
-            adapter = new CustomListView(list, list.size());
+            adapter = new route_result_CustomListView(list, list.size());
             listView.setAdapter(adapter);
         }
         else {
-            adapter = new CustomListView(list, cnt);
+            adapter = new route_result_CustomListView(list, cnt);
             listView.setAdapter(adapter);
         }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                selectedAttr = list.get(arg2).getName();
-                Toast.makeText(getApplicationContext(), selectedAttr, Toast.LENGTH_SHORT).show();
+                String selectedAttrName = list.get(arg2).getName();
+                String selectedAttrAddress = list.get(arg2).getAddress();
 
                 CameraPosition cameraPosition = new CameraPosition.Builder()
                         .target(new LatLng(Double.parseDouble(list.get(arg2).getLat()), Double.parseDouble(list.get(arg2).getLng())) )      // Sets the center of the map to Mountain View
@@ -276,7 +272,15 @@ public class route_result extends AppCompatActivity implements OnMapReadyCallbac
                         .build();                   // Creates a CameraPosition from the builder
 
                 map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-                // 해당 상세페이지로 이동, 상페 완성되면 구현
+
+                SystemClock.sleep(300); // 해당 마커로 이동하는 것과 인텐트 넘어가는 것 사이에 여유 줌
+
+                // 해당 상세페이지로 이동
+                Intent intent = new Intent(route_result.this, detailPage.class);
+                intent.putExtra("address", selectedAttrAddress);
+                intent.putExtra("name", selectedAttrName);
+                intent.putExtra("theme", "관광지");
+                startActivity(intent);
             }
         });
     }

@@ -5,7 +5,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:usesCleartextTraffic="true"
@@ -33,7 +34,7 @@
             android:name=".sangpe"
             android:exported="false" />
         <activity
-            android:name=".scrollview"
+            android:name=".list_search"
             android:exported="false" />
         <activity
             android:name=".mypage"
@@ -48,28 +49,22 @@
             android:name=".route_result"
             android:exported="false" />
         <activity
-            android:name=".review"
-            android:exported="false" />
-        <activity
             android:name=".rental_charge"
             android:exported="false" />
         <activity
-            android:name=".like_it"
-            android:exported="false" />
-        <activity
-            android:name=".res_information"
+            android:name=".bookmark"
             android:exported="false" />
         <activity
             android:name=".res_search"
             android:exported="false" />
         <activity
-            android:name=".res_sangpe"
+            android:name=".detailPage"
             android:exported="false" />
         <activity
             android:name=".map_search"
             android:exported="false" />
         <activity
-            android:name=".change"
+            android:name=".profile_change"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -95,7 +90,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".after_login" />
     </application>
 
 </manifest>

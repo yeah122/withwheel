@@ -7,7 +7,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,17 +16,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -35,7 +23,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.concurrent.atomic.DoubleAccumulator;
 
 public class mypage extends AppCompatActivity {
 
@@ -59,7 +46,7 @@ public class mypage extends AppCompatActivity {
         String user = preference.getString("id", "");
 
         if (user != "") {
-            setContentView(R.layout.activity_mypage);
+            setContentView(R.layout.mypage);
             textID = (TextView) findViewById(R.id.textID);
             btnlogout = (Button) findViewById(R.id.btnLogout);
             btnDelete = (Button) findViewById(R.id.btnMembershipWithdrawal);
@@ -133,7 +120,7 @@ public class mypage extends AppCompatActivity {
 
         }
         else{
-            setContentView(R.layout.activity_mypage_logout_ver);
+            setContentView(R.layout.mypage_logout_ver);
 
             startLogin = (Button) findViewById(R.id.startLogin);
             startRegister = (Button) findViewById(R.id.startRegister);
@@ -199,7 +186,7 @@ public class mypage extends AppCompatActivity {
                     finish();
                 }
                 if(result.equals("비번 확인^^")){
-                    Intent i = new Intent(mypage.this, change.class);
+                    Intent i = new Intent(mypage.this, profile_change.class);
                     startActivity(i);
                 }
             }

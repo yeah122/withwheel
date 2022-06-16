@@ -1,7 +1,6 @@
 package com.example.withwheel;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 import androidx.appcompat.widget.SearchView;
 
@@ -12,15 +11,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.withwheel.locationData;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -59,107 +57,123 @@ public class map_search extends FragmentActivity implements OnMapReadyCallback {
     GoogleMap map;
     SupportMapFragment mapFragment;
     SearchView searchView;
+    Button btn_restaurant, btn_hotel, btn_attractive;
+    String theme = "식당";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map_search);
+        setContentView(R.layout.map_search);
 
-        mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(map_search.this);
         searchView = (SearchView) findViewById(R.id.search_view);
 
         mArrayList = new ArrayList<>();
 
-        Button toolist = (Button) findViewById(R.id.toolist);
-        toolist.setOnClickListener(new View.OnClickListener() {
+        ImageButton tolist = (ImageButton) findViewById(R.id.toList);
+        tolist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), scrollview.class);
+                Intent intent = new Intent(getApplicationContext(), list_search.class);
                 startActivity(intent);
             }
         });
 
-        Button ress = (Button) findViewById(R.id.btn_ress);
-        ress.setOnClickListener(new View.OnClickListener() {
+        btn_restaurant = (Button) findViewById(R.id.btn_restaurant);
+        btn_restaurant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String s) {
-                        String location = searchView.getQuery().toString();
+                btn_restaurant.setEnabled(false);
+                btn_hotel.setEnabled(true);
+                btn_attractive.setEnabled(true);
 
-                        // 검색한 지역이 제대로 입력 되었으면
-                        if (location != null || !location.equals("")) {
-                            mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
+                theme = "식당";
 
-                            map_search.GetData task = new map_search.GetData();
-                            task.execute("http://10.0.2.2/res_location.php", location);
-                        }
-                        return false;
-                    };
-
-                    @Override
-                    public boolean onQueryTextChange(String s) {
-                        return false;
-                    }
-                });
+                String searchViewQuery = searchView.getQuery().toString();
+                if (searchViewQuery != null || !searchViewQuery.equals("")) {
+                    map_search.GetData task = new map_search.GetData();
+                    task.execute("http://10.0.2.2/res_location.php", searchViewQuery);
+                }
                 mapFragment.getMapAsync(map_search.this);
             }
         });
 
-        Button hotell = (Button) findViewById(R.id.btn_hotell);
-        hotell.setOnClickListener(new View.OnClickListener() {
+        btn_hotel = (Button) findViewById(R.id.btn_hotel);
+        btn_hotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String s) {
-                        String location = searchView.getQuery().toString();
+                btn_restaurant.setEnabled(true);
+                btn_hotel.setEnabled(false);
+                btn_attractive.setEnabled(true);
 
-                        // 검색한 지역이 제대로 입력 되었으면
-                        if (location != null || !location.equals("")) {
-                            mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
+                theme = "숙박";
 
-                            map_search.GetData task = new map_search.GetData();
-                            task.execute("http://10.0.2.2/hotel_location.php", location);
-                        }
-                        return false;
-                    };
-
-                    @Override
-                    public boolean onQueryTextChange(String s) {
-                        return false;
-                    }
-                });
+                String searchViewQuery = searchView.getQuery().toString();
+                if(searchViewQuery != null || !searchViewQuery.equals(""))
+                {
+                    map_search.GetData task = new map_search.GetData();
+                    task.execute("http://10.0.2.2/hotel_location.php", searchViewQuery);
+                }
                 mapFragment.getMapAsync(map_search.this);
             }
         });
-        Button placee = (Button) findViewById(R.id.btn_placee);
-        placee.setOnClickListener(new View.OnClickListener() {
+        btn_attractive = (Button) findViewById(R.id.btn_attractive);
+        btn_attractive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String s) {
-                        String location = searchView.getQuery().toString();
+                btn_restaurant.setEnabled(true);
+                btn_hotel.setEnabled(true);
+                btn_attractive.setEnabled(false);
 
-                        // 검색한 지역이 제대로 입력 되었으면
-                        if (location != null || !location.equals("")) {
-                            mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
+                theme = "관광지";
 
-                            map_search.GetData task = new map_search.GetData();
-                            task.execute("http://10.0.2.2/place_location.php", location);
-                        }
-                        return false;
-                    };
-
-                    @Override
-                    public boolean onQueryTextChange(String s) {
-                        return false;
-                    }
-                });
+                String searchViewQuery = searchView.getQuery().toString();
+                if(searchViewQuery != null || !searchViewQuery.equals(""))
+                {
+                    map_search.GetData task = new map_search.GetData();
+                    task.execute("http://10.0.2.2/place_location.php", searchViewQuery);
+                }
                 mapFragment.getMapAsync(map_search.this);
+            }
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                String address = searchView.getQuery().toString();
+
+                // 검색한 지역이 제대로 입력 되었으면
+                if (address != null || !address.equals("")) {
+                    mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
+                    map.clear();
+
+                    if(theme.equals("식당")){
+                        map_search.GetData task = new map_search.GetData();
+                        task.execute("http://10.0.2.2/res_location.php", address);
+                    }
+                    else if (theme.equals("관광지")) {
+                        map_search.GetData task = new map_search.GetData();
+                        task.execute("http://10.0.2.2/place_location.php", address);
+                    }
+                    else if (theme.equals("숙박")) {
+                        map_search.GetData task = new map_search.GetData();
+                        task.execute("http://10.0.2.2/hotel_location.php", address);
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "식당, 관광지, 숙박 중 하나를 선택해주세요.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                else{
+                    Toast.makeText(getApplicationContext(), "검색어를 입력하세요.", Toast.LENGTH_SHORT).show();
+                }
+                return false;
+            };
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
             }
         });
     }
@@ -198,10 +212,10 @@ public class map_search extends FragmentActivity implements OnMapReadyCallback {
         @Override
         protected String doInBackground(String... params) {
 
-            String location = (String) params[1];
+            String address = (String) params[1];
 
             String serverURL = (String) params[0];//"http://10.0.2.2/charger.php";
-            String postParameters = "location=" + location;
+            String postParameters = "address=" + address;
 
             try {
 
@@ -318,22 +332,9 @@ public class map_search extends FragmentActivity implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
 
-        UiSettings mUiSettings = map.getUiSettings();
-
-        // Keep the UI Settings state in sync with the checkboxes.
-        mUiSettings.setZoomControlsEnabled(true);
-
         LatLng cityhall = new LatLng(37.566826, 126.9786567);
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(cityhall, 14));
 
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions
-                .position(cityhall)
-                .title("서울시청");
-
-        map.addMarker(markerOptions);
-
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(37.566826, 126.9786567),16));
     }
 
     GoogleMap.OnInfoWindowClickListener infoWindowClickListener = new GoogleMap.OnInfoWindowClickListener() {
@@ -342,11 +343,13 @@ public class map_search extends FragmentActivity implements OnMapReadyCallback {
             String name = marker.getTitle();
             String address = marker.getSnippet();
 
-            Toast.makeText(map_search.this, name, Toast.LENGTH_LONG).show();
+            Toast.makeText(map_search.this, name, Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(map_search.this,res_sangpe.class);
+            Intent intent = new Intent(map_search.this, detailPage.class);
 
-            intent.putExtra("location", address);
+            intent.putExtra("address", address);
+            intent.putExtra("name", name);
+            intent.putExtra("theme", theme);
 
             startActivity(intent);
         }

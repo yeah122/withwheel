@@ -12,15 +12,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,14 +29,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class scrollview extends AppCompatActivity {
+public class list_search extends AppCompatActivity {
 
-    Button btn_res, btn_hotel, btn_place ,beforePage, nextPage, btn_toMap;
+    Button btn_restaurant, btn_hotel, btn_attractive;
+    ImageButton beforePage, nextPage, btn_toMap;
     SearchView searchView;
 
     private static String TAG = "listView";
 
-    private static final String TAG_JSON = "map_search";
+    private static final String TAG_JSON = "map";
     private static final String TAG_LAT = "lat";
     private static final String TAG_LNG = "lng";
     private static final String TAG_PLACE_NAME = "place_name";
@@ -57,108 +53,116 @@ public class scrollview extends AppCompatActivity {
 
     list_search_customview adapter;
     ListView listView;
+    String theme = "식당";
 
     int clickCnt = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scrollview);
+        setContentView(R.layout.list_search);
 
         mArrayList = new ArrayList<>();
 
         searchView = (SearchView) findViewById(R.id.search_view);
         listView = (ListView) findViewById(R.id.listView) ;
 
-        btn_res = (Button) findViewById(R.id.btn_res); // 식당 정보
+        btn_restaurant = (Button) findViewById(R.id.btn_restaurant); // 식당 정보
         btn_hotel = (Button) findViewById(R.id.btn_hotel); // 호텔 정보
-        btn_place = (Button) findViewById(R.id.btn_place); // 관광지 정보
-        beforePage = (Button) findViewById(R.id.beforePage); // 이전 버튼 누르면 이전 페이지로,
-        nextPage = (Button) findViewById(R.id.nextPage); // 다음 버튼 누르면 다음 페이지로,
-        btn_toMap = (Button) findViewById(R.id.btn_toMap);
+        btn_attractive = (Button) findViewById(R.id.btn_attractive); // 관광지 정보
+        beforePage = (ImageButton) findViewById(R.id.beforePage); // 이전 버튼 누르면 이전 페이지로,
+        nextPage = (ImageButton) findViewById(R.id.nextPage); // 다음 버튼 누르면 다음 페이지로,
+        btn_toMap = (ImageButton) findViewById(R.id.btn_toMap);
 
 
-        //식당 버튼
-        btn_res.setOnClickListener(new View.OnClickListener() {
+        btn_restaurant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String s) {
-                        String location = searchView.getQuery().toString();
+                btn_restaurant.setEnabled(false);
+                btn_hotel.setEnabled(true);
+                btn_attractive.setEnabled(true);
 
-                        // 검색한 지역이 제대로 입력 되었으면
-                        if (location != null || !location.equals("")) {
-                            clickCnt = 0;
-                            mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
+                theme = "식당";
 
-                            scrollview.GetData task = new scrollview.GetData();
-                            task.execute("http://10.0.2.2/res_location.php", location);
-                        }
-                        return false;
-                    };
-
-                    @Override
-                    public boolean onQueryTextChange(String s) {
-                        return false;
-                    }
-                });
+                String searchViewQuery = searchView.getQuery().toString();
+                if (searchViewQuery != null || !searchViewQuery.equals("")) {
+                    list_search.GetData task = new list_search.GetData();
+                    task.execute("http://10.0.2.2/res_location.php", searchViewQuery);
+                }
             }
         });
 
-        // 호텔 버튼
         btn_hotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String s) {
-                        String location = searchView.getQuery().toString();
+                btn_restaurant.setEnabled(true);
+                btn_hotel.setEnabled(false);
+                btn_attractive.setEnabled(true);
 
-                        // 검색한 지역이 제대로 입력 되었으면
-                        if (location != null || !location.equals("")) {
-                            clickCnt = 0;
-                            mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
+                theme = "숙박";
 
-                            scrollview.GetData task = new scrollview.GetData();
-                            task.execute("http://10.0.2.2/hotel_location.php", location);
-                        }
-                        return false;
-                    };
-
-                    @Override
-                    public boolean onQueryTextChange(String s) {
-                        return false;
-                    }
-                });
+                String searchViewQuery = searchView.getQuery().toString();
+                if(searchViewQuery != null || !searchViewQuery.equals(""))
+                {
+                    list_search.GetData task = new list_search.GetData();
+                    task.execute("http://10.0.2.2/hotel_location.php", searchViewQuery);
+                }
             }
         });
 
-        // 관광지 버튼
-        btn_place.setOnClickListener(new View.OnClickListener() {
+        btn_attractive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String s) {
-                        String location = searchView.getQuery().toString();
+                btn_restaurant.setEnabled(true);
+                btn_hotel.setEnabled(true);
+                btn_attractive.setEnabled(false);
 
-                        // 검색한 지역이 제대로 입력 되었으면
-                        if (location != null || !location.equals("")) {
-                            clickCnt = 0;
-                            mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
+                theme = "관광지";
 
-                            scrollview.GetData task = new scrollview.GetData();
-                            task.execute("http://10.0.2.2/place_location.php", location);
-                        }
-                        return false;
-                    };
+                String searchViewQuery = searchView.getQuery().toString();
+                if(searchViewQuery != null || !searchViewQuery.equals(""))
+                {
+                    list_search.GetData task = new list_search.GetData();
+                    task.execute("http://10.0.2.2/place_location.php", searchViewQuery);
+                }
+            }
+        });
 
-                    @Override
-                    public boolean onQueryTextChange(String s) {
-                        return false;
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                String address = searchView.getQuery().toString();
+
+                // 검색한 지역이 제대로 입력 되었으면
+                if (address != null || !address.equals("")) {
+                    mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
+
+                    if(theme.equals("식당")){
+                        list_search.GetData task = new list_search.GetData();
+                        task.execute("http://10.0.2.2/res_location.php", address);
                     }
-                });
+                    else if (theme.equals("관광지")) {
+                        list_search.GetData task = new list_search.GetData();
+                        task.execute("http://10.0.2.2/place_location.php", address);
+                    }
+                    else if (theme.equals("숙박")) {
+                        list_search.GetData task = new list_search.GetData();
+                        task.execute("http://10.0.2.2/hotel_location.php", address);
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "식당, 관광지, 숙박 중 하나를 선택해주세요.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                else{
+                    Toast.makeText(getApplicationContext(), "주소를 입력하세요.", Toast.LENGTH_SHORT).show();
+                }
+                return false;
+            };
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
             }
         });
 
@@ -200,11 +204,19 @@ public class scrollview extends AppCompatActivity {
             }
         });
 
+        //리스트뷰 클릭시 상세페이지로 이동
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                String selectedPlace = mArrayList.get(arg2 + clickCnt).getName();
-                Toast.makeText(getApplicationContext(), selectedPlace, Toast.LENGTH_SHORT).show();
-                // 해당 상세페이지로 이동, 상페 완성되면 구현
+                String selectedPlaceName = mArrayList.get(arg2 + clickCnt).getName();
+                String selectedPlaceAddress = mArrayList.get(arg2 + clickCnt).getAddress();
+                Toast.makeText(getApplicationContext(), selectedPlaceName, Toast.LENGTH_SHORT).show();
+
+                // 해당 상세페이지로 이동
+                Intent intent = new Intent(list_search.this, detailPage.class);
+                intent.putExtra("address", selectedPlaceAddress);
+                intent.putExtra("name", selectedPlaceName);
+                intent.putExtra("theme", theme);
+                startActivity(intent);
             }
         });
 
@@ -228,7 +240,7 @@ public class scrollview extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressDialog = ProgressDialog.show(scrollview.this,
+            progressDialog = ProgressDialog.show(list_search.this,
                     "Please Wait", null, true, true);
         }
 
@@ -253,10 +265,10 @@ public class scrollview extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
 
-            String location = (String) params[1];
+            String address = (String) params[1];
 
             String serverURL = (String) params[0];//"http://10.0.2.2/charger.php";
-            String postParameters = "location=" + location;
+            String postParameters = "address=" + address;
 
             try {
 
@@ -333,7 +345,7 @@ public class scrollview extends AppCompatActivity {
                 mArrayList.add(locationData);
             }
             //데이터 가져온 후 진행할 코드
-            Toast.makeText(scrollview.this, "정보 가져오기 성공", Toast.LENGTH_SHORT).show();
+            Toast.makeText(list_search.this, "정보 가져오기 성공", Toast.LENGTH_SHORT).show();
 
             adapter = new list_search_customview(mArrayList, clickCnt);
             listView.setAdapter(adapter);
@@ -343,7 +355,7 @@ public class scrollview extends AppCompatActivity {
 
         }
         catch (JSONException e) {
-            Toast.makeText(scrollview.this, mJsonString, Toast.LENGTH_LONG).show();
+            Toast.makeText(list_search.this, mJsonString, Toast.LENGTH_LONG).show();
             Log.d(TAG, "showResult: ", e);
         }
 

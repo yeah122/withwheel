@@ -22,28 +22,33 @@
             android:layout_weight="5"
             android:orientation="horizontal" >
 
-
-
             <fragment
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="match_parent"
                 android:id="@+id/map"
-                tools:context=".MapsActivity"
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 />
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/selectedKeyword"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="5dp"
-            android:textColor="#555555"
-            android:textSize="18dp"
-            android:text="선택한 키워드"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/selectedKeyword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="5dp"
+                android:gravity="center"
+                android:textColor="#ededed"
+                android:background="#aaaaaa"
+                android:textSize="15dp"
+                android:text="선택한 키워드"/>
+
+        </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -63,10 +68,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:layout_marginHorizontal="5dp"
-            android:layout_weight="1"
             android:orientation="horizontal">
 
             <Button

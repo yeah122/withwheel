@@ -75,7 +75,6 @@ public class loc_sangpe extends FragmentActivity{
 
     private AlertDialog dialog;
 
-    private TextView mTextViewResult;
     ArrayList<locationData> mArrayList;
 
     public String mJsonString;
@@ -146,12 +145,11 @@ public class loc_sangpe extends FragmentActivity{
             super.onPostExecute(result);
 
             progressDialog.dismiss();
-            //mTextViewResult.setText(result);
             Log.d(TAG, "response - " + result);
 
             if (result == null) {
 
-                mTextViewResult.setText(errorString);
+                System.out.println(errorString);
             } else {
                 mJsonString = result;
                 showResult();

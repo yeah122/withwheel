@@ -28,7 +28,7 @@ public class sisul extends AppCompatActivity {
         btn_toList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), scrollview.class);
+                Intent intent = new Intent(getApplicationContext(), list_search.class);
                 startActivity(intent);
             }
         });

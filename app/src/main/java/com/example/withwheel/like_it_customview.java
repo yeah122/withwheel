@@ -1,24 +1,23 @@
 package com.example.withwheel;
 
 import android.content.Context;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.BaseAdapter;
-        import android.widget.ImageView;
-        import android.widget.TextView;
-        import java.util.ArrayList;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
 
-public class CustomListView extends BaseAdapter
-{
+import java.util.ArrayList;
+
+public class like_it_customview extends BaseAdapter {
+
     LayoutInflater layoutInflater = null;
     private ArrayList<locationData> mArrayList = null;
     private int count = 0;
 
-    public CustomListView(ArrayList<locationData> listData, int cnt)
+    public like_it_customview(ArrayList<locationData> listData, int cnt)
     {
         mArrayList = listData;
-        //count = mArrayList.size();
         count = cnt;
     }
 
@@ -50,7 +49,7 @@ public class CustomListView extends BaseAdapter
             {
                 layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             }
-            convertView = layoutInflater.inflate(R.layout.route_result_listview, parent, false);
+            convertView = layoutInflater.inflate(R.layout.like_it_customview, parent, false);
         }
 
         TextView name = convertView.findViewById(R.id.name);

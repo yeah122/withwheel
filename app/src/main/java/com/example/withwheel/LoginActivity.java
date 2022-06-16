@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private static String TAG = "phplogin";
 
-    private static final String TAG_JSON = "persons";
+    private static final String TAG_JSON = "person";
     private static final String TAG_ID = "userid";
     private static final String TAG_PASS = "password";
     private static final String TAG_NAME = "nickname";
@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.login);
 
         TextView forgotText = (TextView) findViewById(R.id.forgotText);
 

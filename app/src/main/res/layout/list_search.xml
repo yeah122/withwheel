@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".scrollview"
+    tools:context=".list_search"
     android:orientation="vertical">
 
     <include layout="@layout/toolbar" />
@@ -18,10 +18,11 @@
         android:gravity="center">
 
         <Button
-            android:id="@+id/btn_res"
+            android:id="@+id/btn_restaurant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:clickable="false"
             android:text="식당" />
 
 
@@ -33,7 +34,7 @@
             android:text="숙박" />
 
         <Button
-            android:id="@+id/btn_place"
+            android:id="@+id/btn_attractive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -44,18 +45,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
-        android:orientation="vertical">
-        <Button
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
             android:id="@+id/btn_toMap"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="지도로 보기"/>
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:backgroundTint="#00ff0000"
+            android:src="@drawable/icon_map"/>
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_view"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             app:iconifiedByDefault="false"
             app:queryHint="주소 검색" />
 
@@ -79,18 +84,23 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/beforePage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:text="이전"/>
-        <Button
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:backgroundTint="#00ff0000"
+            android:src="@drawable/icon_arrow_30"
+            android:rotationY="180"/>
+
+        <ImageButton
             android:id="@+id/nextPage"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:text="다음"/>
+            android:backgroundTint="#00ff0000"
+            android:src="@drawable/icon_arrow_30"/>
+
 
     </LinearLayout>
 

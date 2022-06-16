@@ -1,9 +1,6 @@
 package com.example.withwheel;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
-import androidx.appcompat.widget.SearchView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -18,17 +15,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.withwheel.locationData;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.UiSettings;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -113,7 +99,7 @@ public class sangpe extends FragmentActivity {
         String userid = preference.getString("id", "");
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sangpe);
+        setContentView(R.layout.sangpe);
         Intent intent = getIntent();
         String jooso = intent.getStringExtra("jooso");
 
@@ -128,7 +114,7 @@ public class sangpe extends FragmentActivity {
             mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
             sangpe.GetData task = new sangpe.GetData();
-            task.execute("http://192.168.49.70/sangpe_charger.php", jooso);
+            task.execute("http://10.0.2.2/sangpe_charger.php", jooso);
             t1 = (TextView) findViewById(R.id.textview1);
             t1.setText(place_name);
             t1.setTextSize(30);
@@ -163,9 +149,7 @@ public class sangpe extends FragmentActivity {
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu,
-                                    View v,
-                                    ContextMenu.ContextMenuInfo menuInfo) {
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.bookmark, menu);
     }
@@ -178,8 +162,7 @@ public class sangpe extends FragmentActivity {
         switch (item.getItemId()) {
             case R.id.bookmark:
                 sangpe.GetData task = new sangpe.GetData();
-                task.execute("http://10.0.2.2:8080/bookmark_hotel.php", userid, mArrayList.get(0).getName(), place_lat, place_lng);
-
+                task.execute("http://10.0.2.2/bookmark_hotel.php", userid, mArrayList.get(0).getName(), mArrayList.get(0).getAddress());
         }
         return true;
     }
@@ -229,11 +212,10 @@ public class sangpe extends FragmentActivity {
             else{
                 String userid = (String) params[1];
                 String place_name = (String) params[2];
-                String lat = (String) params[3];
-                String lng = (String) params[4];
+                String place_address = (String) params[3];
 
                 serverURL = (String) params[0];//"http://10.0.2.2/bookmark_hotel.php";
-                postParameters = "userid=" + userid + "&place_name=" + place_name + "&lat=" + lat + "&lng=" + lng;
+                postParameters = "userid=" + userid + "&place_name=" + place_name + "&place_address" + place_address;
             }
 
 
