@@ -108,15 +108,15 @@ public class res_sangpe extends FragmentActivity{
 
             if(theme.equals("식당")){
                 res_sangpe.GetData task = new res_sangpe.GetData();
-                task.execute("http://192.168.49.70/res_location.php", location);
+                task.execute("http://10.0.2.2/res_location.php", location);
             }
             else if(theme.equals("관광지")){
                 res_sangpe.GetData task = new res_sangpe.GetData();
-                task.execute("http://192.168.49.70/place_location.php", location);
+                task.execute("http://10.0.2.2/place_location.php", location);
             }
             else  if(theme.equals("숙박")){
                 res_sangpe.GetData task = new res_sangpe.GetData();
-                task.execute("http://192.168.49.70/hotel_location.php", location);
+                task.execute("http://10.0.2.2/hotel_location.php", location);
             }
             else{ // 테마값이 빈 값으로 넘겨졌을 때
                 Toast.makeText(getApplicationContext(), "오류입니다.", Toast.LENGTH_SHORT).show();

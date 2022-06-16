@@ -8,11 +8,12 @@
     android:orientation="vertical"
     android:background="#FFFFFF">
 
+    <include  layout="@layout/toolbar"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -20,6 +21,8 @@
             android:layout_gravity="center"
             android:layout_weight="5"
             android:orientation="horizontal" >
+
+
 
             <fragment
                 android:layout_width="match_parent"
@@ -31,6 +34,16 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/selectedKeyword"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:textColor="#555555"
+            android:textSize="18dp"
+            android:text="선택한 키워드"/>
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -52,6 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:gravity="center_horizontal"
+            android:layout_marginHorizontal="5dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 

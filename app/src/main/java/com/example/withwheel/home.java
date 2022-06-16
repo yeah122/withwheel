@@ -93,7 +93,7 @@ public class home extends AppCompatActivity {
 
 
                 home.GetData task = new home.GetData();
-                task.execute("http://192.168.0.2/login.php", mEditTextID.getText().toString(), mEditTextPass.getText().toString());
+                task.execute("http://10.0.2.2/login.php", mEditTextID.getText().toString(), mEditTextPass.getText().toString());
             }
         });
         mArrayList = new ArrayList<>();

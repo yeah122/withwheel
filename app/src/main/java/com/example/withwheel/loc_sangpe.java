@@ -98,7 +98,7 @@ public class loc_sangpe extends FragmentActivity{
             mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
             loc_sangpe.GetData task = new loc_sangpe.GetData();
-            task.execute("http://192.168.49.70/place_location.php", place_location);
+            task.execute("http://10.0.2.2/place_location.php", place_location);
             t1 = (TextView) findViewById(R.id.textview1);
             t1.setText(place_name);
             t1.setTextSize(30);

@@ -106,6 +106,8 @@ public class route_result extends AppCompatActivity implements OnMapReadyCallbac
         listView =(ListView) findViewById(R.id.listView);
 
         setListView(mArrayList);
+        TextView selectedKeyword = (TextView) findViewById(R.id.selectedKeyword);
+        selectedKeyword.setText("선택한 키워드 " + keyword);
 
         // 관광지 추가
         oneMore = (Button) findViewById(R.id.oneMore);
@@ -118,7 +120,6 @@ public class route_result extends AppCompatActivity implements OnMapReadyCallbac
                 else{
                     addListView(newAttrList);
                 }
-
             }
         });
 
@@ -461,8 +462,6 @@ public class route_result extends AppCompatActivity implements OnMapReadyCallbac
             addNewMarker(newLocal);
             setListView(newLocal);
             newAttrList = newLocal;
-
-
 
             return;
 

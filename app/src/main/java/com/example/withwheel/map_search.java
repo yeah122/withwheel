@@ -40,13 +40,14 @@ import java.util.ArrayList;
 
 public class map_search extends FragmentActivity implements OnMapReadyCallback {
 
-    private static String TAG = "map_search";
+    private static String TAG = "map";
 
-    private static final String TAG_JSON = "map_search";
+    private static final String TAG_JSON = "map";
     private static final String TAG_LAT = "lat";
     private static final String TAG_LNG = "lng";
     private static final String TAG_PLACE_NAME = "place_name";
     private static final String TAG_PLACE_ADDRESS = "place_address";
+    String place_address;
 
     private AlertDialog dialog;
 
@@ -58,10 +59,7 @@ public class map_search extends FragmentActivity implements OnMapReadyCallback {
     GoogleMap map;
     SupportMapFragment mapFragment;
     SearchView searchView;
-    Button toolist;
 
-    String theme;
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,11 +92,9 @@ public class map_search extends FragmentActivity implements OnMapReadyCallback {
                         // 검색한 지역이 제대로 입력 되었으면
                         if (location != null || !location.equals("")) {
                             mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
-                            
-                            theme = "식당";
 
                             map_search.GetData task = new map_search.GetData();
-                            task.execute("http://192.168.49.70/res_location.php", location);
+                            task.execute("http://10.0.2.2/res_location.php", location);
                         }
                         return false;
                     };
@@ -108,6 +104,7 @@ public class map_search extends FragmentActivity implements OnMapReadyCallback {
                         return false;
                     }
                 });
+                mapFragment.getMapAsync(map_search.this);
             }
         });
 
@@ -124,21 +121,18 @@ public class map_search extends FragmentActivity implements OnMapReadyCallback {
                         if (location != null || !location.equals("")) {
                             mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
-                            theme = "숙박";
-
                             map_search.GetData task = new map_search.GetData();
-                            task.execute("http://192.168.49.70/hotel_location.php", location);
+                            task.execute("http://10.0.2.2/hotel_location.php", location);
                         }
                         return false;
-                    }
-
-                    ;
+                    };
 
                     @Override
                     public boolean onQueryTextChange(String s) {
                         return false;
                     }
                 });
+                mapFragment.getMapAsync(map_search.this);
             }
         });
         Button placee = (Button) findViewById(R.id.btn_placee);
@@ -154,70 +148,21 @@ public class map_search extends FragmentActivity implements OnMapReadyCallback {
                         if (location != null || !location.equals("")) {
                             mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
-                            theme = "관광지";
-                            
                             map_search.GetData task = new map_search.GetData();
-                            task.execute("http://192.168.49.70/place_location.php", location);
+                            task.execute("http://10.0.2.2/place_location.php", location);
                         }
                         return false;
-                    }
-
-                    ;
+                    };
 
                     @Override
                     public boolean onQueryTextChange(String s) {
                         return false;
                     }
                 });
+                mapFragment.getMapAsync(map_search.this);
             }
         });
-
-        mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        searchView = (SearchView) findViewById(R.id.search_view);
-
-
-
-
-
-        mArrayList = new ArrayList<>();
-
-
-
-
-        // 서치뷰 검색 버튼 눌렸을 때
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                String location = searchView.getQuery().toString();
-
-                // 검색한 지역이 제대로 입력 되었으면
-                if (location != null || !location.equals("")) {
-                    mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
-                    
-
-                    map_search.GetData task = new map_search.GetData();
-                    task.execute("http://192.168.49.70/res_location.php", location);
-                }
-
-                return false;
-            }
-
-
-
-
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                return false;
-            }
-        });
-
-        mapFragment.getMapAsync(this);
-
     }
-
-
 
     class GetData extends AsyncTask<String, Void, String> {
 
@@ -243,7 +188,8 @@ public class map_search extends FragmentActivity implements OnMapReadyCallback {
             if (result == null) {
 
                 mTextViewResult.setText(errorString);
-            } else {
+            }
+            else {
                 mJsonString = result;
                 showResult();
             }
@@ -278,7 +224,8 @@ public class map_search extends FragmentActivity implements OnMapReadyCallback {
                 InputStream inputStream;
                 if (responseStatusCode == HttpURLConnection.HTTP_OK) {
                     inputStream = httpURLConnection.getInputStream();
-                } else {
+                }
+                else {
                     inputStream = httpURLConnection.getErrorStream();
                 }
 
@@ -319,7 +266,7 @@ public class map_search extends FragmentActivity implements OnMapReadyCallback {
                 String lat = item.getString(TAG_LAT);
                 String lng = item.getString(TAG_LNG);
                 String place_name = item.getString(TAG_PLACE_NAME);
-                String place_address = item.getString(TAG_PLACE_ADDRESS);
+                place_address = item.getString(TAG_PLACE_ADDRESS);
 
                 locationData locationData = new locationData();
 
@@ -332,13 +279,10 @@ public class map_search extends FragmentActivity implements OnMapReadyCallback {
             }
             Toast.makeText(map_search.this, "정보 가져오기 성공", Toast.LENGTH_SHORT).show();
 
-
             // 맵에 있는 마커 모두 삭제
             map.clear();
             // 검색 결과 장소 모두 지도에 마커 추가
-            for (int i=0; i < mArrayList.size(); i++) {
-
-                MarkerOptions markers = new MarkerOptions();
+            for (int i=0; i<mArrayList.size(); i++) {
                 // 배열에서 값 받아오기
                 String st_lat = mArrayList.get(i).getLat();
                 String st_lng = mArrayList.get(i).getLng();
@@ -351,9 +295,8 @@ public class map_search extends FragmentActivity implements OnMapReadyCallback {
 
                 LatLng latLng = new LatLng(lat, lng);
 
-                map.addMarker(markers.position(latLng).title(place_name).snippet(place_address));
+                map.addMarker(new MarkerOptions().position(latLng).title(place_name).snippet(place_address));
             }
-
             CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(new LatLng(Double.parseDouble(mArrayList.get(0).getLat()), Double.parseDouble(mArrayList.get(0).getLng())) )      // Sets the center of the map to Mountain View
                     .zoom(14)                   // Sets the zoom
@@ -375,6 +318,11 @@ public class map_search extends FragmentActivity implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
 
+        UiSettings mUiSettings = map.getUiSettings();
+
+        // Keep the UI Settings state in sync with the checkboxes.
+        mUiSettings.setZoomControlsEnabled(true);
+
         LatLng cityhall = new LatLng(37.566826, 126.9786567);
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(cityhall, 14));
 
@@ -384,8 +332,8 @@ public class map_search extends FragmentActivity implements OnMapReadyCallback {
                 .title("서울시청");
 
         map.addMarker(markerOptions);
-        map.setOnInfoWindowClickListener(infoWindowClickListener);
 
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(37.566826, 126.9786567),16));
     }
 
     GoogleMap.OnInfoWindowClickListener infoWindowClickListener = new GoogleMap.OnInfoWindowClickListener() {
@@ -397,14 +345,13 @@ public class map_search extends FragmentActivity implements OnMapReadyCallback {
             Toast.makeText(map_search.this, name, Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(map_search.this,res_sangpe.class);
+
             intent.putExtra("location", address);
-            intent.putExtra("theme", theme);
+
             startActivity(intent);
         }
 
         ;
 
     };
-
-
 }

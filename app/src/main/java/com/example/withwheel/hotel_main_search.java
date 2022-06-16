@@ -80,7 +80,7 @@ public class hotel_main_search extends FragmentActivity implements OnMapReadyCal
                     mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
                     hotel_main_search.GetData task = new hotel_main_search.GetData();
-                    task.execute("http://192.168.0.2/hotel_location.php", hotel_location);
+                    task.execute("http://10.0.2.2/hotel_location.php", hotel_location);
                 }
 
                 return false;
