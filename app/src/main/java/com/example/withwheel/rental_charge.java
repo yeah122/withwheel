@@ -82,7 +82,7 @@ public class rental_charge extends FragmentActivity implements OnMapReadyCallbac
                     mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
                     rental_charge.GetData task = new rental_charge.GetData();
-                    task.execute("http://192.168.0.2/charger.php", location);
+                    task.execute("http://192.168.49.70/charger.php", location);
                 }
 
                 return false;
@@ -97,7 +97,6 @@ public class rental_charge extends FragmentActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
 
     }
-
 
     class GetData extends AsyncTask<String, Void, String> {
 
@@ -293,7 +292,6 @@ public class rental_charge extends FragmentActivity implements OnMapReadyCallbac
             Toast.makeText(rental_charge.this,name,Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(rental_charge.this, sangpe.class);
-
 
 
             intent.putExtra("jooso" , address );

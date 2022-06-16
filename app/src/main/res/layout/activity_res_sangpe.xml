@@ -24,7 +24,7 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="키워드"
+            android:text=""
             android:textSize="20dp"/>
         <TextView
             android:id="@+id/textview2"
@@ -32,7 +32,7 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="키워드"
+            android:text=""
             android:textSize="20dp"/>
         <TextView
             android:id="@+id/textview3"
@@ -40,7 +40,7 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="키워드"
+            android:text=""
             android:textSize="20dp"/>
         <TextView
             android:id="@+id/textview4"
@@ -48,7 +48,7 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="키워드"
+            android:text=""
             android:textSize="20dp"/>
         <TextView
             android:id="@+id/textview5"
@@ -56,7 +56,7 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="키워드"
+            android:text=""
             android:textSize="20dp"/>
         <TextView
             android:id="@+id/textview6"
@@ -64,7 +64,7 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="키워드"
+            android:text=""
             android:textSize="20dp"/>
         <TextView
             android:id="@+id/textview7"
@@ -72,7 +72,7 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="키워드"
+            android:text=""
             android:textSize="20dp"/>
         <TextView
             android:id="@+id/textview8"
@@ -80,7 +80,7 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="키워드"
+            android:text=""
             android:textSize="20dp"/>
         <TextView
             android:id="@+id/textview9"
@@ -88,7 +88,7 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="키워드"
+            android:text=""
             android:textSize="20dp"/>
         <TextView
             android:id="@+id/textview10"
@@ -96,7 +96,7 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="키워드"
+            android:text=""
             android:textSize="20dp"/>
         <TextView
             android:id="@+id/textview11"
@@ -104,7 +104,7 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="키워드"
+            android:text=""
             android:textSize="20dp"/>
         <TextView
             android:id="@+id/textview12"
@@ -112,7 +112,7 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="키워드"
+            android:text=""
             android:textSize="20dp"/>
 
     </LinearLayout>

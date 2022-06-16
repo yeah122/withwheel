@@ -128,7 +128,7 @@ public class sangpe extends FragmentActivity {
             mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
             sangpe.GetData task = new sangpe.GetData();
-            task.execute("http://10.0.2.2/sangpe_charger.php", jooso);
+            task.execute("http://192.168.49.70/sangpe_charger.php", jooso);
             t1 = (TextView) findViewById(R.id.textview1);
             t1.setText(place_name);
             t1.setTextSize(30);
@@ -178,7 +178,7 @@ public class sangpe extends FragmentActivity {
         switch (item.getItemId()) {
             case R.id.bookmark:
                 sangpe.GetData task = new sangpe.GetData();
-                task.execute("http://10.0.2.2/bookmark_hotel.php", userid, mArrayList.get(0).getName(), place_lat, place_lng);
+                task.execute("http://10.0.2.2:8080/bookmark_hotel.php", userid, mArrayList.get(0).getName(), place_lat, place_lng);
 
         }
         return true;
