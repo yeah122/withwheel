@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -31,35 +30,9 @@ public class route extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "route";
 
     private static final String TAG_JSON = "route";
-    private static final String TAG_LAT = "lat";
-    private static final String TAG_LNG = "lng";
-    private static final String TAG_PLACE_NAME = "place_name";
-    private static final String TAG_PLACE_ADDRESS = "place_address";
-    private static final String TAG_PLACE_CALL = "place_call";
-    private static final String TAG_HOMEPAGE = "homepage";
-    private static final String TAG_GUIDE = "guide";
-    private static final String TAG_ENTRANCE = "entrance";
-    private static final String TAG_ELEVATOR = "elevator";
-    private static final String TAG_TOILET = "toilet";
-    private static final String TAG_PARKING = "parking";
-    private static final String TAG_INTRODUTION = "introdution";
-    private static final String TAG_OUTSIDE = "야외";
-    private static final String TAG_INSIDE = "실내";
-    private static final String TAG_HISTORY = "역사유적";
-    private static final String TAG_NATURE = "자연경관";
-    private static final String TAG_SHOPPING = "쇼핑";
-    private static final String TAG_ART = "문화예술";
-    private static final String TAG_THEMEPARK = "테마파크";
-    private static final String TAG_CITY = "도시경관";
-    private static final String TAG_FOOD = "식도락";
-    private static final String TAG_GOOGLE_RATING = "google_rating";
-    private static final String TAG_GOOGLE_TOTAL = "google_ratings_total";
-    private static final String TAG_KAKAO_RATING = "kakao_rating";
-    private static final String TAG_KAKAO_TOTAL = "kakao_ratings_total";
 
-    private TextView mTextViewResult;
     public String mJsonString;
-    ArrayList<locationData> mArrayList = new ArrayList<>();
+    ArrayList<LocationData> mArrayList = new ArrayList<>();
 
     List<String> keyword_list = new ArrayList<String>();
 
@@ -241,12 +214,11 @@ public class route extends AppCompatActivity implements View.OnClickListener {
             super.onPostExecute(result);
 
             progressDialog.dismiss();
-            //mTextViewResult.setText(result);
             Log.d(TAG, "response - " + result);
 
             if (result == null){
 
-                mTextViewResult.setText(errorString);
+                System.out.println(errorString);
             }
             else {
                 mJsonString = result;
@@ -328,33 +300,34 @@ public class route extends AppCompatActivity implements View.OnClickListener {
 
                 String lat = item.getString("lat");
                 String lng = item.getString("lng");
-                String place_name = item.getString(TAG_PLACE_NAME);
-                String place_address = item.getString(TAG_PLACE_ADDRESS);
-                String place_call = item.getString(TAG_PLACE_CALL);
-                String homepage = item.getString(TAG_HOMEPAGE);
-                String guide = item.getString(TAG_GUIDE);
-                String entrance = item.getString(TAG_ENTRANCE);
-                String elevator = item.getString(TAG_ELEVATOR);
-                String toilet = item.getString(TAG_TOILET);
-                String parking = item.getString(TAG_PARKING);
-                String introdution = item.getString(TAG_INTRODUTION);
-                String outside = item.getString(TAG_OUTSIDE);
-                String inside = item.getString(TAG_INSIDE);
-                String history = item.getString(TAG_HISTORY);
-                String nature = item.getString(TAG_NATURE);
-                String shopping = item.getString(TAG_SHOPPING);
-                String art = item.getString(TAG_ART);
-                String themepark = item.getString(TAG_THEMEPARK);
-                String city = item.getString(TAG_CITY);
-                String food = item.getString(TAG_FOOD);
-                String google_rating = item.getString(TAG_GOOGLE_RATING);
-                String google_ratings_total = item.getString(TAG_GOOGLE_TOTAL);
-                String kakao_rating = item.getString(TAG_KAKAO_RATING);
-                String kakao_ratings_total = item.getString(TAG_KAKAO_TOTAL);
+                String place_name = item.getString("place_name");
+                String place_address = item.getString("place_address");
+                String place_call = item.getString("place_call");
+                String homepage = item.getString("homepage");
+                String guide = item.getString("guide");
+                String entrance = item.getString("entrance");
+                String elevator = item.getString("elevator");
+                String toilet = item.getString("toilet");
+                String parking = item.getString("parking");
+                String introdution = item.getString("introdution");
+                String outside = item.getString("야외");
+                String inside = item.getString("실내");
+                String history = item.getString("역사유적");
+                String nature = item.getString("자연경관");
+                String shopping = item.getString("쇼핑");
+                String art = item.getString("문화예술");
+                String themepark = item.getString("테마파크");
+                String city = item.getString("도시경관");
+                String food = item.getString("식도락");
+                String google_rating = item.getString("google_rating");
+                String google_ratings_total = item.getString("google_ratings_total");
+                String kakao_rating = item.getString("kakao_ratings");
+                String kakao_ratings_total = item.getString("kakao_ratings_total");
+
                 String distFromFirst = item.getString("1등과의_거리");
                 String totalScore = item.getString("합계_점수");
 
-                locationData locationData = new locationData();
+                LocationData locationData = new LocationData();
 
                 locationData.setLat(lat);
                 locationData.setLng(lng);
@@ -392,16 +365,6 @@ public class route extends AppCompatActivity implements View.OnClickListener {
             intent.putExtra("keyword", keyword_list.toString());
             intent.putExtra("mArrayList", mArrayList);
             startActivityForResult(intent, 0);
-
-            /*
-            AlertDialog.Builder builder = new AlertDialog.Builder(rental_charge.this);
-            for (int j=0; j<mArrayList.size(); j++) {
-
-                builder.setMessage(mArrayList.get(j).getLng() + "\n" + mArrayList.get(j).getLat() +
-                        "\n" + mArrayList.get(j).getName());
-                builder.setNegativeButton("확인", null);
-                builder.show();
-            }*/
 
             return;
 

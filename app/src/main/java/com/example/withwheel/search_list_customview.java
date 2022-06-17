@@ -9,13 +9,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class list_search_customview extends BaseAdapter {
+public class search_list_customview extends BaseAdapter {
 
     LayoutInflater layoutInflater = null;
-    private ArrayList<locationData> mArrayList = null;
+    private ArrayList<LocationData> mArrayList = null;
     private int count = 0, click;
 
-    public list_search_customview(ArrayList<locationData> listData, int clickCnt)
+    public search_list_customview(ArrayList<LocationData> listData, int clickCnt)
     {
         mArrayList = listData;
         click = clickCnt;
@@ -55,7 +55,7 @@ public class list_search_customview extends BaseAdapter {
             {
                 layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             }
-            convertView = layoutInflater.inflate(R.layout.list_search_listview, parent, false);
+            convertView = layoutInflater.inflate(R.layout.search_list_customview, parent, false);
         }
 
         TextView name = convertView.findViewById(R.id.name);

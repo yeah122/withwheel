@@ -31,7 +31,7 @@
             android:name=".sangpe"
             android:exported="false" />
         <activity
-            android:name=".list_search"
+            android:name=".search_list"
             android:exported="false" />
         <activity
             android:name=".mypage"
@@ -43,7 +43,7 @@
             android:name=".route_result"
             android:exported="false" />
         <activity
-            android:name=".rental_charge"
+            android:name=".search_charger"
             android:exported="false" />
         <activity
             android:name=".bookmark"
@@ -52,7 +52,7 @@
             android:name=".detailPage"
             android:exported="false" />
         <activity
-            android:name=".map_search"
+            android:name=".search_map"
             android:exported="false" />
         <activity
             android:name=".profile_change"
@@ -72,7 +72,7 @@
             android:value="kju7s5d1h8" />
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".profile_login"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -80,7 +80,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".profile_insert" />
     </application>
 
 </manifest>

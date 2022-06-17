@@ -5,17 +5,16 @@ import android.content.Context;
         import android.view.View;
         import android.view.ViewGroup;
         import android.widget.BaseAdapter;
-        import android.widget.ImageView;
-        import android.widget.TextView;
+import android.widget.TextView;
         import java.util.ArrayList;
 
 public class route_result_CustomListView extends BaseAdapter
 {
     LayoutInflater layoutInflater = null;
-    private ArrayList<locationData> mArrayList = null;
+    private ArrayList<LocationData> mArrayList = null;
     private int count = 0;
 
-    public route_result_CustomListView(ArrayList<locationData> listData, int cnt)
+    public route_result_CustomListView(ArrayList<LocationData> listData, int cnt)
     {
         mArrayList = listData;
         //count = mArrayList.size();

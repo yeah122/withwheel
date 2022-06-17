@@ -34,21 +34,17 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class rental_charge extends FragmentActivity implements OnMapReadyCallback {
+public class search_charger extends FragmentActivity implements OnMapReadyCallback {
 
     private static String TAG = "charger";
 
     private static final String TAG_JSON = "charger";
-    private static final String TAG_LAT = "lat";
-    private static final String TAG_LNG = "lng";
-    private static final String TAG_PLACE_NAME = "place_name";
-    private static final String TAG_PLACE_ADDRESS = "place_address";
     String place_address;
 
     private AlertDialog dialog;
 
     private TextView mTextViewResult;
-    ArrayList<locationData> mArrayList;
+    ArrayList<LocationData> mArrayList;
 
     public String mJsonString;
 
@@ -60,7 +56,7 @@ public class rental_charge extends FragmentActivity implements OnMapReadyCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.rental_charge);
+        setContentView(R.layout.search_charger);
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -79,7 +75,7 @@ public class rental_charge extends FragmentActivity implements OnMapReadyCallbac
                 if (location != null || !location.equals("")){
                     mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
-                    rental_charge.GetData task = new rental_charge.GetData();
+                    search_charger.GetData task = new search_charger.GetData();
                     task.execute("http://10.0.2.2/charger.php", location);
                 }
 
@@ -106,7 +102,7 @@ public class rental_charge extends FragmentActivity implements OnMapReadyCallbac
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressDialog = ProgressDialog.show(rental_charge.this,
+            progressDialog = ProgressDialog.show(search_charger.this,
                     "Please Wait", null, true, true);
         }
 
@@ -196,13 +192,12 @@ public class rental_charge extends FragmentActivity implements OnMapReadyCallbac
 
                 JSONObject item = jsonArray.getJSONObject(i);
 
-                String lat = item.getString(TAG_LAT);
-                String lng = item.getString(TAG_LNG);
-                String place_name = item.getString(TAG_PLACE_NAME);
-                place_address = item.getString(TAG_PLACE_ADDRESS);
+                String lat = item.getString("lat");
+                String lng = item.getString("lng");
+                String place_name = item.getString("place_name");
+                place_address = item.getString("place_address");
 
-
-                locationData locationData = new locationData();
+                LocationData locationData = new LocationData();
 
                 locationData.setLat(lat);
                 locationData.setLng(lng);
@@ -211,7 +206,7 @@ public class rental_charge extends FragmentActivity implements OnMapReadyCallbac
 
                 mArrayList.add(locationData);
             }
-            Toast.makeText(rental_charge.this, "정보 가져오기 성공", Toast.LENGTH_SHORT).show();
+            Toast.makeText(search_charger.this, "정보 가져오기 성공", Toast.LENGTH_SHORT).show();
 
             // 맵에 있는 마커 모두 삭제
             map.clear();
@@ -245,7 +240,7 @@ public class rental_charge extends FragmentActivity implements OnMapReadyCallbac
 
         }
         catch (JSONException e) {
-            Toast.makeText(rental_charge.this, mJsonString, Toast.LENGTH_LONG).show();
+            Toast.makeText(search_charger.this, mJsonString, Toast.LENGTH_LONG).show();
             Log.d(TAG, "showResult: ", e);
         }
 
@@ -261,14 +256,8 @@ public class rental_charge extends FragmentActivity implements OnMapReadyCallbac
         mUiSettings.setZoomControlsEnabled(true);
 
         LatLng cityhall = new LatLng(37.566826, 126.9786567);
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(cityhall, 14));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(cityhall, 11));
 
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions
-                .position(cityhall)
-                .title("서울시청");
-
-        map.addMarker(markerOptions);
         map.setOnInfoWindowClickListener(infoWindowClickListener);
 
     }
@@ -278,11 +267,12 @@ public class rental_charge extends FragmentActivity implements OnMapReadyCallbac
             String name = marker.getTitle();
             String address = marker.getSnippet();
 
-            Toast.makeText(rental_charge.this,name,Toast.LENGTH_SHORT).show();
+            Toast.makeText(search_charger.this,name,Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(rental_charge.this, sangpe.class);
+            Intent intent = new Intent(search_charger.this, detailPage.class);
             intent.putExtra("place_address", address);
             intent.putExtra("place_name", name);
+            intent.putExtra("theme", "충전소");
             startActivity(intent);
         }
 

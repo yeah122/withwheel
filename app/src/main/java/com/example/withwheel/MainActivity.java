@@ -24,28 +24,28 @@ public class MainActivity extends TabActivity {
         //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
         intent = new Intent().setClass(this, home.class);
         spec = tabHost.newTabSpec("home"); // 객체를 생성
-        spec.setIndicator("메인"); //탭의 이름 설정
+        spec.setIndicator("메인", getApplicationContext().getResources().getDrawable(R.drawable.icon_home)); //탭의 이름 설정
         spec.setContent(intent);
         tabHost.addTab(spec);
 
         //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
-        intent = new Intent().setClass(this, map_search.class);
+        intent = new Intent().setClass(this, search_map.class);
         spec = tabHost.newTabSpec("map_search"); // 객체를 생성
-        spec.setIndicator("시설"); //탭의 이름 설정
+        spec.setIndicator("시설", getApplicationContext().getResources().getDrawable(R.drawable.icon_search)); //탭의 이름 설정
         spec.setContent(intent);
         tabHost.addTab(spec);
 
         //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
         intent = new Intent().setClass(this, route.class);
         spec = tabHost.newTabSpec("route"); // 객체를 생성
-        spec.setIndicator("경로\n추천"); //탭의 이름 설정
+        spec.setIndicator("경로\n추천", getApplicationContext().getResources().getDrawable(R.drawable.icon_gps)); //탭의 이름 설정
         spec.setContent(intent);
         tabHost.addTab(spec);
 
         //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
-        intent = new Intent().setClass(this, rental_charge.class);
+        intent = new Intent().setClass(this, search_charger.class);
         spec = tabHost.newTabSpec("rental_charge"); // 객체를 생성
-        spec.setIndicator("휠체어 충전기"); //탭의 이름 설정
+        spec.setIndicator("휠체어 충전기", getApplicationContext().getResources().getDrawable(R.drawable.charge)); //탭의 이름 설정
         spec.setContent(intent);
         tabHost.addTab(spec);
 
@@ -53,7 +53,7 @@ public class MainActivity extends TabActivity {
         //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
         intent = new Intent().setClass(this, mypage.class);
         spec = tabHost.newTabSpec("mypage"); // 객체를 생성
-        spec.setIndicator("마이\n페이지"); //탭의 이름 설정
+        spec.setIndicator("마이\n페이지", getApplicationContext().getResources().getDrawable(R.drawable.account)); //탭의 이름 설정
         spec.setContent(intent);
         tabHost.addTab(spec);
 

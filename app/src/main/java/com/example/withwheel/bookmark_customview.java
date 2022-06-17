@@ -9,13 +9,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class like_it_customview extends BaseAdapter {
+public class bookmark_customview extends BaseAdapter {
 
     LayoutInflater layoutInflater = null;
-    private ArrayList<locationData> mArrayList = null;
+    private ArrayList<LocationData> mArrayList = null;
     private int count = 0;
 
-    public like_it_customview(ArrayList<locationData> listData, int cnt)
+    public bookmark_customview(ArrayList<LocationData> listData, int cnt)
     {
         mArrayList = listData;
         count = cnt;
@@ -49,7 +49,7 @@ public class like_it_customview extends BaseAdapter {
             {
                 layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             }
-            convertView = layoutInflater.inflate(R.layout.like_it_customview, parent, false);
+            convertView = layoutInflater.inflate(R.layout.bookmark_customview, parent, false);
         }
 
         TextView name = convertView.findViewById(R.id.name);

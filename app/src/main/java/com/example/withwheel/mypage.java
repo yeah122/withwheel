@@ -23,15 +23,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
 public class mypage extends AppCompatActivity {
 
     private static String TAG = "mypage";
-    String place_address;
-    private AlertDialog dialog;
-    private TextView mTextViewResult;
-    ArrayList<locationData> mArrayList;
 
     public String mJsonString;
 
@@ -39,6 +34,8 @@ public class mypage extends AppCompatActivity {
     Button startLogin, startRegister, btnlogout, btnDelete, btnchange, btnBookmark;
 
     String URL;
+
+    Intent i;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,19 +103,22 @@ public class mypage extends AppCompatActivity {
                     editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     AlertDialog.Builder builder = new AlertDialog.Builder(mypage.this);
 
-                    builder.setTitle("비밀번호 수정").setMessage("수정을 원하시면 현재 비밀번호를 입력해주세요.");
+                    builder.setTitle("비밀번호 수정").setMessage("현재 비밀번호를 입력해주세요.");
                     builder.setView(editText);
                     builder.setNegativeButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             String password;
                             URL = "change";
-
                             password = editText.getText().toString();
 
-                            mypage.GetData task = new mypage.GetData();
-                            task.execute("http://10.0.2.2/profile_change_check.php", name, password);
-
+                            if(!password.equals("")){
+                                mypage.GetData task = new mypage.GetData();
+                                task.execute("http://10.0.2.2/profile_change_check.php", name, password);
+                            }
+                            else {
+                                Toast.makeText(getApplicationContext(), "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
                     builder.show();
@@ -147,7 +147,7 @@ public class mypage extends AppCompatActivity {
             startLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(mypage.this, LoginActivity.class);
+                    Intent intent = new Intent(mypage.this, profile_login.class);
                     startActivity(intent);
                 }
             });
@@ -155,7 +155,7 @@ public class mypage extends AppCompatActivity {
             startRegister.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(mypage.this, RegisterActivity.class);
+                    Intent intent = new Intent(mypage.this, profile_insert.class);
                     startActivity(intent);
                 }
             });
@@ -195,7 +195,7 @@ public class mypage extends AppCompatActivity {
                         editor.remove("id");
                         editor.commit();
 
-                        Intent i = new Intent(mypage.this, MainActivity.class);
+                        i = new Intent(mypage.this, MainActivity.class);
                         startActivity(i);
                         finish();
                     }
@@ -207,10 +207,10 @@ public class mypage extends AppCompatActivity {
                 else if(URL.equals("change")){ //비밀번호 수정
                     if(result.equals("확인")){//비밀번호 수정 완료됐을 때
                         Toast.makeText(mypage.this, "비밀번호가 확인되었습니다.", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(mypage.this, profile_change.class);
+                        i = new Intent(mypage.this, profile_change.class);
                         startActivity(i);
                     }
-                    else{//비번 다를 시?
+                    else{//비번 다를 시
                         Toast.makeText(mypage.this, result, Toast.LENGTH_SHORT).show();
                     }
 

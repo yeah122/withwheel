@@ -2,7 +2,7 @@ package com.example.withwheel;
 
 import java.io.Serializable;
 
-public class locationData implements Serializable {
+public class LocationData implements Serializable {
     private String place_name, place_address, place_call, homepage ,lat, lng;
     private String guide, entrance, elevator, toilet, parking, introdution, rentalWheel, room;
     private String outside, inside, history, nature, shopping, art, themepark, city, food;

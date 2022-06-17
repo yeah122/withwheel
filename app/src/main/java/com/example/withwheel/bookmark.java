@@ -7,12 +7,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,17 +26,15 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class bookmark extends AppCompatActivity {
 
     private static String TAG = "bookmark";
     private TextView mTextViewResult;
     public String mJsonString;
-    ArrayList<locationData> mArrayList;
+    ArrayList<LocationData> mArrayList;
     ListView listView;
-    like_it_customview adapter;
+    bookmark_customview adapter;
 
     Button btnCharger, btnAttr, btnRes, btnHotel;
 
@@ -232,7 +228,6 @@ public class bookmark extends AppCompatActivity {
                 return new String("Error: " + e.getMessage());
             }
 
-
         }
 
     }
@@ -251,7 +246,7 @@ public class bookmark extends AppCompatActivity {
                 String place_address = item.getString("place_address");
                 String bookmark = item.getString("bookmark");
 
-                locationData locationData = new locationData();
+                LocationData locationData = new LocationData();
 
                 locationData.setName(place_name);
                 locationData.setAddress(place_address);
@@ -259,14 +254,13 @@ public class bookmark extends AppCompatActivity {
                 mArrayList.add(locationData);
             }
             //정보갖고와서 띄울거
-            adapter = new like_it_customview(mArrayList, mArrayList.size());
+            adapter = new bookmark_customview(mArrayList, mArrayList.size());
             listView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
 
-
         } catch (JSONException e) {
             if(mJsonString.equals("즐겨찾기 목록이 없습니다.")){
-                adapter = new like_it_customview(mArrayList, mArrayList.size());
+                adapter = new bookmark_customview(mArrayList, mArrayList.size());
                 listView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
 

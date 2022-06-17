@@ -3,31 +3,15 @@ package com.example.withwheel;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -35,9 +19,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
 
-public class RegisterActivity extends AppCompatActivity
+public class profile_insert extends AppCompatActivity
 {
     private static String IP_ADDRESS = "10.0.2.2";//다음 줄에 있는 IP 주소를 아파치 웹서버가 설치된  컴퓨터의 IP
     private static String TAG = "withwheel";//
@@ -51,7 +34,7 @@ public class RegisterActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.profile_register);
 
         mEditTextID = (EditText)findViewById(R.id.editText_main_name);
         mEditTextPassword = (EditText)findViewById(R.id.editText_main_Password);
@@ -67,17 +50,23 @@ public class RegisterActivity extends AppCompatActivity
                 String password2 = mEditTextPassword2.getText().toString();
 
                 if(userid.equals("") || userid == null){ //아이디 입력 안 됐으면
-                    Toast.makeText(RegisterActivity.this, "아이디를 입력하세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(profile_insert.this, "아이디를 입력하세요.", Toast.LENGTH_SHORT).show();
                 }
                 else {//아이디 입력 됐으면
-                    // 비밀번호가 같으면
-                    if(password.equals(password2)){
-                        InsertData task = new InsertData();
-                        task.execute("http://" + IP_ADDRESS + "/insert.php", userid, password);
-                    }
+                    //비밀번호가 빈 칸이 아니면
+                    if(!password.equals("") && !password2.equals("")){
+                        // 비밀번호가 같으면
+                        if(password.equals(password2)){
+                            InsertData task = new InsertData();
+                            task.execute("http://" + IP_ADDRESS + "/insert.php", userid, password);
+                        }
 
-                    else {//비밀번호가 다르면
-                        Toast.makeText(RegisterActivity.this, "비밀번호가 다릅니다.", Toast.LENGTH_SHORT).show();
+                        else {//비밀번호가 다르면
+                            Toast.makeText(profile_insert.this, "비밀번호가 다릅니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else {
+                        Toast.makeText(profile_insert.this, "비밀번호를 모두 입력하세요.", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -92,7 +81,7 @@ public class RegisterActivity extends AppCompatActivity
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressDialog = ProgressDialog.show(RegisterActivity.this,
+            progressDialog = ProgressDialog.show(profile_insert.this,
                     "Please Wait", null, true, true);
         }
 
@@ -189,9 +178,9 @@ public class RegisterActivity extends AppCompatActivity
             mEditTextID.setText("");
             mEditTextPassword.setText("");
             mEditTextPassword2.setText("");
-            Toast.makeText(RegisterActivity.this, "회원가입 완료.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(profile_insert.this, "회원가입 완료.", Toast.LENGTH_SHORT).show();
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(profile_insert.this);
             builder.setTitle("회원가입에 성공하였습니다.").setMessage("환영합니다.");
             builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                 @Override
@@ -206,7 +195,7 @@ public class RegisterActivity extends AppCompatActivity
             alertDialog.show();
         }
         else{
-            Toast.makeText(RegisterActivity.this, result_message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(profile_insert.this, result_message, Toast.LENGTH_SHORT).show();
         }
 
 

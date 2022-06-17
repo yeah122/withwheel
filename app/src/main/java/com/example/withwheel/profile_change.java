@@ -54,7 +54,7 @@ public class profile_change extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // 비밀번호가 모두 입력이 되었다면
-                if(editPass1.getText().toString().equals("") && editPass2.getText().toString().equals("")){
+                if(!editPass1.getText().toString().equals("") && !editPass2.getText().toString().equals("")){
                     // 비밀번호가 같으면
                     if(editPass1.getText().toString().equals(editPass2.getText().toString())){
                         profile_change.GetData task = new profile_change.GetData();

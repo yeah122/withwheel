@@ -6,13 +6,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -31,13 +28,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class LoginActivity extends AppCompatActivity {
+public class profile_login extends AppCompatActivity {
 
     private static String TAG = "login";
 
     private static final String TAG_JSON = "person";
-    private static final String TAG_ID = "userid";
-    private static final String TAG_PASS = "password";
 
     ArrayList<HashMap<String, String>> mArrayList;
     private EditText mEditTextID, mEditTextPass;
@@ -51,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.profile_login);
 
         mEditTextID = (EditText) findViewById(R.id.et_id);
         mEditTextPass = (EditText) findViewById(R.id.et_pass);
@@ -63,8 +58,9 @@ public class LoginActivity extends AppCompatActivity {
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                Intent intent = new Intent(getApplicationContext(), profile_insert.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -88,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressDialog = ProgressDialog.show(LoginActivity.this,
+            progressDialog = ProgressDialog.show(profile_login.this,
                     "Please Wait", null, true, true);
         }
 
@@ -188,13 +184,13 @@ public class LoginActivity extends AppCompatActivity {
 
                 JSONObject item = jsonArray.getJSONObject(i);
 
-                String userid = item.getString(TAG_ID);
-                String password = item.getString(TAG_PASS);
+                String userid = item.getString("userid");
+                String password = item.getString("password");
 
                 HashMap<String,String> hashMap = new HashMap<>();
 
-                hashMap.put(TAG_ID, userid);
-                hashMap.put(TAG_PASS, password);
+                hashMap.put("userid", userid);
+                hashMap.put("password", password);
 
                 mArrayList.add(hashMap);
 
@@ -202,12 +198,12 @@ public class LoginActivity extends AppCompatActivity {
                 editor.commit();
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(profile_login.this);
                 dialog = builder.setMessage(userid + "님 로그인 되었습니다.")
                         .setNegativeButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                Intent intent = new Intent(profile_login.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();
                             }

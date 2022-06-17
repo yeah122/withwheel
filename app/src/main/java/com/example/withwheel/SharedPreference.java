@@ -6,7 +6,6 @@ import android.preference.PreferenceManager;
 
 public class SharedPreference {
 
-
     public static void setAttribute(Context context, String key, String value){// 값 저장
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = prefs.edit();

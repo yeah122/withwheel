@@ -35,19 +35,13 @@ public class sangpe extends FragmentActivity {
 
     private static final String TAG_JSON = "charger";
 
-    SharedPreferences preferences;
-    SharedPreferences.Editor editor;
-
-    String place_lat, place_lng;
-
     String place_address, place_name, place_info, place_start, place_close, place_sat_start, place_sat_close;
     String place_sun_start, place_sun_close, place_sametime, place_air, place_phone, place_call;
 
     TextView Tplace_name, Tplace_address, Tplace_call, Tplace_info, Tplace_time;
     TextView Tplace_sat_time, Tplace_sun_time, Tplace_phone , Tplace_air;
 
-    private TextView mTextViewResult;
-    ArrayList<locationData> mArrayList;
+    ArrayList<LocationData> mArrayList;
     public String mJsonString;
 
 
@@ -59,7 +53,7 @@ public class sangpe extends FragmentActivity {
         String userid = preference.getString("id", "");
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sangpe);
+        setContentView(R.layout.detailpage_charger);
         Intent intent = getIntent();
         String location_address = intent.getStringExtra("place_address");
         String location_name = intent.getStringExtra("place_name");
@@ -132,7 +126,7 @@ public class sangpe extends FragmentActivity {
 
             if (result == null) {
 
-                mTextViewResult.setText(errorString);
+                System.out.println(errorString);
             } else {
                 mJsonString = result;
                 showResult();
@@ -156,11 +150,11 @@ public class sangpe extends FragmentActivity {
                 String userid = (String) params[1];
                 String place_name = (String) params[2];
                 String place_address = (String) params[3];
+                String theme = "충전소";
 
                 serverURL = (String) params[0];
-                postParameters = "userid=" + userid + "&place_name=" + place_name + "&place_address" + place_address + "&btnState=" + "충전소";
+                postParameters = "userid=" + userid + "&place_name=" + place_name + "&place_address=" + place_address + "&btnState=" + theme;
             }
-
 
             try {
 
@@ -234,10 +228,7 @@ public class sangpe extends FragmentActivity {
                 place_air = item.getString("place_air");
                 place_phone = item.getString("place_phone");
                 place_call = item.getString("place_call");
-                place_lat = item.getString("lat");
-                place_lng = item.getString("lng");
             }
-            Toast.makeText(getApplicationContext(), String.valueOf(jsonArray.length()), Toast.LENGTH_SHORT).show();
 
             Tplace_name.setText("시설명 : " + place_name);
             Tplace_address.setText(place_address);
