@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -79,6 +80,7 @@ public class mypage extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     EditText editText = new EditText(mypage.this);
+                    editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     AlertDialog.Builder builder = new AlertDialog.Builder(mypage.this);
 
                     builder.setTitle("정말 탈퇴하실 건가요?").setMessage("탈퇴를 원하시면 비밀번호를 입력해주세요.");
@@ -90,7 +92,7 @@ public class mypage extends AppCompatActivity {
                             password = editText.getText().toString();
                             URL = "Delete";
                             mypage.GetData task = new mypage.GetData();
-                            task.execute("http://10.0.2.2/Delete.php", name, password);
+                            task.execute("http://10.0.2.2/profile_delete.php", name, password);
                         }
                     });
                     builder.show();
@@ -101,6 +103,7 @@ public class mypage extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     EditText editText = new EditText(mypage.this);
+                    editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     AlertDialog.Builder builder = new AlertDialog.Builder(mypage.this);
 
                     builder.setTitle("비밀번호 수정").setMessage("수정을 원하시면 현재 비밀번호를 입력해주세요.");
@@ -112,8 +115,9 @@ public class mypage extends AppCompatActivity {
                             URL = "change";
 
                             password = editText.getText().toString();
+
                             mypage.GetData task = new mypage.GetData();
-                            task.execute("http://10.0.2.2/change.php", name, password);
+                            task.execute("http://10.0.2.2/profile_change_check.php", name, password);
 
                         }
                     });
@@ -200,8 +204,9 @@ public class mypage extends AppCompatActivity {
                     }
 
                 }
-                if(URL.equals("change")){ //비밀번호 수정
-                    if(result.equals("비번 확인^^")){//비밀번호 수정 완료됐을 때
+                else if(URL.equals("change")){ //비밀번호 수정
+                    if(result.equals("확인")){//비밀번호 수정 완료됐을 때
+                        Toast.makeText(mypage.this, "비밀번호가 확인되었습니다.", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(mypage.this, profile_change.class);
                         startActivity(i);
                     }
@@ -209,6 +214,10 @@ public class mypage extends AppCompatActivity {
                         Toast.makeText(mypage.this, result, Toast.LENGTH_SHORT).show();
                     }
 
+                }
+                //탈퇴도 수정도 아닐 때
+                else {
+                    Toast.makeText(mypage.this, "오류가 발생하였습니다. 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
                 }
             }
         }

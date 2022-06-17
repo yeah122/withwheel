@@ -264,7 +264,6 @@ public class bookmark extends AppCompatActivity {
             adapter.notifyDataSetChanged();
 
 
-
         } catch (JSONException e) {
             if(mJsonString.equals("즐겨찾기 목록이 없습니다.")){
                 adapter = new like_it_customview(mArrayList, mArrayList.size());

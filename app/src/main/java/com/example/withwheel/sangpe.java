@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,58 +34,17 @@ public class sangpe extends FragmentActivity {
     private static String TAG = "sangpe";
 
     private static final String TAG_JSON = "charger";
-    private static final String TAG_PLACE_NAME = "place_name";
-    private static final String TAG_PLACE_ADDRESS = "place_address";
-    private static final String TAG_PLACE_INFO = "place_info";
-    private static final String TAG_PLACE_START = "place_start";
-    private static final String TAG_PLACE_CLOSE = "place_close";
-    private static final String TAG_PLACE_SAT_START = "place_sat_start";
-    private static final String TAG_PLACE_SAT_CLOSE = "place_sat_close";
-    private static final String TAG_PLACE_SUN_START = "place_sun_start";
-    private static final String TAG_PLACE_SUN_CLOSE = "place_sun_close";
-    private static final String TAG_PLACE_USE = "place_use";
-    private static final String TAG_PLACE_AIR = "place_air";
-    private static final String TAG_PLACE_PHONE = "place_phone";
-    private static final String TAG_PLACE_NUMBER = "place_number";
-    private static final String TAG_PLACE_LAT = "place_lat";
-    private static final String TAG_PLACE_LNG = "place_lng";
 
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
-    String place_lat;
-    String place_lng;
-    String PLT,PLG;
+    String place_lat, place_lng;
 
-    String place_address;
-    String place_name;
-    String place_info;
-    String place_start;
-    String place_close;
-    String place_sat_start;
-    String place_sat_close;
-    String place_sun_start;
-    String place_sun_close;
-    String place_use;
-    String place_air;
-    String place_phone;
-    String place_number;
+    String place_address, place_name, place_info, place_start, place_close, place_sat_start, place_sat_close;
+    String place_sun_start, place_sun_close, place_sametime, place_air, place_phone, place_call;
 
-    TextView t1;
-    TextView t2;
-    TextView t3;
-    TextView t4;
-    TextView t5;
-    TextView t6;
-    TextView t7;
-    TextView t8;
-    TextView t9;
-    TextView t10;
-    TextView t11;
-    TextView t12;
-    TextView t13;
-    TextView t14;
-
+    TextView Tplace_name, Tplace_address, Tplace_call, Tplace_info, Tplace_time;
+    TextView Tplace_sat_time, Tplace_sun_time, Tplace_phone , Tplace_air;
 
     private TextView mTextViewResult;
     ArrayList<locationData> mArrayList;
@@ -101,49 +61,31 @@ public class sangpe extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sangpe);
         Intent intent = getIntent();
-        String jooso = intent.getStringExtra("jooso");
+        String location_address = intent.getStringExtra("place_address");
+        String location_name = intent.getStringExtra("place_name");
 
         LinearLayout Conmenu = (LinearLayout)findViewById(R.id.contextmenu);
         registerForContextMenu(Conmenu);
 
         mArrayList = new ArrayList<>();
+        Tplace_name = (TextView) findViewById(R.id.place_name);
+        Tplace_address = (TextView) findViewById(R.id.place_address);
+        Tplace_call = (TextView) findViewById(R.id.place_call);
+        Tplace_info = (TextView) findViewById(R.id.place_info);
+        Tplace_time = (TextView) findViewById(R.id.place_time);
+        Tplace_sat_time = (TextView) findViewById(R.id.place_sat_time);
+        Tplace_sun_time  = (TextView) findViewById(R.id.place_sun_time);
+        Tplace_air = (TextView) findViewById(R.id.place_air);
+        Tplace_phone = (TextView) findViewById(R.id.place_phone);
 
         // 서치뷰 검색 버튼 눌렸을 때
         // 검색한 지역이 제대로 입력 되었으면
-        if (jooso != null) {
+        if (location_address != null) {
             mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
             sangpe.GetData task = new sangpe.GetData();
-            task.execute("http://10.0.2.2/sangpe_charger.php", jooso);
-            t1 = (TextView) findViewById(R.id.textview1);
-            t1.setText(place_name);
-            t1.setTextSize(30);
-            t2 = (TextView) findViewById(R.id.textview2);
-            t2.setText(place_address);
-            t3 = (TextView) findViewById(R.id.textview3);
-            t3.setText(place_info);
-            t4 = (TextView) findViewById(R.id.textview4);
-            t4.setText(place_start);
-            t5 = (TextView) findViewById(R.id.textview5);
-            t5.setText(place_close);
-            t6 = (TextView) findViewById(R.id.textview6);
-            t6.setText(place_sat_start);
-            t7 = (TextView) findViewById(R.id.textview7);
-            t7.setText(place_sat_close);
-            t8 = (TextView) findViewById(R.id.textview8);
-            t8.setText(place_sun_start);
-            t9 = (TextView) findViewById(R.id.textview9);
-            t9.setText(place_sun_close);
-            t10 = (TextView) findViewById(R.id.textview10);
-            t10.setText(place_use);
-            t11 = (TextView) findViewById(R.id.textview11);
-            t11.setText(place_air);
-            t12 = (TextView) findViewById(R.id.textview12);
-            t12.setText(place_phone);
-            t13 = (TextView) findViewById(R.id.textview13);
-            t13.setText(place_number);
-            t14 = (TextView) findViewById(R.id.textview14);
-            t14.setText(userid);
+            task.execute("http://10.0.2.2/charger.php", location_address, location_name);
+
             return;
         }
     }
@@ -162,7 +104,7 @@ public class sangpe extends FragmentActivity {
         switch (item.getItemId()) {
             case R.id.bookmark:
                 sangpe.GetData task = new sangpe.GetData();
-                task.execute("http://10.0.2.2/bookmark_hotel.php", userid, mArrayList.get(0).getName(), mArrayList.get(0).getAddress());
+                task.execute("http://10.0.2.2/bookmark_onoff.php", userid, place_name, place_address);
         }
         return true;
     }
@@ -203,19 +145,20 @@ public class sangpe extends FragmentActivity {
             String serverURL;
             String postParameters;
 
-            if(params.length <= 2) {
-                String jooso = (String) params[1];
+            if(params.length <= 3) {//상세페이지 정보 가져오기
+                String location_address = (String) params[1];
+                String location_name = (String) params[2];
 
                 serverURL = (String) params[0];
-                postParameters = "jooso=" + jooso;
+                postParameters = "place_address=" + location_address + "&place_name=" + location_name;
             }
-            else{
+            else{//즐겨찾기 등록/해제 하기
                 String userid = (String) params[1];
                 String place_name = (String) params[2];
                 String place_address = (String) params[3];
 
-                serverURL = (String) params[0];//"http://10.0.2.2/bookmark_hotel.php";
-                postParameters = "userid=" + userid + "&place_name=" + place_name + "&place_address" + place_address;
+                serverURL = (String) params[0];
+                postParameters = "userid=" + userid + "&place_name=" + place_name + "&place_address" + place_address + "&btnState=" + "충전소";
             }
 
 
@@ -271,102 +214,55 @@ public class sangpe extends FragmentActivity {
 
         try {
             JSONObject jsonObject = new JSONObject(mJsonString);
-            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
+            JSONArray jsonArray = jsonObject.getJSONArray("charger");
             //JSONArray jsonArray = new JSONArray(TAG_JSON);
 
             for (int i = 0; i < jsonArray.length(); i++) {
 
                 JSONObject item = jsonArray.getJSONObject(i);
 
-                place_name = item.getString(TAG_PLACE_NAME);
-                place_address = item.getString(TAG_PLACE_ADDRESS);
-                place_info = item.getString(TAG_PLACE_INFO);
-                place_start = item.getString(TAG_PLACE_START);
-                place_close = item.getString(TAG_PLACE_CLOSE);
-                place_sat_start = item.getString(TAG_PLACE_SAT_START);
-                place_sat_close = item.getString(TAG_PLACE_SAT_CLOSE);
-                place_sun_start = item.getString(TAG_PLACE_SUN_START);
-                place_sun_close = item.getString(TAG_PLACE_SUN_CLOSE);
-                place_use = item.getString(TAG_PLACE_USE);
-                place_air = item.getString(TAG_PLACE_AIR);
-                place_phone = item.getString(TAG_PLACE_PHONE);
-                place_number = item.getString(TAG_PLACE_NUMBER);
+                place_name = item.getString("place_name");
+                place_address = item.getString("place_address");
+                place_info = item.getString("place_info");
+                place_start = item.getString("place_start");
+                place_close = item.getString("place_close");
+                place_sat_start = item.getString("place_sat_start");
+                place_sat_close = item.getString("place_sat_close");
+                place_sun_start = item.getString("place_sun_start");
+                place_sun_close = item.getString("place_sun_close");
+                place_sametime = item.getString("place_sametime");
+                place_air = item.getString("place_air");
+                place_phone = item.getString("place_phone");
+                place_call = item.getString("place_call");
                 place_lat = item.getString("lat");
                 place_lng = item.getString("lng");
-
-
-                locationData locationData = new locationData();
-
-                locationData.setName(place_name);
-                locationData.setAddress(place_address);
-                locationData.setAddress(place_info);
-                locationData.setAddress(place_start);
-                locationData.setAddress(place_close);
-                locationData.setAddress(place_sat_start);
-                locationData.setAddress(place_sat_close);
-                locationData.setAddress(place_sun_start);
-                locationData.setAddress(place_sun_close);
-                locationData.setAddress(place_use);
-                locationData.setAddress(place_air);
-                locationData.setAddress(place_phone);
-                locationData.setAddress(place_number);
-                locationData.setLat(place_lat);
-                locationData.setLng(place_lng);
-
-
-                mArrayList.add(locationData);
             }
             Toast.makeText(getApplicationContext(), String.valueOf(jsonArray.length()), Toast.LENGTH_SHORT).show();
 
-            t1 = (TextView) findViewById(R.id.textview1);
-            t1.setText("시설명 : " + place_name);
-            t1.setTextSize(20);
-            t2 = (TextView) findViewById(R.id.textview2);
-            t2.setText("소재지 도로명주소 : " +place_address);
-            t2.setTextSize(20);
-            t3 = (TextView) findViewById(R.id.textview3);
-            t3.setText("설치 장소 설명 : " +place_info);
-            t3.setTextSize(20);
-            t4 = (TextView) findViewById(R.id.textview4);
-            t4.setText("평일 운영 시작 시각 : " +place_start);
-            t4.setTextSize(20);
-            t5 = (TextView) findViewById(R.id.textview5);
-            t5.setText("평일 운영 종료 시각 : " + place_close);
-            t5.setTextSize(20);
-            t6 = (TextView) findViewById(R.id.textview6);
-            t6.setText("토요일 운영 시작 시각 : " + place_sat_start);
-            t6.setTextSize(20);
-            t7 = (TextView) findViewById(R.id.textview7);
-            t7.setText("토요일 운영 종료 시각 : " + place_sat_close);
-            t7.setTextSize(20);
-            t8 = (TextView) findViewById(R.id.textview8);
-            t8.setText("일요일 운영 시작 시각 : " + place_sun_start);
-            t8.setTextSize(20);
-            t9 = (TextView) findViewById(R.id.textview9);
-            t9.setText("일요일 운영 종료 시각 : " + place_sun_close);
-            t9.setTextSize(20);
-            t10 = (TextView) findViewById(R.id.textview10);
-            t10.setText("동시 사용 가능 대수 : " + place_use);
-            t10.setTextSize(20);
-            t11 = (TextView) findViewById(R.id.textview11);
-            t11.setText("공기 주입 가능 여부 : " + place_air);
-            t11.setTextSize(20);
-            t12 = (TextView) findViewById(R.id.textview12);
-            t12.setText("휴대전화 충전 가능 여부 : " + place_phone);
-            t12.setTextSize(20);
-            t13 = (TextView) findViewById(R.id.textview13);
-            t13.setText("관리기관 전화번호 : " + place_number);
-            t13.setTextSize(20);
-            //정보갖고와서 띄울거
+            Tplace_name.setText("시설명 : " + place_name);
+            Tplace_address.setText(place_address);
+            Tplace_call.setText(place_call);
+            Tplace_info.setText(place_info);
+            Tplace_time.setText("평일: " + place_start +" ~ "+ place_close);
+            Tplace_sat_time.setText("토요일: " + place_sat_start +" ~ "+ place_sat_close);
+            Tplace_sun_time.setText("공휴일: " + place_sun_start +" ~ "+ place_sun_close);
+            Tplace_air.setText("공기 주입 가능 여부 : " + place_air);
+            Tplace_phone.setText("휴대전화 충전 가능 여부 : " + place_phone);
+
+            Tplace_call.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Uri uri = Uri.parse("tel:" + Tplace_call.getText().toString());
+                    Intent intentCAll = new Intent(Intent.ACTION_DIAL, uri);
+                    startActivity(intentCAll);
+                }
+            });
 
 
         } catch (JSONException e) {
             Toast.makeText(sangpe.this, mJsonString, Toast.LENGTH_LONG).show();
             Log.d(TAG, "showResult: ", e);
         }
-
-
-
 
     }
 

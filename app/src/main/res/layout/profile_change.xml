@@ -41,14 +41,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:hint="비밀번호를 입력해주세요"
-            android:id="@+id/editText_main_Password_change1" />
+            android:id="@+id/Password_change1" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:hint="비밀번호를 다시 입력해주세요."
-            android:id="@+id/editText_main_Password_change2" />
+            android:id="@+id/Password_change2" />
 
 
     </LinearLayout>

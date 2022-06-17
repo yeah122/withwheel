@@ -37,6 +37,14 @@
             android:textColor="#555555"
             android:text="선택한 키워드에 관련된 장소가 추천됩니다."/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="17dp"
+            android:textColor="#555555"
+            android:text="선택한 키워드에 관련된 장소가 추천됩니다."/>
+
     </LinearLayout>
 
 

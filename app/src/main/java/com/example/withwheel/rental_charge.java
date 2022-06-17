@@ -213,16 +213,6 @@ public class rental_charge extends FragmentActivity implements OnMapReadyCallbac
             }
             Toast.makeText(rental_charge.this, "정보 가져오기 성공", Toast.LENGTH_SHORT).show();
 
-            /*
-            AlertDialog.Builder builder = new AlertDialog.Builder(rental_charge.this);
-            for (int j=0; j<mArrayList.size(); j++) {
-
-                builder.setMessage(mArrayList.get(j).getLng() + "\n" + mArrayList.get(j).getLat() +
-                        "\n" + mArrayList.get(j).getName());
-                builder.setNegativeButton("확인", null);
-                builder.show();
-            }*/
-
             // 맵에 있는 마커 모두 삭제
             map.clear();
             // 검색 결과 장소 모두 지도에 마커 추가
@@ -288,18 +278,12 @@ public class rental_charge extends FragmentActivity implements OnMapReadyCallbac
             String name = marker.getTitle();
             String address = marker.getSnippet();
 
-            Toast.makeText(rental_charge.this,name,Toast.LENGTH_LONG).show();
+            Toast.makeText(rental_charge.this,name,Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(rental_charge.this, sangpe.class);
-
-
-
-            intent.putExtra("jooso" , address );
-
-
+            intent.putExtra("place_address", address);
+            intent.putExtra("place_name", name);
             startActivity(intent);
         }
-
-        ;
 
     };}

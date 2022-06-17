@@ -1,6 +1,8 @@
 package com.example.withwheel;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -40,8 +42,8 @@ public class profile_change extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_change);
 
-        editPass1 = (EditText) findViewById(R.id.editText_main_Password_change1);
-        editPass2 = (EditText) findViewById(R.id.editText_main_Password_change2);
+        editPass1 = (EditText) findViewById(R.id.Password_change1);
+        editPass2 = (EditText) findViewById(R.id.Password_change2);
 
         preferences = getSharedPreferences("UserInfo", MODE_PRIVATE);
         editor = preferences.edit();
@@ -51,15 +53,20 @@ public class profile_change extends AppCompatActivity {
         button_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // 비밀번호가 같으면
-                if(editPass1.equals(editPass2)){
-                    profile_change.GetData task = new profile_change.GetData();
-                    task.execute("http://10.0.2.2/change1.php", userid, editPass1.getText().toString());
+                // 비밀번호가 모두 입력이 되었다면
+                if(editPass1.getText().toString().equals("") && editPass2.getText().toString().equals("")){
+                    // 비밀번호가 같으면
+                    if(editPass1.getText().toString().equals(editPass2.getText().toString())){
+                        profile_change.GetData task = new profile_change.GetData();
+                        task.execute("http://10.0.2.2/profile_change.php", userid, editPass1.getText().toString());
+                    }
+                    else {//비밀번호가 다르면
+                        Toast.makeText(getApplicationContext(), "비밀번호가 다릅니다.", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                else {//비밀번호가 다르면
-                    Toast.makeText(getApplicationContext(), "비밀번호가 다릅니다.", Toast.LENGTH_SHORT).show();
+                else{
+                    Toast.makeText(getApplicationContext(), "비밀번호를 모두 입력해주세요.", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
     }
@@ -102,7 +109,7 @@ public class profile_change extends AppCompatActivity {
                 String password = (String) params[2];
 
                 String serverURL = (String) params[0];
-                String postParameters = "userid=" + userid + "&password =" + password;
+                String postParameters = "userid=" + userid + "&password=" + password;
 
             try {
 
@@ -151,7 +158,14 @@ public class profile_change extends AppCompatActivity {
     }
 
     private void showResult(){
-        Toast.makeText(getApplicationContext(), mJsonString, Toast.LENGTH_SHORT).show();
-        finish();
+        if(mJsonString.equals("확인")){
+            Toast.makeText(getApplicationContext(), "회원 정보가 성공적으로 수정되었습니다.", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        else {
+            Toast.makeText(getApplicationContext(), mJsonString, Toast.LENGTH_SHORT).show();
+        }
+
     }
+
 }

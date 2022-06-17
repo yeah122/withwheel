@@ -108,24 +108,6 @@ public class detailPage extends FragmentActivity{
 
         }
 
-        place_call.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse("tel:" + homepage.getText().toString());
-                Intent intentCAll = new Intent(Intent.ACTION_DIAL, uri);
-                startActivity(intentCAll);
-            }
-        });
-
-        homepage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse(homepage.getText().toString());
-                Intent intentInternet = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intentInternet);
-            }
-        });
-
     }
 
     @Override
@@ -298,6 +280,24 @@ public class detailPage extends FragmentActivity{
                 place_room.setText("장애인용 객실: " + mArrayList.get(0).getRoom());
                 rental_wheel.setText("휠체어 대여: " + mArrayList.get(0).getRentalWheel());
 
+                place_call.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Uri uri = Uri.parse("tel:" + place_call.getText().toString());
+                        Intent intentCAll = new Intent(Intent.ACTION_DIAL, uri);
+                        startActivity(intentCAll);
+                    }
+                });
+
+                homepage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Uri uri = Uri.parse(homepage.getText().toString());
+                        Intent intentInternet = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intentInternet);
+                    }
+                });
+
             }
             else if(theme.equals("관광지")){
                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -330,6 +330,24 @@ public class detailPage extends FragmentActivity{
                 toilet.setText("장애인 화장실: " + mArrayList.get(0).getToilet());
                 parking.setText("장애인 전용 주차장: " + mArrayList.get(0).getParking());
                 introduction.setText(mArrayList.get(0).getIntrodution());
+
+                place_call.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Uri uri = Uri.parse("tel:" + place_call.getText().toString());
+                        Intent intentCAll = new Intent(Intent.ACTION_DIAL, uri);
+                        startActivity(intentCAll);
+                    }
+                });
+
+                homepage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Uri uri = Uri.parse(homepage.getText().toString());
+                        Intent intentInternet = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intentInternet);
+                    }
+                });
             }
             else if(theme.equals("식당")){
                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -358,6 +376,24 @@ public class detailPage extends FragmentActivity{
                 elevator.setText("장애인 엘리베이터: " + mArrayList.get(0).getElevator());
                 toilet.setText("장애인 화장실: " + mArrayList.get(0).getToilet());
                 parking.setText("장애인 전용 주차장: " + mArrayList.get(0).getParking());
+
+                place_call.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Uri uri = Uri.parse("tel:" + place_call.getText().toString());
+                        Intent intentCAll = new Intent(Intent.ACTION_DIAL, uri);
+                        startActivity(intentCAll);
+                    }
+                });
+
+                homepage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Uri uri = Uri.parse(homepage.getText().toString());
+                        Intent intentInternet = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intentInternet);
+                    }
+                });
             }
             else{
                 Toast.makeText(detailPage.this, "버튼을 누르고 검색하세요", Toast.LENGTH_SHORT).show();

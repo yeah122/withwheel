@@ -74,6 +74,52 @@ public class list_search extends AppCompatActivity {
         nextPage = (ImageButton) findViewById(R.id.nextPage); // 다음 버튼 누르면 다음 페이지로,
         btn_toMap = (ImageButton) findViewById(R.id.btn_toMap);
 
+        Intent intent = getIntent();
+        String address = intent.getStringExtra("searchQuery");
+        String btnWhat = intent.getStringExtra("theme");
+
+        if(address != null || !address.equals("") && btnWhat != null || !btnWhat.equals("")){
+            searchView.setQuery(address, true);
+            theme = btnWhat;
+            if(theme.equals("식당")){
+                btn_restaurant.setEnabled(false);
+                btn_hotel.setEnabled(true);
+                btn_attractive.setEnabled(true);
+            }
+            else if(theme.equals("관광지")){
+                btn_restaurant.setEnabled(true);
+                btn_hotel.setEnabled(true);
+                btn_attractive.setEnabled(false);
+            }
+            else { //숙박일 때
+                btn_restaurant.setEnabled(true);
+                btn_hotel.setEnabled(false);
+                btn_attractive.setEnabled(true);
+            }
+            list_search.GetData task = new list_search.GetData();
+            task.execute(searchView.getQuery().toString());
+        }
+        else if(btnWhat != null || !btnWhat.equals("")){
+            theme = btnWhat;
+            if(theme.equals("식당")){
+                btn_restaurant.setEnabled(false);
+                btn_hotel.setEnabled(true);
+                btn_attractive.setEnabled(true);
+            }
+            else if(theme.equals("관광지")){
+                btn_restaurant.setEnabled(true);
+                btn_hotel.setEnabled(true);
+                btn_attractive.setEnabled(false);
+            }
+            else { //숙박일 때
+                btn_restaurant.setEnabled(true);
+                btn_hotel.setEnabled(false);
+                btn_attractive.setEnabled(true);
+            }
+        }
+        else{
+            btn_restaurant.setEnabled(false);
+        }
 
         btn_restaurant.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +133,7 @@ public class list_search extends AppCompatActivity {
                 String searchViewQuery = searchView.getQuery().toString();
                 if (searchViewQuery != null || !searchViewQuery.equals("")) {
                     list_search.GetData task = new list_search.GetData();
-                    task.execute("http://10.0.2.2/res_location.php", searchViewQuery);
+                    task.execute(searchViewQuery);
                 }
             }
         });
@@ -105,7 +151,7 @@ public class list_search extends AppCompatActivity {
                 if(searchViewQuery != null || !searchViewQuery.equals(""))
                 {
                     list_search.GetData task = new list_search.GetData();
-                    task.execute("http://10.0.2.2/hotel_location.php", searchViewQuery);
+                    task.execute(searchViewQuery);
                 }
             }
         });
@@ -126,7 +172,7 @@ public class list_search extends AppCompatActivity {
                 if(searchViewQuery != null || !searchViewQuery.equals(""))
                 {
                     list_search.GetData task = new list_search.GetData();
-                    task.execute("http://10.0.2.2/place_location.php", searchViewQuery);
+                    task.execute(searchViewQuery);
                 }
             }
         });
@@ -140,17 +186,9 @@ public class list_search extends AppCompatActivity {
                 if (address != null || !address.equals("")) {
                     mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
-                    if(theme.equals("식당")){
+                    if(!theme.equals("")){
                         list_search.GetData task = new list_search.GetData();
-                        task.execute("http://10.0.2.2/res_location.php", address);
-                    }
-                    else if (theme.equals("관광지")) {
-                        list_search.GetData task = new list_search.GetData();
-                        task.execute("http://10.0.2.2/place_location.php", address);
-                    }
-                    else if (theme.equals("숙박")) {
-                        list_search.GetData task = new list_search.GetData();
-                        task.execute("http://10.0.2.2/hotel_location.php", address);
+                        task.execute(address);
                     }
                     else{
                         Toast.makeText(getApplicationContext(), "식당, 관광지, 숙박 중 하나를 선택해주세요.", Toast.LENGTH_SHORT).show();
@@ -227,8 +265,14 @@ public class list_search extends AppCompatActivity {
         btn_toMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String address = searchView.getQuery().toString();
                 Intent intent = new Intent(getApplicationContext(), map_search.class);
+                if(!address.equals("")){
+                    intent.putExtra("searchQuery", address);
+                }
+                intent.putExtra("theme", theme);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -268,9 +312,18 @@ public class list_search extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
 
-            String address = (String) params[1];
+            String address = (String) params[0];
+            String serverURL;
 
-            String serverURL = (String) params[0];//"http://10.0.2.2/charger.php";
+            if(theme.equals("식당")){
+                serverURL = "http://10.0.2.2/res_location.php";
+            }
+            else if(theme.equals("관광지")){
+                serverURL = "http://10.0.2.2/place_location.php";
+            }
+            else {//숙박일 때
+                serverURL = "http://10.0.2.2/hotel_location.php";
+            }
             String postParameters = "place_address=" + address;
 
             try {

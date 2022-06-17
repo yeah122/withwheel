@@ -81,6 +81,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:enabled="true"
                     android:text="연락처"
                     android:textSize="20dp"/>
 
@@ -100,7 +101,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
+                    android:enabled="true"
                     android:text="홈페이지"
                     android:textSize="20dp"/>
 
