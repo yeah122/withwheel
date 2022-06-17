@@ -45,10 +45,8 @@ public class RegisterActivity extends AppCompatActivity
     private EditText mEditTextID;
     private EditText mEditTextPassword;
     private EditText mEditTextPassword2;
-    private EditText mEditTextNickname;
-    private TextView mTextViewResult;
 
-    public String insert_result;
+    String result_message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +56,6 @@ public class RegisterActivity extends AppCompatActivity
         mEditTextID = (EditText)findViewById(R.id.editText_main_name);
         mEditTextPassword = (EditText)findViewById(R.id.editText_main_Password);
         mEditTextPassword2 = (EditText) findViewById(R.id.editText_main_Password2);
-        mEditTextNickname = (EditText) findViewById(R.id.editText_main_nickname);
-
-        mTextViewResult = (TextView)findViewById(R.id.textView_main_result);
-
-        mTextViewResult.setMovementMethod(new ScrollingMovementMethod());
-
 
         Button buttonInsert = (Button)findViewById(R.id.button_main_insert);
         buttonInsert.setOnClickListener(new View.OnClickListener() {
@@ -73,21 +65,21 @@ public class RegisterActivity extends AppCompatActivity
                 String userid = mEditTextID.getText().toString();
                 String password = mEditTextPassword.getText().toString();
                 String password2 = mEditTextPassword2.getText().toString();
-                String nickname = mEditTextNickname.getText().toString();
 
-                // 비밀번호 확인
-                if(password.equals(password2)){
-                    InsertData task = new InsertData();
-                    task.execute("http://" + IP_ADDRESS + "/insert.php", userid, password, nickname);
-
+                if(userid.equals("") || userid == null){ //아이디 입력 안 됐으면
+                    Toast.makeText(RegisterActivity.this, "아이디를 입력하세요.", Toast.LENGTH_SHORT).show();
                 }
+                else {//아이디 입력 됐으면
+                    // 비밀번호가 같으면
+                    if(password.equals(password2)){
+                        InsertData task = new InsertData();
+                        task.execute("http://" + IP_ADDRESS + "/insert.php", userid, password);
+                    }
 
-                else {
-                    Toast.makeText(RegisterActivity.this, "비밀번호가 다릅니다.", Toast.LENGTH_SHORT).show();
-                    mEditTextPassword.setText("");
-                    mEditTextPassword2.setText("");
+                    else {//비밀번호가 다르면
+                        Toast.makeText(RegisterActivity.this, "비밀번호가 다릅니다.", Toast.LENGTH_SHORT).show();
+                    }
                 }
-
             }
         });
     }
@@ -113,11 +105,12 @@ public class RegisterActivity extends AppCompatActivity
 
             Log.d(TAG, "POST response  - " + result);
 
-            if (result == "새로운 사용자를 추가했습니다."){
-                showResult();
+            if (result == null){
+                System.out.println(result);
             }
             else {
-                mTextViewResult.setText(result);
+                result_message = result;
+                showResult();
             }
         }
 
@@ -127,10 +120,9 @@ public class RegisterActivity extends AppCompatActivity
 
             String userid = (String)params[1];
             String password = (String)params[2];
-            String nickname = (String)params[3];
 
             String serverURL = (String)params[0];
-            String postParameters = "userid=" + userid + "&password=" + password + "&nickname=" + nickname;
+            String postParameters = "userid=" + userid + "&password=" + password;
 
 
             try {
@@ -192,26 +184,32 @@ public class RegisterActivity extends AppCompatActivity
 
     private void showResult(){
 
-                mEditTextID.setText("");
-                mEditTextPassword.setText("");
-                mEditTextPassword2.setText("");
-                mEditTextNickname.setText("");
-                Toast.makeText(RegisterActivity.this, "회원가입 완료.", Toast.LENGTH_SHORT).show();
+        if (result_message.equals("회원가입에 성공하였습니다.")){
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-                builder.setTitle("회원가입").setMessage("방가방가");
-                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
+            mEditTextID.setText("");
+            mEditTextPassword.setText("");
+            mEditTextPassword2.setText("");
+            Toast.makeText(RegisterActivity.this, "회원가입 완료.", Toast.LENGTH_SHORT).show();
 
-                return;
+            AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+            builder.setTitle("회원가입에 성공하였습니다.").setMessage("환영합니다.");
+            builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    //Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    //startActivity(intent);
+                    finish();
+                }
+            });
 
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
+        else{
+            Toast.makeText(RegisterActivity.this, result_message, Toast.LENGTH_SHORT).show();
+        }
+
+
+        return;
     }
 }

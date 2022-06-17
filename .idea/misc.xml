@@ -41,6 +41,8 @@
         <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/activity_register.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/activity_rental_charge.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/activity_res_information.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/activity_res_main_search.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/activity_res_search.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/activity_review.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/activity_route.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/activity_route1.xml" value="0.264" />
@@ -60,8 +62,12 @@
         <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/like_it_customview.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/list_search.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/list_search_listview.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/login.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/main_tab_host.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/map_search.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/mypage.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/mypage_logout_ver.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/profile_change.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/route_result.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/route_result_listview.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/syw/Desktop/withwheel/app/src/main/res/layout/sangpe.xml" value="0.24947916666666667" />

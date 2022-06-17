@@ -30,34 +30,20 @@ public class profile_change extends AppCompatActivity {
 
     private static String TAG = "change";
 
-    private static final String TAG_JSON = "persons";
-    private static final String TAG_ID = "userid";
-    private static final String TAG_PASS = "password";
-    private static final String TAG_NICKNAME = "nickname";
-
-    private TextView mTextViewResult;
     private Button button_change;
-    private EditText editNickname, editPass;
-    ArrayList<HashMap<String, String>> mArrayList;
-    ListView mListViewList;
+    private EditText editPass1, editPass2;
     public String mJsonString;
     String userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        /*SharedPreferences preference = getSharedPreferences("UserInfo", MODE_PRIVATE);
-        String user = preference.getString("id", "");*/
-
         setContentView(R.layout.profile_change);
-        mTextViewResult = (TextView)findViewById(R.id.textView_main_result);
 
-        editNickname = (EditText) findViewById(R.id.editText_main_nickname_change);
-        editPass = (EditText) findViewById(R.id.editText_main_Password_change);
+        editPass1 = (EditText) findViewById(R.id.editText_main_Password_change1);
+        editPass2 = (EditText) findViewById(R.id.editText_main_Password_change2);
 
         preferences = getSharedPreferences("UserInfo", MODE_PRIVATE);
-
         editor = preferences.edit();
         userid = preferences.getString("id", "");
 
@@ -65,11 +51,15 @@ public class profile_change extends AppCompatActivity {
         button_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), userid + "  " + editNickname.getText().toString()
-                        + "  " + editPass.getText().toString(), Toast.LENGTH_SHORT).show();
-                profile_change.GetData task = new profile_change.GetData();
-                task.execute("http://10.0.2.2/change1.php", userid, editNickname.getText().toString(),
-                        editPass.getText().toString());
+                // 비밀번호가 같으면
+                if(editPass1.equals(editPass2)){
+                    profile_change.GetData task = new profile_change.GetData();
+                    task.execute("http://10.0.2.2/change1.php", userid, editPass1.getText().toString());
+                }
+                else {//비밀번호가 다르면
+                    Toast.makeText(getApplicationContext(), "비밀번호가 다릅니다.", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }
@@ -94,16 +84,13 @@ public class profile_change extends AppCompatActivity {
             if(progressDialog != null){
                 progressDialog.dismiss();
             }
-
-            mTextViewResult.setText(result);
             Log.d(TAG, "response - " + result);
 
             if (result == null){
-                mTextViewResult.setText(errorString);
+                System.out.println(errorString);
             }
             else {
                 mJsonString = result;
-
                 showResult();
             }
         }
@@ -112,11 +99,10 @@ public class profile_change extends AppCompatActivity {
         protected String doInBackground(String... params) {
 
                 String userid= (String) params[1];
-                String nickname = (String) params[2];
-                String password = (String) params[3];
+                String password = (String) params[2];
 
-                String serverURL = (String) params[0];//"http://10.0.2.2/login.php";
-                String postParameters = "userid=" + userid + "&nickname =" + nickname + "&password =" + password;
+                String serverURL = (String) params[0];
+                String postParameters = "userid=" + userid + "&password =" + password;
 
             try {
 
@@ -166,23 +152,6 @@ public class profile_change extends AppCompatActivity {
 
     private void showResult(){
         Toast.makeText(getApplicationContext(), mJsonString, Toast.LENGTH_SHORT).show();
-
-        /*
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                AlertDialog.Builder builder = new AlertDialog.Builder(change.this);
-                dialog = builder.setMessage(userid + "님 정보가 수정되었습니다.")
-                        .setNegativeButton("확인", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(getApplicationContext(), mypage.class);
-                                intent.putExtra("loginID", editNickname.getText().toString());
-                                startActivity(intent);
-                                finish();
-                            }
-                        }).create();
-                dialog.show();
-
-                return;
-         */
+        finish();
     }
 }

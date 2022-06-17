@@ -33,7 +33,7 @@ import java.util.List;
 
 public class bookmark extends AppCompatActivity {
 
-    private static String TAG = "like_it";
+    private static String TAG = "bookmark";
     private TextView mTextViewResult;
     public String mJsonString;
     ArrayList<locationData> mArrayList;
@@ -60,13 +60,13 @@ public class bookmark extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedPlaceName = mArrayList.get(i).getName();
-                String selectedPlaceAddress = mArrayList.get(i).getName();
+                String selectedPlaceAddress = mArrayList.get(i).getAddress();
                 Toast.makeText(getApplicationContext(), selectedPlaceName, Toast.LENGTH_SHORT).show();
                 //상세페이지로 이동
                 Intent intent = new Intent(bookmark.this, detailPage.class);
 
-                intent.putExtra("address", selectedPlaceAddress);
-                intent.putExtra("name", selectedPlaceName);
+                intent.putExtra("place_address", selectedPlaceAddress);
+                intent.putExtra("place_name", selectedPlaceName);
                 intent.putExtra("theme", btnWhat);
 
                 startActivity(intent);
@@ -84,10 +84,10 @@ public class bookmark extends AppCompatActivity {
         btnCharger.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
                 btnWhat = "충전소";
-                btnCharger.setClickable(false);
-                btnAttr.setClickable(true);
-                btnRes.setClickable(true);
-                btnHotel.setClickable(true);
+                btnCharger.setEnabled(false);
+                btnAttr.setEnabled(true);
+                btnRes.setEnabled(true);
+                btnHotel.setEnabled(true);
 
                 bookmark.GetData task = new bookmark.GetData();
                 task.execute("http://10.0.2.2/bookmark_search.php", userid, btnWhat);
@@ -98,10 +98,10 @@ public class bookmark extends AppCompatActivity {
         btnAttr.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
                 btnWhat = "관광지";
-                btnAttr.setClickable(false);
-                btnCharger.setClickable(true);
-                btnRes.setClickable(true);
-                btnHotel.setClickable(true);
+                btnAttr.setEnabled(false);
+                btnCharger.setEnabled(true);
+                btnRes.setEnabled(true);
+                btnHotel.setEnabled(true);
 
                 bookmark.GetData task = new bookmark.GetData();
                 task.execute("http://10.0.2.2/bookmark_search.php", userid, btnWhat);
@@ -112,10 +112,10 @@ public class bookmark extends AppCompatActivity {
         btnRes.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
                 btnWhat = "식당";
-                btnRes.setClickable(false);
-                btnCharger.setClickable(true);
-                btnAttr.setClickable(true);
-                btnHotel.setClickable(true);
+                btnRes.setEnabled(false);
+                btnCharger.setEnabled(true);
+                btnAttr.setEnabled(true);
+                btnHotel.setEnabled(true);
 
                 bookmark.GetData task = new bookmark.GetData();
                 task.execute("http://10.0.2.2/bookmark_search.php", userid, btnWhat);
@@ -126,10 +126,10 @@ public class bookmark extends AppCompatActivity {
         btnHotel.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View view) {
                 btnWhat = "숙박";
-                btnHotel.setClickable(false);
-                btnCharger.setClickable(true);
-                btnAttr.setClickable(true);
-                btnRes.setClickable(true);
+                btnHotel.setEnabled(false);
+                btnCharger.setEnabled(true);
+                btnAttr.setEnabled(true);
+                btnRes.setEnabled(true);
 
                 bookmark.GetData task = new bookmark.GetData();
                 task.execute("http://10.0.2.2/bookmark_search.php", userid, btnWhat);
@@ -240,7 +240,7 @@ public class bookmark extends AppCompatActivity {
         mArrayList.clear();
         try {
             JSONObject jsonObject = new JSONObject(mJsonString);
-            JSONArray jsonArray = jsonObject.getJSONArray("likeit");
+            JSONArray jsonArray = jsonObject.getJSONArray("bookmark");
             //JSONArray jsonArray = new JSONArray(TAG_JSON);
 
             for (int i = 0; i < jsonArray.length(); i++) {
@@ -267,7 +267,11 @@ public class bookmark extends AppCompatActivity {
 
         } catch (JSONException e) {
             if(mJsonString.equals("즐겨찾기 목록이 없습니다.")){
-                Toast.makeText(bookmark.this, mJsonString, Toast.LENGTH_LONG).show();
+                adapter = new like_it_customview(mArrayList, mArrayList.size());
+                listView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+
+                Toast.makeText(bookmark.this, btnWhat + "의 " + mJsonString, Toast.LENGTH_SHORT).show();
                 //listView.setOn;
             }
             else{

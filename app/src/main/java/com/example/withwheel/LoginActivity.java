@@ -33,22 +33,17 @@ import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static String TAG = "phplogin";
+    private static String TAG = "login";
 
     private static final String TAG_JSON = "person";
     private static final String TAG_ID = "userid";
     private static final String TAG_PASS = "password";
-    private static final String TAG_NAME = "nickname";
 
-    private TextView mTextViewResult;
     ArrayList<HashMap<String, String>> mArrayList;
-    ListView mListViewList;
     private EditText mEditTextID, mEditTextPass;
     Button btn_login, btn_register;
     public String mJsonString;
     private AlertDialog dialog;
-
-    String loginSort;
 
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
@@ -58,13 +53,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        TextView forgotText = (TextView) findViewById(R.id.forgotText);
-
-        mTextViewResult = (TextView)findViewById(R.id.textView_main_result);
         mEditTextID = (EditText) findViewById(R.id.et_id);
         mEditTextPass = (EditText) findViewById(R.id.et_pass);
-
-        mEditTextPass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
         preferences = getSharedPreferences("UserInfo", MODE_PRIVATE);
         editor = preferences.edit();
@@ -73,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(intent);
             }
         });
@@ -108,12 +98,11 @@ public class LoginActivity extends AppCompatActivity {
             super.onPostExecute(result);
 
             progressDialog.dismiss();
-            mTextViewResult.setText(result);
             Log.d(TAG, "response - " + result);
 
             if (result == null){
 
-                mTextViewResult.setText(errorString);
+               System.out.println(errorString);
             }
             else {
                 mJsonString = result;
@@ -218,9 +207,6 @@ public class LoginActivity extends AppCompatActivity {
                         .setNegativeButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                intent.putExtra("loginID", mEditTextID.getText().toString());
-                                startActivity(intent);
                                 finish();
                             }
                         })

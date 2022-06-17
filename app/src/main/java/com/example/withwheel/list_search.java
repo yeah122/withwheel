@@ -119,6 +119,9 @@ public class list_search extends AppCompatActivity {
 
                 theme = "관광지";
 
+                //listView.removeAllViews();
+                //listView.setAdapter(null);
+
                 String searchViewQuery = searchView.getQuery().toString();
                 if(searchViewQuery != null || !searchViewQuery.equals(""))
                 {
@@ -213,8 +216,8 @@ public class list_search extends AppCompatActivity {
 
                 // 해당 상세페이지로 이동
                 Intent intent = new Intent(list_search.this, detailPage.class);
-                intent.putExtra("address", selectedPlaceAddress);
-                intent.putExtra("name", selectedPlaceName);
+                intent.putExtra("place_address", selectedPlaceAddress);
+                intent.putExtra("place_name", selectedPlaceName);
                 intent.putExtra("theme", theme);
                 startActivity(intent);
             }
@@ -268,7 +271,7 @@ public class list_search extends AppCompatActivity {
             String address = (String) params[1];
 
             String serverURL = (String) params[0];//"http://10.0.2.2/charger.php";
-            String postParameters = "address=" + address;
+            String postParameters = "place_address=" + address;
 
             try {
 
@@ -322,6 +325,10 @@ public class list_search extends AppCompatActivity {
     private void showResult() {
 
         try {
+            mArrayList.clear();
+            clickCnt = 0;
+            //listView.setAdapter(null);
+
             JSONObject jsonObject = new JSONObject(mJsonString);
             JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
             //JSONArray jsonArray = new JSONArray(TAG_JSON);

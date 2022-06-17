@@ -63,8 +63,8 @@ public class detailPage extends FragmentActivity{
         setContentView(R.layout.detailpage);
 
         Intent intent = getIntent();
-        String address = intent.getStringExtra("address");
-        String name = intent.getStringExtra("name");
+        String address = intent.getStringExtra("place_address");
+        String name = intent.getStringExtra("place_name");
         theme = intent.getStringExtra("theme");
 
         place_call = (TextView) findViewById(R.id.place_call);
@@ -76,7 +76,7 @@ public class detailPage extends FragmentActivity{
         userid = preference.getString("id", "");
 
         // 주소와 이름이 잘 넘어왔으면
-        if (address != null || !address.equals("") || name != null || !name.equals("")) {
+        if (address != null || !address.equals("") && name != null || !name.equals("")) {
             mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
             if(theme==null) {
@@ -139,7 +139,7 @@ public class detailPage extends FragmentActivity{
         switch (item.getItemId()) {
             case R.id.bookmark:
                 detailPage.GetData task = new detailPage.GetData();
-                task.execute("http://10.0.2.2/bookmark_hotel.php",
+                task.execute("http://10.0.2.2/bookmark_onoff.php",
                         mArrayList.get(0).getAddress(), mArrayList.get(0).getName(), theme, userid);
         }
         return true;
@@ -179,7 +179,6 @@ public class detailPage extends FragmentActivity{
         protected String doInBackground(String... params) {
             String postParameters;
 
-
             String address = (String) params[1];
             String name = (String) params[2];
 
@@ -191,11 +190,8 @@ public class detailPage extends FragmentActivity{
                 postParameters = "place_address=" + address + "&place_name=" + name + "&btnState=" + btnState+ "&userid=" + id;
             }
             else{//상세페이지 띄우기
-                postParameters = "address=" + address + "&name=" + name;
+                postParameters = "place_address=" + address + "&place_name=" + name;
             }
-
-
-
 
             try {
 
@@ -368,7 +364,12 @@ public class detailPage extends FragmentActivity{
             }
 
         } catch (JSONException e) {
-            Toast.makeText(detailPage.this, mJsonString, Toast.LENGTH_LONG).show();
+            if(mJsonString.equals("true")){
+                Toast.makeText(detailPage.this, "즐겨찾기가 등록되었습니다.", Toast.LENGTH_LONG).show();
+            }
+            else if(mJsonString.equals("false")){
+                Toast.makeText(detailPage.this, "즐겨찾기가 해제되었습니다.", Toast.LENGTH_LONG).show();
+            }
             Log.d(TAG, "showResult: ", e);
         }
 

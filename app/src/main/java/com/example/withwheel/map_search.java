@@ -215,7 +215,7 @@ public class map_search extends FragmentActivity implements OnMapReadyCallback {
             String address = (String) params[1];
 
             String serverURL = (String) params[0];//"http://10.0.2.2/charger.php";
-            String postParameters = "address=" + address;
+            String postParameters = "place_address=" + address;
 
             try {
 
@@ -347,8 +347,8 @@ public class map_search extends FragmentActivity implements OnMapReadyCallback {
 
             Intent intent = new Intent(map_search.this, detailPage.class);
 
-            intent.putExtra("address", address);
-            intent.putExtra("name", name);
+            intent.putExtra("place_address", address);
+            intent.putExtra("place_name", name);
             intent.putExtra("theme", theme);
 
             startActivity(intent);

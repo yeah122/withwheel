@@ -387,8 +387,7 @@ public class route extends AppCompatActivity implements View.OnClickListener {
                 mArrayList.add(locationData);
             }
             // 데이터 가져온 이후에 할 코드
-            //Toast.makeText(route.this, "정보 가져오기 성공", Toast.LENGTH_SHORT).show();
-            Toast.makeText(route.this, mArrayList.get(0).getName(), Toast.LENGTH_SHORT).show();
+            // Toast.makeText(route.this, "정보 가져오기 성공", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getApplicationContext(), route_result.class);
             intent.putExtra("keyword", keyword_list.toString());
             intent.putExtra("mArrayList", mArrayList);

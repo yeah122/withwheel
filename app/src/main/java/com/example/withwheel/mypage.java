@@ -35,8 +35,9 @@ public class mypage extends AppCompatActivity {
     public String mJsonString;
 
     TextView textID;
-    Button startLogin, startRegister, btnlogout, btnDelete, btnchange;
-    SharedPreference preference;
+    Button startLogin, startRegister, btnlogout, btnDelete, btnchange, btnBookmark;
+
+    String URL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +46,13 @@ public class mypage extends AppCompatActivity {
         SharedPreferences preference = getSharedPreferences("UserInfo", MODE_PRIVATE);
         String user = preference.getString("id", "");
 
-        if (user != "") {
+        if (user != "") { // 로그인 되어 있으면
             setContentView(R.layout.mypage);
             textID = (TextView) findViewById(R.id.textID);
             btnlogout = (Button) findViewById(R.id.btnLogout);
             btnDelete = (Button) findViewById(R.id.btnMembershipWithdrawal);
             btnchange = (Button) findViewById(R.id.btnChange);
+            btnBookmark= (Button) findViewById(R.id.btnBookmark);
 
             String name = user;
 
@@ -79,13 +81,14 @@ public class mypage extends AppCompatActivity {
                     EditText editText = new EditText(mypage.this);
                     AlertDialog.Builder builder = new AlertDialog.Builder(mypage.this);
 
-                    builder.setTitle("진짜 탈퇴할 거면 비번 입력 ㄱ");
+                    builder.setTitle("정말 탈퇴하실 건가요?").setMessage("탈퇴를 원하시면 비밀번호를 입력해주세요.");
                     builder.setView(editText);
                     builder.setNegativeButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             String password;
                             password = editText.getText().toString();
+                            URL = "Delete";
                             mypage.GetData task = new mypage.GetData();
                             task.execute("http://10.0.2.2/Delete.php", name, password);
                         }
@@ -100,12 +103,13 @@ public class mypage extends AppCompatActivity {
                     EditText editText = new EditText(mypage.this);
                     AlertDialog.Builder builder = new AlertDialog.Builder(mypage.this);
 
-                    builder.setTitle("진짜 수정할 거면 비번 입력 ㄱ");
+                    builder.setTitle("비밀번호 수정").setMessage("수정을 원하시면 현재 비밀번호를 입력해주세요.");
                     builder.setView(editText);
                     builder.setNegativeButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             String password;
+                            URL = "change";
 
                             password = editText.getText().toString();
                             mypage.GetData task = new mypage.GetData();
@@ -118,8 +122,17 @@ public class mypage extends AppCompatActivity {
 
             });
 
+            btnBookmark.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(mypage.this, bookmark.class);
+                    startActivity(i);
+                }
+
+            });
+
         }
-        else{
+        else{ // 로그인 되어있지 않으면
             setContentView(R.layout.mypage_logout_ver);
 
             startLogin = (Button) findViewById(R.id.startLogin);
@@ -163,31 +176,39 @@ public class mypage extends AppCompatActivity {
             super.onPostExecute(result);
 
             progressDialog.dismiss();
-            //mTextViewResult.setText(result);
             Log.d(TAG, "response - " + result) ;
 
             if (result == null){
-                mTextViewResult.setText(errorString);
+                System.out.println(errorString);
             }
 
             else {
-                //mTextViewResult.setText(result);
-                Toast.makeText(mypage.this, result, Toast.LENGTH_SHORT).show();
+                if(URL.equals("Delete")){ // 회원탈퇴
+                    if(result.equals("회원탈퇴에 성공했습니다.")){
+                        SharedPreferences pref = getSharedPreferences("UserInfo", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = pref.edit();
 
-                if(result.equals("회원탈퇴에 성공했습니다.")){
-                    SharedPreferences pref = getSharedPreferences("UserInfo", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = pref.edit();
+                        editor.remove("id");
+                        editor.commit();
 
-                    editor.remove("id");
-                    editor.commit();
+                        Intent i = new Intent(mypage.this, MainActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
+                    else{ // 회원탈퇴 실패
+                        Toast.makeText(mypage.this, result, Toast.LENGTH_SHORT).show();
+                    }
 
-                    Intent i = new Intent(mypage.this, MainActivity.class);
-                    startActivity(i);
-                    finish();
                 }
-                if(result.equals("비번 확인^^")){
-                    Intent i = new Intent(mypage.this, profile_change.class);
-                    startActivity(i);
+                if(URL.equals("change")){ //비밀번호 수정
+                    if(result.equals("비번 확인^^")){//비밀번호 수정 완료됐을 때
+                        Intent i = new Intent(mypage.this, profile_change.class);
+                        startActivity(i);
+                    }
+                    else{//비번 다를 시?
+                        Toast.makeText(mypage.this, result, Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             }
         }

@@ -22,9 +22,6 @@
         <activity
             android:name=".home"
             android:exported="false" />
-        <activity
-            android:name=".sisul"
-            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -40,9 +37,6 @@
             android:name=".mypage"
             android:exported="false" />
         <activity
-            android:name=".setting"
-            android:exported="false" />
-        <activity
             android:name=".route"
             android:exported="false" />
         <activity
@@ -53,9 +47,6 @@
             android:exported="false" />
         <activity
             android:name=".bookmark"
-            android:exported="false" />
-        <activity
-            android:name=".res_search"
             android:exported="false" />
         <activity
             android:name=".detailPage"

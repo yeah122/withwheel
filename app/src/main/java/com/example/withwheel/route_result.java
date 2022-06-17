@@ -277,8 +277,8 @@ public class route_result extends AppCompatActivity implements OnMapReadyCallbac
 
                 // 해당 상세페이지로 이동
                 Intent intent = new Intent(route_result.this, detailPage.class);
-                intent.putExtra("address", selectedAttrAddress);
-                intent.putExtra("name", selectedAttrName);
+                intent.putExtra("place_address", selectedAttrAddress);
+                intent.putExtra("place_name", selectedAttrName);
                 intent.putExtra("theme", "관광지");
                 startActivity(intent);
             }
