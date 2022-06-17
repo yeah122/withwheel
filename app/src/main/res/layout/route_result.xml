@@ -39,10 +39,10 @@
                 android:id="@+id/selectedKeyword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="5dp"
+                android:paddingVertical="7dp"
                 android:gravity="center"
-                android:textColor="#ededed"
-                android:background="#aaaaaa"
+                android:textColor="#8c8c8c"
+                android:background="#e7ecef"
                 android:textSize="15dp"
                 android:text="선택한 키워드"/>
 
@@ -79,6 +79,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_gravity="center"
+                android:backgroundTint="#e7ecef"
+                android:textColor="@color/black"
                 android:text="다시하기"/>
 
             <Button
@@ -87,6 +89,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_gravity="center"
+                android:backgroundTint="#e7ecef"
+                android:textColor="@color/black"
                 android:text="근처 관광지 추가"/>
 
             <Button
@@ -95,6 +99,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_gravity="center"
+                android:backgroundTint="#e7ecef"
+                android:textColor="@color/black"
                 android:text="다른 장소 보기"/>
 
         </LinearLayout>

@@ -321,7 +321,7 @@ public class route extends AppCompatActivity implements View.OnClickListener {
                 String food = item.getString("식도락");
                 String google_rating = item.getString("google_rating");
                 String google_ratings_total = item.getString("google_ratings_total");
-                String kakao_rating = item.getString("kakao_ratings");
+                String kakao_rating = item.getString("kakao_rating");
                 String kakao_ratings_total = item.getString("kakao_ratings_total");
 
                 String distFromFirst = item.getString("1등과의_거리");

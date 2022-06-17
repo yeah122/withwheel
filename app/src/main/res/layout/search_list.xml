@@ -20,6 +20,7 @@
             android:id="@+id/btn_restaurant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#e7ecef"
             android:layout_weight="1"
             android:text="식당" />
 
@@ -28,6 +29,7 @@
             android:id="@+id/btn_hotel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#e7ecef"
             android:layout_weight="1"
             android:text="숙박" />
 
@@ -35,6 +37,7 @@
             android:id="@+id/btn_attractive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#e7ecef"
             android:layout_weight="1"
             android:text="관광지"/>
 
@@ -85,8 +88,9 @@
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:backgroundTint="#00ff0000"
             android:src="@drawable/icon_arrow_30"
+
+            android:backgroundTint="#e7ecef"
             android:rotationY="180"/>
 
         <ImageButton
@@ -94,7 +98,7 @@
             android:layout_width="100dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:backgroundTint="#00ff0000"
+            android:backgroundTint="#e7ecef"
             android:src="@drawable/icon_arrow_30"/>
 
 

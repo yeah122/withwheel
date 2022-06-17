@@ -3,6 +3,7 @@ package com.example.withwheel;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -160,6 +161,8 @@ public class profile_change extends AppCompatActivity {
     private void showResult(){
         if(mJsonString.equals("확인")){
             Toast.makeText(getApplicationContext(), "회원 정보가 성공적으로 수정되었습니다.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(profile_change.this, MainActivity.class);
+            intent.putExtra("startTab", 4);
             finish();
         }
         else {

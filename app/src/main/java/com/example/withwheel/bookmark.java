@@ -57,7 +57,7 @@ public class bookmark extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedPlaceName = mArrayList.get(i).getName();
                 String selectedPlaceAddress = mArrayList.get(i).getAddress();
-                Toast.makeText(getApplicationContext(), selectedPlaceName, Toast.LENGTH_SHORT).show();
+
                 //상세페이지로 이동
                 Intent intent = new Intent(bookmark.this, detailPage.class);
 

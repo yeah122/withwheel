@@ -394,7 +394,7 @@ public class route_result extends AppCompatActivity implements OnMapReadyCallbac
                 String city = item.getString("도시경관");
                 String food = item.getString("식도락");
                 String google_rating = item.getString("google_rating");
-                String google_ratings_total = item.getString("google_total");
+                String google_ratings_total = item.getString("google_ratings_total");
                 String kakao_rating = item.getString("kakao_rating");
                 String kakao_ratings_total = item.getString("kakao_ratings_total");
 

@@ -206,8 +206,6 @@ public class search_charger extends FragmentActivity implements OnMapReadyCallba
 
                 mArrayList.add(locationData);
             }
-            Toast.makeText(search_charger.this, "정보 가져오기 성공", Toast.LENGTH_SHORT).show();
-
             // 맵에 있는 마커 모두 삭제
             map.clear();
             // 검색 결과 장소 모두 지도에 마커 추가
@@ -267,12 +265,11 @@ public class search_charger extends FragmentActivity implements OnMapReadyCallba
             String name = marker.getTitle();
             String address = marker.getSnippet();
 
-            Toast.makeText(search_charger.this,name,Toast.LENGTH_SHORT).show();
-
             Intent intent = new Intent(search_charger.this, detailPage.class);
             intent.putExtra("place_address", address);
             intent.putExtra("place_name", name);
             intent.putExtra("theme", "충전소");
+
             startActivity(intent);
         }
 

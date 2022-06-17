@@ -329,7 +329,6 @@ public class detailPage extends FragmentActivity{
                     locationData.setToilet(item.getString(TAG_PLACE_REST));
                     locationData.setIntrodution(item.getString("place_intro"));// 소개
 
-
                     mArrayList.add(locationData);
                 }
 
@@ -429,6 +428,13 @@ public class detailPage extends FragmentActivity{
                     place_air = item.getString("place_air");
                     place_phone = item.getString("place_phone");
                     place_call = item.getString("place_call");
+
+                    LocationData locationData = new LocationData();
+
+                    locationData.setName(item.getString(TAG_PLACE_NAME));
+                    locationData.setAddress(item.getString(TAG_PLACE_ADDRESS));
+
+                    mArrayList.add(locationData);
                 }
                 Tplace_name = (TextView) findViewById(R.id.place_name);
                 Tplace_address = (TextView) findViewById(R.id.place_address);
@@ -441,7 +447,7 @@ public class detailPage extends FragmentActivity{
                 Tplace_phone = (TextView) findViewById(R.id.place_phone);
                 Tplace_sametime = (TextView) findViewById(R.id.place_sametime);
 
-                Tplace_name.setText("시설명 : " + place_name);
+                Tplace_name.setText(place_name);
                 Tplace_address.setText(place_address);
                 Tplace_call.setText(place_call);
                 Tplace_info.setText(place_info);
@@ -471,6 +477,10 @@ public class detailPage extends FragmentActivity{
             }
             else if(mJsonString.equals("false")){
                 Toast.makeText(detailPage.this, "즐겨찾기가 해제되었습니다.", Toast.LENGTH_SHORT).show();
+            }
+            else if(mJsonString.equals("logout")){
+                Toast.makeText(detailPage.this, "즐겨찾기는 로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(detailPage.this, "즐겨찾기는 로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
             }
             Log.d(TAG, "showResult: ", e);
         }

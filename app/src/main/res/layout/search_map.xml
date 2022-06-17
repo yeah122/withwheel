@@ -23,8 +23,7 @@
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".MapsActivity" />
+            android:layout_height="match_parent"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,12 +41,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:backgroundTint="#e7ecef"
                     android:text="식당" />
 
                 <Button
                     android:id="@+id/btn_hotel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="#e7ecef"
                     android:layout_weight="1"
                     android:text="숙박" />
 
@@ -55,6 +56,7 @@
                     android:id="@+id/btn_attractive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="#e7ecef"
                     android:layout_weight="1"
                     android:text="관광지" />
 

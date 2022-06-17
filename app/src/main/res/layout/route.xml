@@ -7,74 +7,72 @@
     <include  layout="@layout/toolbar"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:gravity="center"
         android:layout_marginVertical="8dp"
         android:text="경로추천"
-        android:textColor="#333333"
+        android:textColor="#0a1128"
         android:textSize="25dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="10dp"
+        android:gravity="center"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="17dp"
-            android:textColor="#555555"
+            android:textSize="18dp"
+            android:textColor="#444444"
             android:text="키워드를 2~4개 골라주세요."/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="17dp"
-            android:textColor="#555555"
-            android:text="선택한 키워드에 관련된 장소가 추천됩니다."/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="17dp"
-            android:textColor="#555555"
+            android:textSize="18dp"
+            android:textColor="#444444"
             android:text="선택한 키워드에 관련된 장소가 추천됩니다."/>
 
     </LinearLayout>
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
         android:orientation="horizontal"
-        android:layout_marginVertical="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
         android:gravity="center">
 
         <Button
             android:id="@+id/btn_outside"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
+            android:layout_weight="1"
+            android:backgroundTint="#e7ecef"
+            android:textColor="#444444"
             android:text="야외"/>
 
         <Button
             android:id="@+id/btn_inside"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
+            android:layout_weight="1"
+            android:backgroundTint="#e7ecef"
+            android:textColor="@color/black"
             android:text="실내"/>
 
         <Button
             android:id="@+id/btn_shopping"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
+            android:layout_weight="1"
+            android:backgroundTint="#e7ecef"
+            android:textColor="@color/black"
             android:text="쇼핑"/>
 
     </LinearLayout>
@@ -84,33 +82,42 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginVertical="5dp"
+        android:layout_marginHorizontal="10dp"
         android:gravity="center">
 
         <Button
             android:id="@+id/btn_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
+            android:layout_weight="1"
+            android:backgroundTint="#e7ecef"
+            android:textColor="@color/black"
             android:text="역사유적"/>
 
         <Button
             android:id="@+id/btn_nature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
+            android:backgroundTint="#e7ecef"
+            android:layout_weight="1"
+            android:textColor="@color/black"
             android:text="자연경관"/>
 
         <Button
             android:id="@+id/btn_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
+            android:backgroundTint="#e7ecef"
+            android:layout_weight="1"
+            android:textColor="@color/black"
             android:text="도시경관"/>
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
         android:orientation="horizontal"
         android:layout_marginVertical="5dp"
         android:gravity="center">
@@ -119,21 +126,27 @@
             android:id="@+id/btn_themepark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
+            android:layout_weight="1"
+            android:backgroundTint="#e7ecef"
+            android:textColor="@color/black"
             android:text="테마파크"/>
 
         <Button
             android:id="@+id/btn_art"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
+            android:layout_weight="1"
+            android:backgroundTint="#e7ecef"
+            android:textColor="@color/black"
             android:text="문화예술"/>
 
         <Button
             android:id="@+id/btn_food"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
+            android:layout_weight="1"
+            android:backgroundTint="#e7ecef"
+            android:textColor="@color/black"
             android:text="식도락"/>
 
     </LinearLayout>
@@ -142,7 +155,50 @@
         android:id="@+id/send_keyword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="10dp"
+        android:backgroundTint="#e7ecef"
+        android:textColor="@color/black"
         android:text="선택완료"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textSize="15dp"
+            android:textColor="#444444"
+            android:text="자연경관: 공원, 정원, 산 등"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textSize="15dp"
+            android:textColor="#444444"
+            android:text="테마파크: 놀이공원, 아쿠아리움, 동물원 등"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textSize="15dp"
+            android:textColor="#444444"
+            android:text="문화예술: 미술관, 전시관, 박물관 등"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textSize="15dp"
+            android:textColor="#444444"
+            android:text="식도락: 반경 500m 안에 먹자 골목이나 복합 상가 등이 있는 곳"/>
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -400,7 +400,6 @@ public class search_list extends AppCompatActivity {
                 mArrayList.add(locationData);
             }
             //데이터 가져온 후 진행할 코드
-            Toast.makeText(search_list.this, "정보 가져오기 성공", Toast.LENGTH_SHORT).show();
 
             adapter = new search_list_customview(mArrayList, clickCnt);
             listView.setAdapter(adapter);

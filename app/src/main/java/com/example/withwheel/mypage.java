@@ -28,8 +28,6 @@ public class mypage extends AppCompatActivity {
 
     private static String TAG = "mypage";
 
-    public String mJsonString;
-
     TextView textID;
     Button startLogin, startRegister, btnlogout, btnDelete, btnchange, btnBookmark;
 
@@ -37,11 +35,14 @@ public class mypage extends AppCompatActivity {
 
     Intent i;
 
+    SharedPreferences preference;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences preference = getSharedPreferences("UserInfo", MODE_PRIVATE);
+        preference = getSharedPreferences("UserInfo", MODE_PRIVATE);
         String user = preference.getString("id", "");
 
         if (user != "") { // 로그인 되어 있으면
@@ -54,7 +55,7 @@ public class mypage extends AppCompatActivity {
 
             String name = user;
 
-            textID.setText(name);
+            textID.setText(name + " 님");
 
             btnlogout.setOnClickListener(new View.OnClickListener() {
                 SharedPreferences pref = getSharedPreferences("UserInfo", MODE_PRIVATE);
@@ -188,9 +189,11 @@ public class mypage extends AppCompatActivity {
 
             else {
                 if(URL.equals("Delete")){ // 회원탈퇴
-                    if(result.equals("회원탈퇴에 성공했습니다.")){
-                        SharedPreferences pref = getSharedPreferences("UserInfo", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = pref.edit();
+                    if(result.equals("탈퇴에 성공했습니다.")){
+                        Toast.makeText(mypage.this, result, Toast.LENGTH_SHORT).show();
+
+                        preference = getSharedPreferences("UserInfo", MODE_PRIVATE);
+                        editor = preference.edit();
 
                         editor.remove("id");
                         editor.commit();

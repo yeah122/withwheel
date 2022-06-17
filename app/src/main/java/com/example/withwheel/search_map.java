@@ -348,7 +348,6 @@ public class search_map extends FragmentActivity implements OnMapReadyCallback {
 
                 mArrayList.add(locationData);
             }
-            Toast.makeText(search_map.this, "정보 가져오기 성공", Toast.LENGTH_SHORT).show();
 
             // 맵에 있는 마커 모두 삭제
             map.clear();
@@ -401,10 +400,7 @@ public class search_map extends FragmentActivity implements OnMapReadyCallback {
             String name = marker.getTitle();
             String address = marker.getSnippet();
 
-            Toast.makeText(search_map.this, name, Toast.LENGTH_SHORT).show();
-
             Intent intent = new Intent(search_map.this, detailPage.class);
-
             intent.putExtra("place_address", address);
             intent.putExtra("place_name", name);
             intent.putExtra("theme", theme);

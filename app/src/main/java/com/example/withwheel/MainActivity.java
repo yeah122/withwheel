@@ -13,6 +13,8 @@ public class MainActivity extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_tab_host);
 
+        Intent i = getIntent();
+        int startTab = i.getIntExtra("startTab", 0);
 
         TabHost tabHost = getTabHost(); //탭 호스트 객체 생성
 
@@ -57,7 +59,7 @@ public class MainActivity extends TabActivity {
         spec.setContent(intent);
         tabHost.addTab(spec);
 
-        tabHost.setCurrentTab(0); //먼저 열릴 탭을 선택!(설정 순서대로 0부터 시작)
+        tabHost.setCurrentTab(startTab); //먼저 열릴 탭을 선택!(설정 순서대로 0부터 시작)
 
     }
 
