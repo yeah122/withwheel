@@ -90,7 +90,7 @@ public class mypage extends AppCompatActivity {
                             password = editText.getText().toString();
                             URL = "Delete";
                             mypage.GetData task = new mypage.GetData();
-                            task.execute("http://10.0.2.2/profile_delete.php", name, password);
+                            task.execute("http://192.168.219.104/profile_delete.php", name, password);
                         }
                     });
                     builder.show();
@@ -115,7 +115,7 @@ public class mypage extends AppCompatActivity {
 
                             if(!password.equals("")){
                                 mypage.GetData task = new mypage.GetData();
-                                task.execute("http://10.0.2.2/profile_change_check.php", name, password);
+                                task.execute("http://192.168.219.104/profile_change_check.php", name, password);
                             }
                             else {
                                 Toast.makeText(getApplicationContext(), "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
@@ -173,7 +173,7 @@ public class mypage extends AppCompatActivity {
             super.onPreExecute();
 
             progressDialog = ProgressDialog.show(mypage.this,
-                    "잠시만 기다려주세요.", null, true, true);
+                    "잠시만 기다려주세요.", null, true, false);
         }
 
         @Override
@@ -230,7 +230,7 @@ public class mypage extends AppCompatActivity {
 
             String userid = (String)params[1];
             String password = (String)params[2];
-            String serverURL = (String)params[0];//"http://10.0.2.2/charger.php";
+            String serverURL = (String)params[0];
             String postParameters = "userid=" + userid + "&password=" + password;
 
             try {

@@ -86,25 +86,25 @@ public class detailPage extends FragmentActivity{
                 setContentView(R.layout.detailpage_attractive);
 
                 detailPage.GetData task = new detailPage.GetData();
-                task.execute("http://10.0.2.2/attractive.php", address, name);
+                task.execute("http://192.168.219.104/attractive.php", address, name);
             }
             else  if(theme.equals("숙박")){
                 setContentView(R.layout.detailpage_hotel);
 
                 detailPage.GetData task = new detailPage.GetData();
-                task.execute("http://10.0.2.2/hotel.php", address, name);
+                task.execute("http://192.168.219.104/hotel.php", address, name);
             }
             else if(theme.equals("식당")) {
                 setContentView(R.layout.detailpage_restaurant);
 
                 detailPage.GetData task = new detailPage.GetData();
-                task.execute("http://10.0.2.2/restaurant.php", address, name);
+                task.execute("http://192.168.219.104/restaurant.php", address, name);
             }
             else if(theme.equals("충전소")) {
                 setContentView(R.layout.detailpage_charger);
 
                 detailPage.GetData task = new detailPage.GetData();
-                task.execute("http://10.0.2.2/charger.php", address, name);
+                task.execute("http://192.168.219.104/charger.php", address, name);
             }
             else{ // 테마값이 빈 값으로 넘겨졌을 때
                 Toast.makeText(getApplicationContext(), "테마 값이 비었습니다.", Toast.LENGTH_SHORT).show();
@@ -127,7 +127,7 @@ public class detailPage extends FragmentActivity{
         switch (item.getItemId()) {
             case R.id.bookmark:
                 detailPage.GetData task = new detailPage.GetData();
-                task.execute("http://10.0.2.2/bookmark_onoff.php",
+                task.execute("http://192.168.219.104/bookmark_onoff.php",
                         mArrayList.get(0).getAddress(), mArrayList.get(0).getName(), theme, userid);
         }
         return true;
@@ -144,7 +144,7 @@ public class detailPage extends FragmentActivity{
             super.onPreExecute();
 
             progressDialog = ProgressDialog.show(detailPage.this,
-                    "잠시만 기다려주세요.", null, true, true);
+                    "잠시만 기다려주세요.", null, true, false);
         }
 
         @Override
@@ -170,7 +170,7 @@ public class detailPage extends FragmentActivity{
             String address = (String) params[1];
             String name = (String) params[2];
 
-            String serverURL = (String) params[0];//"http://10.0.2.2/charger.php";
+            String serverURL = (String) params[0];
 
             if(params.length > 3){ // 즐겨찾기
                 String btnState = (String) params[3];
@@ -346,18 +346,23 @@ public class detailPage extends FragmentActivity{
                 Tplace_call.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Uri uri = Uri.parse("tel:" + Tplace_call.getText().toString());
-                        Intent intentCAll = new Intent(Intent.ACTION_DIAL, uri);
-                        startActivity(intentCAll);
+                        // 전화번호가 비어있지 않을 때만
+                        if(!Tplace_call.getText().toString().equals("") || Tplace_call != null){
+                            Uri uri = Uri.parse("tel:" + Tplace_call.getText().toString());
+                            Intent intentCAll = new Intent(Intent.ACTION_DIAL, uri);
+                            startActivity(intentCAll);
+                        }
                     }
                 });
 
                 homepage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Uri uri = Uri.parse(homepage.getText().toString());
-                        Intent intentInternet = new Intent(Intent.ACTION_VIEW, uri);
-                        startActivity(intentInternet);
+                        if(!homepage.getText().toString().equals("") || Tplace_call != null){
+                            Uri uri = Uri.parse(homepage.getText().toString());
+                            Intent intentInternet = new Intent(Intent.ACTION_VIEW, uri);
+                            startActivity(intentInternet);
+                        }
                     }
                 });
             }
@@ -392,18 +397,23 @@ public class detailPage extends FragmentActivity{
                 Tplace_call.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Uri uri = Uri.parse("tel:" + Tplace_call.getText().toString());
-                        Intent intentCAll = new Intent(Intent.ACTION_DIAL, uri);
-                        startActivity(intentCAll);
+                        // 전화번호가 비어있지 않을 때만
+                        if(!Tplace_call.getText().toString().equals("") || Tplace_call != null){
+                            Uri uri = Uri.parse("tel:" + Tplace_call.getText().toString());
+                            Intent intentCAll = new Intent(Intent.ACTION_DIAL, uri);
+                            startActivity(intentCAll);
+                        }
                     }
                 });
 
                 homepage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Uri uri = Uri.parse(homepage.getText().toString());
-                        Intent intentInternet = new Intent(Intent.ACTION_VIEW, uri);
-                        startActivity(intentInternet);
+                        if(!homepage.getText().toString().equals("") || Tplace_call != null){
+                            Uri uri = Uri.parse(homepage.getText().toString());
+                            Intent intentInternet = new Intent(Intent.ACTION_VIEW, uri);
+                            startActivity(intentInternet);
+                        }
                     }
                 });
             }
@@ -461,9 +471,12 @@ public class detailPage extends FragmentActivity{
                 Tplace_call.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Uri uri = Uri.parse("tel:" + Tplace_call.getText().toString());
-                        Intent intentCAll = new Intent(Intent.ACTION_DIAL, uri);
-                        startActivity(intentCAll);
+                        // 전화번호가 비어있지 않을 때만
+                        if(!Tplace_call.getText().toString().equals("") || Tplace_call != null){
+                            Uri uri = Uri.parse("tel:" + Tplace_call.getText().toString());
+                            Intent intentCAll = new Intent(Intent.ACTION_DIAL, uri);
+                            startActivity(intentCAll);
+                        }
                     }
                 });
             }

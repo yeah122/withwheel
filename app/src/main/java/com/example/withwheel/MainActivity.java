@@ -1,9 +1,17 @@
 package com.example.withwheel;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.app.TabActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.TabHost;
+import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 public class MainActivity extends TabActivity {
 
@@ -21,7 +29,6 @@ public class MainActivity extends TabActivity {
         // 탭스팩 선언하고, 탭의 내부 명칭, 탭에 출력될 글 작성
         TabHost.TabSpec spec;
         Intent intent; //객체
-
 
         //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
         intent = new Intent().setClass(this, home.class);
@@ -47,7 +54,7 @@ public class MainActivity extends TabActivity {
         //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
         intent = new Intent().setClass(this, search_charger_map.class);
         spec = tabHost.newTabSpec("rental_charge"); // 객체를 생성
-        spec.setIndicator("휠체어 충전기", getApplicationContext().getResources().getDrawable(R.drawable.charge)); //탭의 이름 설정
+        spec.setIndicator("휠체어\n충전기", getApplicationContext().getResources().getDrawable(R.drawable.charge)); //탭의 이름 설정
         spec.setContent(intent);
         tabHost.addTab(spec);
 
@@ -61,6 +68,43 @@ public class MainActivity extends TabActivity {
 
         tabHost.setCurrentTab(startTab); //먼저 열릴 탭을 선택!(설정 순서대로 0부터 시작)
 
+        // 현재위치
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+        } else {
+            checkLocationPermissionWithRationale();
+        }
+    }
+
+    //현재위치
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+
+    private void checkLocationPermissionWithRationale() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
+            }
+            else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode,permissions,grantResults);
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_LOCATION: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+                    }
+                } else {
+                    Toast.makeText(this, "접근 권한이 거부되었습니다.", Toast.LENGTH_LONG).show();
+                }
+                return;
+            }
+        }
     }
 
 }

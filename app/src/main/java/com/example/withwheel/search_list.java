@@ -336,7 +336,7 @@ public class search_list extends AppCompatActivity {
             super.onPreExecute();
 
             progressDialog = ProgressDialog.show(search_list.this,
-                    "잠시만 기다려주세요.", null, true, true);
+                    "잠시만 기다려주세요.", null, true, false);
         }
 
         @Override
@@ -364,13 +364,13 @@ public class search_list extends AppCompatActivity {
             String serverURL;
 
             if(theme.equals("식당")){
-                serverURL = "http://10.0.2.2/restaurant.php";
+                serverURL = "http://192.168.219.104/restaurant.php";
             }
             else if(theme.equals("관광지")){
-                serverURL = "http://10.0.2.2/attractive.php";
+                serverURL = "http://192.168.219.104/attractive.php";
             }
             else {//숙박일 때
-                serverURL = "http://10.0.2.2/hotel.php";
+                serverURL = "http://192.168.219.104/hotel.php";
             }
             String postParameters = "place_address=" + address;
 

@@ -59,7 +59,7 @@ public class profile_change extends AppCompatActivity {
                     // 비밀번호가 같으면
                     if(editPass1.getText().toString().equals(editPass2.getText().toString())){
                         profile_change.GetData task = new profile_change.GetData();
-                        task.execute("http://10.0.2.2/profile_change.php", userid, editPass1.getText().toString());
+                        task.execute("http://192.168.219.104/profile_change.php", userid, editPass1.getText().toString());
                     }
                     else {//비밀번호가 다르면
                         Toast.makeText(getApplicationContext(), "비밀번호가 다릅니다.", Toast.LENGTH_SHORT).show();
@@ -82,7 +82,7 @@ public class profile_change extends AppCompatActivity {
             super.onPreExecute();
 
             progressDialog = ProgressDialog.show(profile_change.this,
-                    "잠시만 기다려주세요.", "잠시만 기다려주세요.", true, true);
+                    "잠시만 기다려주세요.", null, true, false);
         }
 
         @Override
@@ -160,7 +160,7 @@ public class profile_change extends AppCompatActivity {
 
     private void showResult(){
         if(mJsonString.equals("확인")){
-            Toast.makeText(getApplicationContext(), "비밀번호가마포잠 수정되었습니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "비밀번호가 수정되었습니다.", Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(profile_change.this, MainActivity.class);
             intent.putExtra("startTab", 4);

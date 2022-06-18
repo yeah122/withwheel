@@ -69,7 +69,7 @@ public class profile_login extends AppCompatActivity {
             public void onClick(View view) {
                 mArrayList.clear();
                 GetData task = new GetData();
-                task.execute("http://10.0.2.2/login.php", mEditTextID.getText().toString(), mEditTextPass.getText().toString());
+                task.execute("http://192.168.219.104/login.php", mEditTextID.getText().toString(), mEditTextPass.getText().toString());
             }
         });
         mArrayList = new ArrayList<>();
@@ -85,7 +85,7 @@ public class profile_login extends AppCompatActivity {
             super.onPreExecute();
 
             progressDialog = ProgressDialog.show(profile_login.this,
-                    "잠시만 기다려주세요.", null, true, true);
+                    "잠시만 기다려주세요.", null, true, false);
         }
 
 
@@ -113,7 +113,7 @@ public class profile_login extends AppCompatActivity {
             String userid = (String)params[1];
             String password = (String)params[2];
 
-            String serverURL = (String)params[0];//"http://10.0.2.2/login.php";
+            String serverURL = (String)params[0];
             String postParameters = "userid=" + userid + "&password=" + password ;
 
 
@@ -174,55 +174,23 @@ public class profile_login extends AppCompatActivity {
     }
 
     private void showResult(){
-
-        try {
-            JSONObject jsonObject = new JSONObject(mJsonString);
-            JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
-            //JSONArray jsonArray = new JSONArray(TAG_JSON);
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-
-                JSONObject item = jsonArray.getJSONObject(i);
-
-                String userid = item.getString("userid");
-                String password = item.getString("password");
-
-                HashMap<String,String> hashMap = new HashMap<>();
-
-                hashMap.put("userid", userid);
-                hashMap.put("password", password);
-
-                mArrayList.add(hashMap);
-
-                editor.putString("id", userid);
-                editor.commit();
-
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                AlertDialog.Builder builder = new AlertDialog.Builder(profile_login.this);
-                dialog = builder.setMessage(userid + "님 로그인 되었습니다.")
-                        .setNegativeButton("확인", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(profile_login.this, MainActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                        })
-
-                        .create();
-                dialog.show();
-
-
-                return;
-            }
-        } catch (JSONException e) {
-            Toast.makeText(getApplicationContext(), mJsonString, Toast.LENGTH_LONG).show();
-            Log.d(TAG, "showResult: ", e);
+        if(mJsonString.equals("확인")){
+            AlertDialog.Builder builder = new AlertDialog.Builder(profile_login.this);
+            dialog = builder.setMessage(mEditTextID.getText().toString() + "님 로그인 되었습니다.")
+                    .setNegativeButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(profile_login.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }).create();
+            dialog.show();
+            editor.putString("id", mEditTextID.getText().toString());
+            editor.commit();
         }
-
+        else{
+            Toast.makeText(getApplicationContext(), mJsonString, Toast.LENGTH_SHORT).show();
+        }
     }
-
-
-
-
 }

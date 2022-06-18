@@ -1,10 +1,16 @@
 package com.example.withwheel;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.appcompat.widget.SearchView;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -288,7 +294,7 @@ public class search_map extends FragmentActivity implements OnMapReadyCallback {
             super.onPreExecute();
 
             progressDialog = ProgressDialog.show(search_map.this,
-                    "잠시만 기다려주세요.", null, true, true);
+                    "잠시만 기다려주세요.", null, true, false);
         }
 
         @Override
@@ -316,13 +322,13 @@ public class search_map extends FragmentActivity implements OnMapReadyCallback {
             String serverURL;
 
             if(theme.equals("식당")){
-                serverURL = "http://10.0.2.2/restaurant.php";
+                serverURL = "http://192.168.219.104/restaurant.php";
             }
             else if(theme.equals("관광지")){
-                serverURL = "http://10.0.2.2/attractive.php";
+                serverURL = "http://192.168.219.104/attractive.php";
             }
             else {//숙박일 때
-                serverURL = "http://10.0.2.2/hotel.php";
+                serverURL = "http://192.168.219.104/hotel.php";
             }
 
             String postParameters = "place_address=" + address;
@@ -447,9 +453,16 @@ public class search_map extends FragmentActivity implements OnMapReadyCallback {
         mUiSettings.setZoomControlsEnabled(true);
 
         LatLng cityhall = new LatLng(37.566826, 126.9786567);
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(cityhall, 11));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(cityhall, 14));
 
         map.setOnInfoWindowClickListener(infoWindowClickListener);
+
+        // 현재위치
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            googleMap.setMyLocationEnabled(true);
+        } else {
+            checkLocationPermissionWithRationale();
+        }
     }
 
     GoogleMap.OnInfoWindowClickListener infoWindowClickListener = new GoogleMap.OnInfoWindowClickListener() {
@@ -466,4 +479,34 @@ public class search_map extends FragmentActivity implements OnMapReadyCallback {
             startActivity(intent);
         }
     };
+
+    //현재위치
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+
+    private void checkLocationPermissionWithRationale() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+                ActivityCompat.requestPermissions(search_map.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode,permissions,grantResults);
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_LOCATION: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                        map.setMyLocationEnabled(true);
+                    }
+                } else {
+                    Toast.makeText(this, "접근 권한이 거부되었습니다.", Toast.LENGTH_LONG).show();
+                }
+                return;
+            }
+        }
+    }
 }

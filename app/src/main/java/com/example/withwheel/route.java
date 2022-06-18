@@ -71,11 +71,8 @@ public class route extends AppCompatActivity implements View.OnClickListener {
                     String size = String.valueOf(keyword_list.size());
 
                     route.GetData task = new route.GetData();
-                    task.execute("http://10.0.2.2/route.php", size, keyword_list.toString());
+                    task.execute("http://192.168.219.104/route.php", size, keyword_list.toString());
 
-                    //setContentView(R.layout.activity_route_result);
-
-                    //Toast.makeText(getApplicationContext(),keyword_list.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -208,7 +205,7 @@ public class route extends AppCompatActivity implements View.OnClickListener {
             super.onPreExecute();
 
             progressDialog = ProgressDialog.show(route.this,
-                    "잠시만 기다려주세요.", null, true, true);
+                    "잠시만 기다려주세요.", null, true, false);
         }
 
         @Override

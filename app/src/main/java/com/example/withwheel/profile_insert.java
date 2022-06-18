@@ -23,7 +23,7 @@ import java.net.URL;
 
 public class profile_insert extends AppCompatActivity
 {
-    private static String IP_ADDRESS = "10.0.2.2";//다음 줄에 있는 IP 주소를 아파치 웹서버가 설치된  컴퓨터의 IP
+    private static String IP_ADDRESS = "192.168.219.104";//다음 줄에 있는 IP 주소를 아파치 웹서버가 설치된  컴퓨터의 IP
     private static String TAG = "withwheel";//
 
     private EditText mEditTextID;
@@ -83,7 +83,7 @@ public class profile_insert extends AppCompatActivity
             super.onPreExecute();
 
             progressDialog = ProgressDialog.show(profile_insert.this,
-                    "잠시만 기다려주세요.", null, true, true);
+                    "잠시만 기다려주세요.", null, true, false);
         }
 
 
@@ -179,7 +179,6 @@ public class profile_insert extends AppCompatActivity
             mEditTextID.setText("");
             mEditTextPassword.setText("");
             mEditTextPassword2.setText("");
-            Toast.makeText(profile_insert.this, "회원가입 완료.", Toast.LENGTH_SHORT).show();
 
             AlertDialog.Builder builder = new AlertDialog.Builder(profile_insert.this);
             builder.setTitle("회원가입에 성공하였습니다.").setMessage("환영합니다.");

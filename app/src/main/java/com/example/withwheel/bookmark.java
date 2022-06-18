@@ -75,7 +75,7 @@ public class bookmark extends AppCompatActivity {
 
         //맨처음에는 식당 정보 가져오기
         bookmark.GetData task = new bookmark.GetData();
-        task.execute("http://10.0.2.2/bookmark_search.php", userid, btnWhat);
+        task.execute("http://192.168.219.104/bookmark_search.php", userid, btnWhat);
         
         btnCharger = (Button) findViewById(R.id.btnCharger);
         btnCharger.setOnClickListener(new Button.OnClickListener() {
@@ -95,7 +95,7 @@ public class bookmark extends AppCompatActivity {
                 btnHotel.setTextColor(Color.parseColor("#515354"));
 
                 bookmark.GetData task = new bookmark.GetData();
-                task.execute("http://10.0.2.2/bookmark_search.php", userid, btnWhat);
+                task.execute("http://192.168.219.104/bookmark_search.php", userid, btnWhat);
             }
         });
 
@@ -117,7 +117,7 @@ public class bookmark extends AppCompatActivity {
                 btnHotel.setTextColor(Color.parseColor("#515354"));
 
                 bookmark.GetData task = new bookmark.GetData();
-                task.execute("http://10.0.2.2/bookmark_search.php", userid, btnWhat);
+                task.execute("http://192.168.219.104/bookmark_search.php", userid, btnWhat);
             }
         });
 
@@ -139,7 +139,7 @@ public class bookmark extends AppCompatActivity {
                 btnHotel.setTextColor(Color.parseColor("#515354"));
 
                 bookmark.GetData task = new bookmark.GetData();
-                task.execute("http://10.0.2.2/bookmark_search.php", userid, btnWhat);
+                task.execute("http://192.168.219.104/bookmark_search.php", userid, btnWhat);
             }
         });
 
@@ -161,7 +161,7 @@ public class bookmark extends AppCompatActivity {
                 btnRes.setTextColor(Color.parseColor("#515354"));
 
                 bookmark.GetData task = new bookmark.GetData();
-                task.execute("http://10.0.2.2/bookmark_search.php", userid, btnWhat);
+                task.execute("http://192.168.219.104/bookmark_search.php", userid, btnWhat);
             }
         });
     }
@@ -177,7 +177,7 @@ public class bookmark extends AppCompatActivity {
             super.onPreExecute();
 
             progressDialog = ProgressDialog.show(bookmark.this,
-                    "잠시만 기다려주세요.", null, true, true);
+                    "잠시만 기다려주세요.", null, true, false);
         }
 
         @Override
@@ -204,7 +204,7 @@ public class bookmark extends AppCompatActivity {
             String userid = (String)params[1];
             String btnState = (String)params[2];
 
-            String serverURL = (String)params[0];//"http://10.0.2.2/likeit_total_charge.php";
+            String serverURL = (String)params[0];
             String postParameters = "userid=" + userid + "&btnState=" + btnState;
 
 

@@ -80,7 +80,7 @@ public class search_charger_map extends FragmentActivity implements OnMapReadyCa
         else{
             searchView.setQuery(address, true);
             search_charger_map.GetData task = new search_charger_map.GetData();
-            task.execute("http://10.0.2.2/charger.php", searchView.getQuery().toString());
+            task.execute("http://192.168.219.104/charger.php", searchView.getQuery().toString());
         }
 
         // 서치뷰 검색 버튼 눌렸을 때
@@ -94,7 +94,7 @@ public class search_charger_map extends FragmentActivity implements OnMapReadyCa
                     mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
                     search_charger_map.GetData task = new search_charger_map.GetData();
-                    task.execute("http://10.0.2.2/charger.php", location);
+                    task.execute("http://192.168.219.104/charger.php", location);
                 }
 
                 else{
@@ -136,7 +136,7 @@ public class search_charger_map extends FragmentActivity implements OnMapReadyCa
             super.onPreExecute();
 
             progressDialog = ProgressDialog.show(search_charger_map.this,
-                    "잠시만 기다려주세요.", null, true, true);
+                    "잠시만 기다려주세요.", null, true, false);
         }
 
         @Override
@@ -161,7 +161,7 @@ public class search_charger_map extends FragmentActivity implements OnMapReadyCa
 
             String location = (String) params[1];
 
-            String serverURL = (String) params[0];//"http://10.0.2.2/charger.php";
+            String serverURL = (String) params[0];
             String postParameters = "location=" + location;
 
             try {
@@ -281,7 +281,7 @@ public class search_charger_map extends FragmentActivity implements OnMapReadyCa
         mUiSettings.setZoomControlsEnabled(true);
 
         LatLng cityhall = new LatLng(37.566826, 126.9786567);
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(cityhall, 11));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(cityhall, 14));
 
         map.setOnInfoWindowClickListener(infoWindowClickListener);
 
@@ -291,8 +291,6 @@ public class search_charger_map extends FragmentActivity implements OnMapReadyCa
         } else {
             checkLocationPermissionWithRationale();
         }
-
-
     }
 
     GoogleMap.OnInfoWindowClickListener infoWindowClickListener = new GoogleMap.OnInfoWindowClickListener() {
@@ -317,15 +315,7 @@ public class search_charger_map extends FragmentActivity implements OnMapReadyCa
     private void checkLocationPermissionWithRationale() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
-                new AlertDialog.Builder(this)
-                        .setTitle("위치정보")
-                        .setMessage("이 앱을 사용하기 위해서는 위치정보에 접근이 필요합니다. 위치정보 접근을 허용하여 주세요.")
-                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                ActivityCompat.requestPermissions(search_charger_map.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
-                            }
-                        }).create().show();
+                ActivityCompat.requestPermissions(search_charger_map.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
             }
@@ -342,7 +332,7 @@ public class search_charger_map extends FragmentActivity implements OnMapReadyCa
                         map.setMyLocationEnabled(true);
                     }
                 } else {
-                    Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "접근 권한이 거부되었습니다.", Toast.LENGTH_LONG).show();
                 }
                 return;
             }

@@ -144,7 +144,7 @@ public class route_result extends AppCompatActivity implements OnMapReadyCallbac
         newAttrList.clear();
 
         route_result.GetData task = new route_result.GetData();
-        task.execute("http://10.0.2.2/route_re.php", keyword, newArr);
+        task.execute("http://192.168.219.104/route_re.php", keyword, newArr);
     }
 
     private void addNewMarker(ArrayList<LocationData> list){
@@ -299,7 +299,7 @@ public class route_result extends AppCompatActivity implements OnMapReadyCallbac
             super.onPreExecute();
 
             progressDialog = ProgressDialog.show(route_result.this,
-                    "잠시만 기다려주세요.", null, true, true);
+                    "잠시만 기다려주세요.", null, true, false);
         }
 
         @Override

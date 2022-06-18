@@ -72,7 +72,7 @@ public class search_charger_list extends AppCompatActivity {
         else{
             searchView.setQuery(address, true);
             search_charger_list.GetData task = new search_charger_list.GetData();
-            task.execute("http://10.0.2.2/charger.php", searchView.getQuery().toString());
+            task.execute("http://192.168.219.104/charger.php", searchView.getQuery().toString());
         }
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -85,7 +85,7 @@ public class search_charger_list extends AppCompatActivity {
                     mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
                     search_charger_list.GetData task = new search_charger_list.GetData();
-                    task.execute("http://10.0.2.2/charger.php", address);
+                    task.execute("http://192.168.219.104/charger.php", address);
                 }
 
                 else{
@@ -179,7 +179,7 @@ public class search_charger_list extends AppCompatActivity {
             super.onPreExecute();
 
             progressDialog = ProgressDialog.show(search_charger_list.this,
-                    "잠시만 기다려주세요.", null, true, true);
+                    "잠시만 기다려주세요.", null, true, false);
         }
 
         @Override
