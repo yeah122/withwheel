@@ -18,81 +18,85 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-        <fragment
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/btn_restaurant"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="#e7ecef"
-                    android:text="식당" />
+                    android:gravity="center"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btn_hotel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#e7ecef"
-                    android:layout_weight="1"
-                    android:text="숙박" />
+                    <ImageButton
+                        android:id="@+id/toList"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:backgroundTint="#00ff0000"
+                        android:src="@drawable/icon_menu_24"/>
 
-                <Button
-                    android:id="@+id/btn_attractive"
-                    android:layout_width="wrap_content"
+                    <androidx.appcompat.widget.SearchView
+                        android:id="@+id/search_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:iconifiedByDefault="false"
+                        app:queryHint="주소 검색" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#e7ecef"
-                    android:layout_weight="1"
-                    android:text="관광지" />
+                    android:gravity="center"
+                    android:layout_marginHorizontal="10dp"
+                    android:paddingVertical="5dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_restaurant"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:textColor="#E7ECEF"
+                        android:background="@drawable/btn_after"
+                        android:text="식당" />
+
+                    <Button
+                        android:id="@+id/btn_hotel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:textColor="#515354"
+                        android:background="@drawable/btn_before"
+                        android:layout_weight="1"
+                        android:text="숙박" />
+
+                    <Button
+                        android:id="@+id/btn_attractive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:textColor="#515354"
+                        android:background="@drawable/btn_before"
+                        android:layout_weight="1"
+                        android:text="관광지" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
+            <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/toList"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:backgroundTint="#00ff0000"
-                    android:src="@drawable/icon_menu_24"/>
-
-                <androidx.appcompat.widget.SearchView
-                    android:id="@+id/search_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:iconifiedByDefault="false"
-                    app:queryHint="주소 검색" />
-
-            </LinearLayout>
-            
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom">
-
-
-
+                android:layout_height="match_parent"/>
         </LinearLayout>
 
     </FrameLayout>

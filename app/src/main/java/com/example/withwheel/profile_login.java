@@ -85,7 +85,7 @@ public class profile_login extends AppCompatActivity {
             super.onPreExecute();
 
             progressDialog = ProgressDialog.show(profile_login.this,
-                    "Please Wait", null, true, true);
+                    "잠시만 기다려주세요.", null, true, true);
         }
 
 

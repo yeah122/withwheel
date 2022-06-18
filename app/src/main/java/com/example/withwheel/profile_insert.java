@@ -83,7 +83,7 @@ public class profile_insert extends AppCompatActivity
             super.onPreExecute();
 
             progressDialog = ProgressDialog.show(profile_insert.this,
-                    "Please Wait", null, true, true);
+                    "잠시만 기다려주세요.", null, true, true);
         }
 
 

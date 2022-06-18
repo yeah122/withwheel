@@ -5,6 +5,7 @@ import androidx.appcompat.widget.SearchView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -79,18 +80,36 @@ public class search_list extends AppCompatActivity {
             theme = btnWhat;
             if(theme.equals("식당")){
                 btn_restaurant.setEnabled(false);
+                btn_restaurant.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                btn_restaurant.setTextColor(Color.parseColor("#E7ECEF"));
                 btn_hotel.setEnabled(true);
+                btn_hotel.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_hotel.setTextColor(Color.parseColor("#515354"));
                 btn_attractive.setEnabled(true);
+                btn_attractive.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_attractive.setTextColor(Color.parseColor("#515354"));
             }
             else if(theme.equals("관광지")){
                 btn_restaurant.setEnabled(true);
+                btn_restaurant.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_restaurant.setTextColor(Color.parseColor("#515354"));
                 btn_hotel.setEnabled(true);
+                btn_hotel.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_hotel.setTextColor(Color.parseColor("#515354"));
                 btn_attractive.setEnabled(false);
+                btn_attractive.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                btn_attractive.setTextColor(Color.parseColor("#E7ECEF"));
             }
             else { //숙박일 때
                 btn_restaurant.setEnabled(true);
+                btn_restaurant.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_restaurant.setTextColor(Color.parseColor("#515354"));
                 btn_hotel.setEnabled(false);
+                btn_hotel.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                btn_hotel.setTextColor(Color.parseColor("#E7ECEF"));
                 btn_attractive.setEnabled(true);
+                btn_attractive.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_attractive.setTextColor(Color.parseColor("#515354"));
             }
             search_list.GetData task = new search_list.GetData();
             task.execute(searchView.getQuery().toString());
@@ -100,29 +119,51 @@ public class search_list extends AppCompatActivity {
             theme = btnWhat;
             if(theme.equals("식당")){
                 btn_restaurant.setEnabled(false);
+                btn_restaurant.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                btn_restaurant.setTextColor(Color.parseColor("#E7ECEF"));
                 btn_hotel.setEnabled(true);
+                btn_hotel.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_hotel.setTextColor(Color.parseColor("#515354"));
                 btn_attractive.setEnabled(true);
+                btn_attractive.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_attractive.setTextColor(Color.parseColor("#515354"));
             }
             else if(theme.equals("관광지")){
                 btn_restaurant.setEnabled(true);
+                btn_restaurant.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_restaurant.setTextColor(Color.parseColor("#515354"));
                 btn_hotel.setEnabled(true);
+                btn_hotel.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_hotel.setTextColor(Color.parseColor("#515354"));
                 btn_attractive.setEnabled(false);
+                btn_attractive.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                btn_attractive.setTextColor(Color.parseColor("#E7ECEF"));
             }
             else { //숙박일 때
                 btn_restaurant.setEnabled(true);
+                btn_restaurant.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_restaurant.setTextColor(Color.parseColor("#515354"));
                 btn_hotel.setEnabled(false);
+                btn_hotel.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                btn_hotel.setTextColor(Color.parseColor("#E7ECEF"));
                 btn_attractive.setEnabled(true);
+                btn_attractive.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_attractive.setTextColor(Color.parseColor("#515354"));
             }
         }
-
-
 
         btn_restaurant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 btn_restaurant.setEnabled(false);
+                btn_restaurant.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                btn_restaurant.setTextColor(Color.parseColor("#E7ECEF"));
                 btn_hotel.setEnabled(true);
+                btn_hotel.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_hotel.setTextColor(Color.parseColor("#515354"));
                 btn_attractive.setEnabled(true);
+                btn_attractive.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_attractive.setTextColor(Color.parseColor("#515354"));
 
                 theme = "식당";
 
@@ -138,8 +179,14 @@ public class search_list extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 btn_restaurant.setEnabled(true);
+                btn_restaurant.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_restaurant.setTextColor(Color.parseColor("#515354"));
                 btn_hotel.setEnabled(false);
+                btn_hotel.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                btn_hotel.setTextColor(Color.parseColor("#E7ECEF"));
                 btn_attractive.setEnabled(true);
+                btn_attractive.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_attractive.setTextColor(Color.parseColor("#515354"));
 
                 theme = "숙박";
 
@@ -156,8 +203,14 @@ public class search_list extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 btn_restaurant.setEnabled(true);
+                btn_restaurant.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_restaurant.setTextColor(Color.parseColor("#515354"));
                 btn_hotel.setEnabled(true);
+                btn_hotel.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_hotel.setTextColor(Color.parseColor("#515354"));
                 btn_attractive.setEnabled(false);
+                btn_attractive.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                btn_attractive.setTextColor(Color.parseColor("#E7ECEF"));
 
                 theme = "관광지";
 
@@ -246,7 +299,6 @@ public class search_list extends AppCompatActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                 String selectedPlaceName = mArrayList.get(arg2 + clickCnt).getName();
                 String selectedPlaceAddress = mArrayList.get(arg2 + clickCnt).getAddress();
-                Toast.makeText(getApplicationContext(), selectedPlaceName, Toast.LENGTH_SHORT).show();
 
                 // 해당 상세페이지로 이동
                 Intent intent = new Intent(search_list.this, detailPage.class);
@@ -284,7 +336,7 @@ public class search_list extends AppCompatActivity {
             super.onPreExecute();
 
             progressDialog = ProgressDialog.show(search_list.this,
-                    "Please Wait", null, true, true);
+                    "잠시만 기다려주세요.", null, true, true);
         }
 
         @Override

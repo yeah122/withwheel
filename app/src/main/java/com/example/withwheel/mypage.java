@@ -173,7 +173,7 @@ public class mypage extends AppCompatActivity {
             super.onPreExecute();
 
             progressDialog = ProgressDialog.show(mypage.this,
-                    "Please Wait", null, true, true);
+                    "잠시만 기다려주세요.", null, true, true);
         }
 
         @Override

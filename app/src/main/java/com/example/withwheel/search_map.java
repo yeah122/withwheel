@@ -5,6 +5,7 @@ import androidx.appcompat.widget.SearchView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -81,18 +83,36 @@ public class search_map extends FragmentActivity implements OnMapReadyCallback {
             theme = btnWhat;
             if(theme.equals("식당")){
                 btn_restaurant.setEnabled(false);
+                btn_restaurant.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                btn_restaurant.setTextColor(Color.parseColor("#E7ECEF"));
                 btn_hotel.setEnabled(true);
+                btn_hotel.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_hotel.setTextColor(Color.parseColor("#515354"));
                 btn_attractive.setEnabled(true);
+                btn_attractive.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_attractive.setTextColor(Color.parseColor("#515354"));
             }
             else if(theme.equals("관광지")){
                 btn_restaurant.setEnabled(true);
+                btn_restaurant.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_restaurant.setTextColor(Color.parseColor("#515354"));
                 btn_hotel.setEnabled(true);
+                btn_hotel.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_hotel.setTextColor(Color.parseColor("#515354"));
                 btn_attractive.setEnabled(false);
+                btn_attractive.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                btn_attractive.setTextColor(Color.parseColor("#E7ECEF"));
             }
             else { //숙박일 때
                 btn_restaurant.setEnabled(true);
+                btn_restaurant.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_restaurant.setTextColor(Color.parseColor("#515354"));
                 btn_hotel.setEnabled(false);
+                btn_hotel.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                btn_hotel.setTextColor(Color.parseColor("#E7ECEF"));
                 btn_attractive.setEnabled(true);
+                btn_attractive.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_attractive.setTextColor(Color.parseColor("#515354"));
             }
             search_map.GetData task = new search_map.GetData();
             task.execute(searchView.getQuery().toString());
@@ -102,18 +122,36 @@ public class search_map extends FragmentActivity implements OnMapReadyCallback {
             theme = btnWhat;
             if(theme.equals("식당")){
                 btn_restaurant.setEnabled(false);
+                btn_restaurant.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                btn_restaurant.setTextColor(Color.parseColor("#E7ECEF"));
                 btn_hotel.setEnabled(true);
+                btn_hotel.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_hotel.setTextColor(Color.parseColor("#515354"));
                 btn_attractive.setEnabled(true);
+                btn_attractive.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_attractive.setTextColor(Color.parseColor("#515354"));
             }
             else if(theme.equals("관광지")){
                 btn_restaurant.setEnabled(true);
+                btn_restaurant.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_restaurant.setTextColor(Color.parseColor("#515354"));
                 btn_hotel.setEnabled(true);
+                btn_hotel.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_hotel.setTextColor(Color.parseColor("#515354"));
                 btn_attractive.setEnabled(false);
+                btn_attractive.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                btn_attractive.setTextColor(Color.parseColor("#E7ECEF"));
             }
             else { //숙박일 때
                 btn_restaurant.setEnabled(true);
+                btn_restaurant.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_restaurant.setTextColor(Color.parseColor("#515354"));
                 btn_hotel.setEnabled(false);
+                btn_hotel.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                btn_hotel.setTextColor(Color.parseColor("#E7ECEF"));
                 btn_attractive.setEnabled(true);
+                btn_attractive.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_attractive.setTextColor(Color.parseColor("#515354"));
             }
         }
 
@@ -127,7 +165,6 @@ public class search_map extends FragmentActivity implements OnMapReadyCallback {
                 }
                 intent.putExtra("theme", theme);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -135,8 +172,14 @@ public class search_map extends FragmentActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View view) {
                 btn_restaurant.setEnabled(false);
+                btn_restaurant.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                btn_restaurant.setTextColor(Color.parseColor("#E7ECEF"));
                 btn_hotel.setEnabled(true);
+                btn_hotel.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_hotel.setTextColor(Color.parseColor("#515354"));
                 btn_attractive.setEnabled(true);
+                btn_attractive.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_attractive.setTextColor(Color.parseColor("#515354"));
 
                 theme = "식당";
 
@@ -153,8 +196,14 @@ public class search_map extends FragmentActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View view) {
                 btn_restaurant.setEnabled(true);
+                btn_restaurant.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_restaurant.setTextColor(Color.parseColor("#515354"));
                 btn_hotel.setEnabled(false);
+                btn_hotel.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                btn_hotel.setTextColor(Color.parseColor("#E7ECEF"));
                 btn_attractive.setEnabled(true);
+                btn_attractive.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_attractive.setTextColor(Color.parseColor("#515354"));
 
                 theme = "숙박";
 
@@ -172,8 +221,14 @@ public class search_map extends FragmentActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View view) {
                 btn_restaurant.setEnabled(true);
+                btn_restaurant.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_restaurant.setTextColor(Color.parseColor("#515354"));
                 btn_hotel.setEnabled(true);
+                btn_hotel.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btn_hotel.setTextColor(Color.parseColor("#515354"));
                 btn_attractive.setEnabled(false);
+                btn_attractive.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                btn_attractive.setTextColor(Color.parseColor("#E7ECEF"));
 
                 theme = "관광지";
 
@@ -233,7 +288,7 @@ public class search_map extends FragmentActivity implements OnMapReadyCallback {
             super.onPreExecute();
 
             progressDialog = ProgressDialog.show(search_map.this,
-                    "Please Wait", null, true, true);
+                    "잠시만 기다려주세요.", null, true, true);
         }
 
         @Override
@@ -387,6 +442,9 @@ public class search_map extends FragmentActivity implements OnMapReadyCallback {
 
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
+
+        UiSettings mUiSettings = map.getUiSettings();
+        mUiSettings.setZoomControlsEnabled(true);
 
         LatLng cityhall = new LatLng(37.566826, 126.9786567);
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(cityhall, 11));

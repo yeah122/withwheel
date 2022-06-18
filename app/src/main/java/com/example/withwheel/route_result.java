@@ -2,6 +2,7 @@ package com.example.withwheel;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -19,8 +20,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
@@ -103,12 +106,13 @@ public class route_result extends AppCompatActivity implements OnMapReadyCallbac
                 if(click == 0){
                     addDeleteAttr(mArrayList);
                 }
-                else if(click <5){
+                else if(click < 10){
                     addDeleteAttr(newAttrList);
                 }
                 else{
                     other.setClickable(false);
-                    Toast.makeText(getApplicationContext(),"다른 장소 추천 받기는 5번까지 가능합니다.", Toast.LENGTH_SHORT).show();
+                    other.setTextColor(Color.parseColor("#E7ECEF"));
+                    Toast.makeText(getApplicationContext(),"다른 장소 추천 받기는 10번까지 가능합니다.", Toast.LENGTH_SHORT).show();
                 }
                 click++;
             }
@@ -263,7 +267,27 @@ public class route_result extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         addNewMarker(mArrayList);
+
+        UiSettings mUiSettings = map.getUiSettings();
+        mUiSettings.setZoomControlsEnabled(true);
+
+        map.setOnInfoWindowClickListener(infoWindowClickListener);
     }
+
+    GoogleMap.OnInfoWindowClickListener infoWindowClickListener = new GoogleMap.OnInfoWindowClickListener() {
+        @Override
+        public void onInfoWindowClick(Marker marker) {
+            String name = marker.getTitle();
+            String address = marker.getSnippet();
+
+            // 해당 상세페이지로 이동
+            Intent intent = new Intent(route_result.this, detailPage.class);
+            intent.putExtra("place_address", address);
+            intent.putExtra("place_name", name);
+            intent.putExtra("theme", "관광지");
+            startActivity(intent);
+        }
+    };
 
     class GetData extends AsyncTask<String, Void, String> {
 
@@ -272,7 +296,7 @@ public class route_result extends AppCompatActivity implements OnMapReadyCallbac
 
         @Override
         protected void onPreExecute() {
-            //super.onPreExecute();
+            super.onPreExecute();
 
             progressDialog = ProgressDialog.show(route_result.this,
                     "잠시만 기다려주세요.", null, true, true);

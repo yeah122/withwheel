@@ -82,7 +82,7 @@ public class profile_change extends AppCompatActivity {
             super.onPreExecute();
 
             progressDialog = ProgressDialog.show(profile_change.this,
-                    "Please Wait", "잠시만 기다려주세요.", true, true);
+                    "잠시만 기다려주세요.", "잠시만 기다려주세요.", true, true);
         }
 
         @Override
@@ -160,9 +160,11 @@ public class profile_change extends AppCompatActivity {
 
     private void showResult(){
         if(mJsonString.equals("확인")){
-            Toast.makeText(getApplicationContext(), "회원 정보가 성공적으로 수정되었습니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "비밀번호가마포잠 수정되었습니다.", Toast.LENGTH_SHORT).show();
+
             Intent intent = new Intent(profile_change.this, MainActivity.class);
             intent.putExtra("startTab", 4);
+            startActivity(intent);
             finish();
         }
         else {

@@ -41,8 +41,8 @@
                 android:layout_height="wrap_content"
                 android:paddingVertical="7dp"
                 android:gravity="center"
-                android:textColor="#8c8c8c"
-                android:background="#e7ecef"
+                android:textColor="#E7ECEF"
+                android:background="#274C77"
                 android:textSize="15dp"
                 android:text="선택한 키워드"/>
 
@@ -70,37 +70,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:layout_marginHorizontal="5dp"
+            android:layout_marginHorizontal="10dp"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/restart"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginVertical="10dp"
                 android:layout_weight="1"
                 android:layout_gravity="center"
-                android:backgroundTint="#e7ecef"
-                android:textColor="@color/black"
+                android:textColor="#515354"
+                android:background="@drawable/btn_before"
                 android:text="다시하기"/>
 
             <Button
                 android:id="@+id/oneMore"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
                 android:layout_weight="1"
                 android:layout_gravity="center"
-                android:backgroundTint="#e7ecef"
-                android:textColor="@color/black"
+                android:textColor="#515354"
+                android:background="@drawable/btn_before"
                 android:text="근처 관광지 추가"/>
 
             <Button
                 android:id="@+id/other"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginVertical="10dp"
                 android:layout_weight="1"
                 android:layout_gravity="center"
-                android:backgroundTint="#e7ecef"
-                android:textColor="@color/black"
+                android:textColor="#515354"
+                android:background="@drawable/btn_before"
                 android:text="다른 장소 보기"/>
 
         </LinearLayout>

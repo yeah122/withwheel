@@ -8,12 +8,34 @@
 
     <include layout="@layout/toolbar" />
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/toList"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:backgroundTint="#00ff0000"
+                android:src="@drawable/icon_menu_24"/>
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:iconifiedByDefault="false"
+                app:queryHint="주소 검색" />
+
+        </LinearLayout>
 
         <fragment
             android:id="@+id/map"
@@ -21,28 +43,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/search_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:iconifiedByDefault="false"
-                app:queryHint="주소 검색" />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom">
-
-
-
-        </LinearLayout>
-
-    </FrameLayout>
+    </LinearLayout>
 
 </LinearLayout>

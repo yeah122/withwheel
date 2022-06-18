@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -81,9 +82,17 @@ public class bookmark extends AppCompatActivity {
             public void onClick(View view) {
                 btnWhat = "충전소";
                 btnCharger.setEnabled(false);
+                btnCharger.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                btnCharger.setTextColor(Color.parseColor("#E7ECEF"));
                 btnAttr.setEnabled(true);
+                btnAttr.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btnAttr.setTextColor(Color.parseColor("#515354"));
                 btnRes.setEnabled(true);
+                btnRes.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btnRes.setTextColor(Color.parseColor("#515354"));
                 btnHotel.setEnabled(true);
+                btnHotel.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btnHotel.setTextColor(Color.parseColor("#515354"));
 
                 bookmark.GetData task = new bookmark.GetData();
                 task.execute("http://10.0.2.2/bookmark_search.php", userid, btnWhat);
@@ -95,9 +104,17 @@ public class bookmark extends AppCompatActivity {
             public void onClick(View view) {
                 btnWhat = "관광지";
                 btnAttr.setEnabled(false);
+                btnAttr.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                btnAttr.setTextColor(Color.parseColor("#E7ECEF"));
                 btnCharger.setEnabled(true);
+                btnCharger.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btnCharger.setTextColor(Color.parseColor("#515354"));
                 btnRes.setEnabled(true);
+                btnRes.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btnRes.setTextColor(Color.parseColor("#515354"));
                 btnHotel.setEnabled(true);
+                btnHotel.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btnHotel.setTextColor(Color.parseColor("#515354"));
 
                 bookmark.GetData task = new bookmark.GetData();
                 task.execute("http://10.0.2.2/bookmark_search.php", userid, btnWhat);
@@ -109,9 +126,17 @@ public class bookmark extends AppCompatActivity {
             public void onClick(View view) {
                 btnWhat = "식당";
                 btnRes.setEnabled(false);
+                btnRes.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                btnRes.setTextColor(Color.parseColor("#E7ECEF"));
                 btnCharger.setEnabled(true);
+                btnCharger.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btnCharger.setTextColor(Color.parseColor("#515354"));
                 btnAttr.setEnabled(true);
+                btnAttr.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btnAttr.setTextColor(Color.parseColor("#515354"));
                 btnHotel.setEnabled(true);
+                btnHotel.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btnHotel.setTextColor(Color.parseColor("#515354"));
 
                 bookmark.GetData task = new bookmark.GetData();
                 task.execute("http://10.0.2.2/bookmark_search.php", userid, btnWhat);
@@ -123,9 +148,17 @@ public class bookmark extends AppCompatActivity {
             public void onClick(View view) {
                 btnWhat = "숙박";
                 btnHotel.setEnabled(false);
+                btnHotel.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                btnHotel.setTextColor(Color.parseColor("#E7ECEF"));
                 btnCharger.setEnabled(true);
+                btnCharger.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btnCharger.setTextColor(Color.parseColor("#515354"));
                 btnAttr.setEnabled(true);
+                btnAttr.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btnAttr.setTextColor(Color.parseColor("#515354"));
                 btnRes.setEnabled(true);
+                btnRes.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                btnRes.setTextColor(Color.parseColor("#515354"));
 
                 bookmark.GetData task = new bookmark.GetData();
                 task.execute("http://10.0.2.2/bookmark_search.php", userid, btnWhat);
@@ -144,7 +177,7 @@ public class bookmark extends AppCompatActivity {
             super.onPreExecute();
 
             progressDialog = ProgressDialog.show(bookmark.this,
-                    "Please Wait", null, true, true);
+                    "잠시만 기다려주세요.", null, true, true);
         }
 
         @Override

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -78,11 +79,7 @@ public class route extends AppCompatActivity implements View.OnClickListener {
                 }
             }
         });
-
-
     }
-
-
 
     @Override
     public void onClick(View v) {
@@ -93,107 +90,112 @@ public class route extends AppCompatActivity implements View.OnClickListener {
             case R.id.btn_outside:
                 if (keyword_list.contains("야외") == false){
                     keyword_list.add("야외");
-                    btn.setBackgroundColor(getResources().getColor(R.color.purple_200));
+                    btn.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                    btn.setTextColor(Color.parseColor("#E7ECEF"));
                 }
                 else{
                     keyword_list.remove("야외");
-                    btn.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    btn.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                    btn.setTextColor(Color.parseColor("#515354"));
                 }
                 break;
             case R.id.btn_inside:
                 if (keyword_list.contains("실내") == false){
                     keyword_list.add("실내");
-                    btn.setBackgroundColor(getResources().getColor(R.color.purple_200));
+                    btn.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                    btn.setTextColor(Color.parseColor("#E7ECEF"));
                 }
                 else{
                     keyword_list.remove("실내");
-                    btn.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    btn.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                    btn.setTextColor(Color.parseColor("#515354"));
                 }
                 break;
             case R.id.btn_shopping:
                 if (keyword_list.contains("쇼핑") == false){
                     keyword_list.add("쇼핑");
-                    btn.setBackgroundColor(getResources().getColor(R.color.purple_200));
+                    btn.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                    btn.setTextColor(Color.parseColor("#E7ECEF"));
                 }
                 else{
                     keyword_list.remove("쇼핑");
-                    btn.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    btn.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                    btn.setTextColor(Color.parseColor("#515354"));
                 }
                 break;
             case R.id.btn_history:
                 if (keyword_list.contains("역사유적") == false){
                     keyword_list.add("역사유적");
-                    btn.setBackgroundColor(getResources().getColor(R.color.purple_200));
+                    btn.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                    btn.setTextColor(Color.parseColor("#E7ECEF"));
                 }
                 else{
                     keyword_list.remove("역사유적");
-                    btn.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    btn.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                    btn.setTextColor(Color.parseColor("#515354"));
                 }
                 break;
             case R.id.btn_nature:
                 if (keyword_list.contains("자연경관") == false){
                     keyword_list.add("자연경관");
-                    btn.setBackgroundColor(getResources().getColor(R.color.purple_200));
+                    btn.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                    btn.setTextColor(Color.parseColor("#E7ECEF"));
                 }
                 else{
                     keyword_list.remove("자연경관");
-                    btn.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    btn.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                    btn.setTextColor(Color.parseColor("#515354"));
                 }
                 break;
             case R.id.btn_city:
                 if (keyword_list.contains("도시경관") == false){
                     keyword_list.add("도시경관");
-                    btn.setBackgroundColor(getResources().getColor(R.color.purple_200));
+                    btn.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                    btn.setTextColor(Color.parseColor("#E7ECEF"));
                 }
                 else{
                     keyword_list.remove("도시경관");
-                    btn.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    btn.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                    btn.setTextColor(Color.parseColor("#515354"));
                 }
                 break;
             case R.id.btn_themepark:
                 if (keyword_list.contains("테마파크") == false){
                     keyword_list.add("테마파크");
-                    btn.setBackgroundColor(getResources().getColor(R.color.purple_200));
+                    btn.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                    btn.setTextColor(Color.parseColor("#E7ECEF"));
                 }
                 else{
                     keyword_list.remove("테마파크");
-                    btn.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    btn.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                    btn.setTextColor(Color.parseColor("#515354"));
                 }
                 break;
             case R.id.btn_art:
                 if (keyword_list.contains("문화예술") == false){
                     keyword_list.add("문화예술");
-                    btn.setBackgroundColor(getResources().getColor(R.color.purple_200));
+                    btn.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                    btn.setTextColor(Color.parseColor("#E7ECEF"));
                 }
                 else{
                     keyword_list.remove("문화예술");
-                    btn.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    btn.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                    btn.setTextColor(Color.parseColor("#515354"));
                 }
                 break;
             case R.id.btn_food:
                 if (keyword_list.contains("식도락") == false){
                     keyword_list.add("식도락");
-                    btn.setBackgroundColor(getResources().getColor(R.color.purple_200));
+                    btn.setBackground(getResources().getDrawable(R.drawable.btn_after));
+                    btn.setTextColor(Color.parseColor("#E7ECEF"));
                 }
                 else{
                     keyword_list.remove("식도락");
-                    btn.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    btn.setBackground(getResources().getDrawable(R.drawable.btn_before));
+                    btn.setTextColor(Color.parseColor("#515354"));
                 }
                 break;
-
         }
-        //Toast.makeText(this, btn.getTag().toString(), Toast.LENGTH_SHORT).show();
-        //btn_select[Integer.parseInt(btn.getTag().toString())]
-        /*
-        for(int i=0; i<9; i++) {
-            //클릭된 버튼을 찾았으면
-            if (tempBtn == btn) {
-                btn_select[i] = 1;
-                Toast.makeText(this, btn_select[i], Toast.LENGTH_SHORT).show();
-            }
-        }*/
-
-
     }
 
     class GetData extends AsyncTask<String, Void, String> {
@@ -206,7 +208,7 @@ public class route extends AppCompatActivity implements View.OnClickListener {
             super.onPreExecute();
 
             progressDialog = ProgressDialog.show(route.this,
-                    "추천 중입니다. 잠시만 기다려주세요.", null, true, true);
+                    "잠시만 기다려주세요.", null, true, true);
         }
 
         @Override
@@ -360,7 +362,7 @@ public class route extends AppCompatActivity implements View.OnClickListener {
                 mArrayList.add(locationData);
             }
             // 데이터 가져온 이후에 할 코드
-            // Toast.makeText(route.this, "정보 가져오기 성공", Toast.LENGTH_SHORT).show();
+
             Intent intent = new Intent(getApplicationContext(), route_result.class);
             intent.putExtra("keyword", keyword_list.toString());
             intent.putExtra("mArrayList", mArrayList);

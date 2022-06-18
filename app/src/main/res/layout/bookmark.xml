@@ -25,13 +25,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginHorizontal="10dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnRes"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#e7ecef"
+            android:layout_height="42dp"
+            android:textColor="#E7ECEF"
+            android:background="@drawable/btn_after"
             android:layout_weight="1"
             android:enabled="false"
             android:text="식당"/>
@@ -40,26 +42,32 @@
         <Button
             android:id="@+id/btnHotel"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#e7ecef"
+            android:layout_height="42dp"
+            android:textColor="#515354"
+            android:background="@drawable/btn_before"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
+            android:layout_marginLeft="5dp"
             android:text="숙박"/>
 
 
         <Button
             android:id="@+id/btnAttr"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#e7ecef"
+            android:layout_height="42dp"
+            android:textColor="#515354"
+            android:background="@drawable/btn_before"
+            android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:text="관광지"/>
 
         <Button
             android:id="@+id/btnCharger"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#e7ecef"
+            android:layout_height="42dp"
+            android:textColor="#515354"
+            android:background="@drawable/btn_before"
+            android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:text="휠체어충전소"/>
 

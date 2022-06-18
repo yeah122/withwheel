@@ -1,15 +1,23 @@
 package com.example.withwheel;
 
-import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.appcompat.widget.SearchView;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -34,16 +42,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class search_charger extends FragmentActivity implements OnMapReadyCallback {
+public class search_charger_map extends FragmentActivity implements OnMapReadyCallback {
 
     private static String TAG = "charger";
 
     private static final String TAG_JSON = "charger";
     String place_address;
 
-    private AlertDialog dialog;
-
-    private TextView mTextViewResult;
     ArrayList<LocationData> mArrayList;
 
     public String mJsonString;
@@ -56,14 +61,27 @@ public class search_charger extends FragmentActivity implements OnMapReadyCallba
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.search_charger);
+        setContentView(R.layout.search_charger_map);
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         searchView = (SearchView) findViewById(R.id.search_view);
 
-
         mArrayList = new ArrayList<>();
+
+        Intent intent = getIntent();
+        String address = intent.getStringExtra("searchQuery");
+
+        //넘어온 주소 값이 없다면
+        if(address == null){
+
+        }
+        // 주소 값이 넘어왔다면
+        else{
+            searchView.setQuery(address, true);
+            search_charger_map.GetData task = new search_charger_map.GetData();
+            task.execute("http://10.0.2.2/charger.php", searchView.getQuery().toString());
+        }
 
         // 서치뷰 검색 버튼 눌렸을 때
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -72,23 +90,38 @@ public class search_charger extends FragmentActivity implements OnMapReadyCallba
                 String location = searchView.getQuery().toString();
 
                 // 검색한 지역이 제대로 입력 되었으면
-                if (location != null || !location.equals("")){
+                if (location != null || !location.equals("")) {
                     mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
-                    search_charger.GetData task = new search_charger.GetData();
+                    search_charger_map.GetData task = new search_charger_map.GetData();
                     task.execute("http://10.0.2.2/charger.php", location);
                 }
 
+                else{
+                    Toast.makeText(getApplicationContext(), "주소를 입력하세요.", Toast.LENGTH_SHORT).show();
+                }
                 return false;
-            };
+            }
 
             @Override
             public boolean onQueryTextChange(String s) {
                 return false;
             }
         });
-
         mapFragment.getMapAsync(this);
+
+        ImageButton btn_toList = (ImageButton) findViewById(R.id.toList);
+        btn_toList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String location = searchView.getQuery().toString();
+                Intent intent = new Intent(getApplicationContext(), search_charger_list.class);
+                if(!location.equals("")){
+                    intent.putExtra("searchQuery", location);
+                }
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -102,8 +135,8 @@ public class search_charger extends FragmentActivity implements OnMapReadyCallba
         protected void onPreExecute() {
             super.onPreExecute();
 
-            progressDialog = ProgressDialog.show(search_charger.this,
-                    "Please Wait", null, true, true);
+            progressDialog = ProgressDialog.show(search_charger_map.this,
+                    "잠시만 기다려주세요.", null, true, true);
         }
 
         @Override
@@ -114,11 +147,10 @@ public class search_charger extends FragmentActivity implements OnMapReadyCallba
             //mTextViewResult.setText(result);
             Log.d(TAG, "response - " + result);
 
-            if (result == null){
+            if (result == null) {
 
-                mTextViewResult.setText(errorString);
-            }
-            else {
+                System.out.println(errorString);
+            } else {
                 mJsonString = result;
                 showResult();
             }
@@ -127,9 +159,9 @@ public class search_charger extends FragmentActivity implements OnMapReadyCallba
         @Override
         protected String doInBackground(String... params) {
 
-            String location = (String)params[1];
+            String location = (String) params[1];
 
-            String serverURL = (String)params[0];//"http://10.0.2.2/charger.php";
+            String serverURL = (String) params[0];//"http://10.0.2.2/charger.php";
             String postParameters = "location=" + location;
 
             try {
@@ -151,10 +183,9 @@ public class search_charger extends FragmentActivity implements OnMapReadyCallba
                 Log.d(TAG, "POST response code - " + responseStatusCode);
 
                 InputStream inputStream;
-                if(responseStatusCode == HttpURLConnection.HTTP_OK) {
+                if (responseStatusCode == HttpURLConnection.HTTP_OK) {
                     inputStream = httpURLConnection.getInputStream();
-                }
-                else{
+                } else {
                     inputStream = httpURLConnection.getErrorStream();
                 }
 
@@ -164,7 +195,7 @@ public class search_charger extends FragmentActivity implements OnMapReadyCallba
                 StringBuilder sb = new StringBuilder();
                 String line;
 
-                while((line = bufferedReader.readLine()) != null){
+                while ((line = bufferedReader.readLine()) != null) {
                     sb.append(line);
                 }
 
@@ -181,7 +212,7 @@ public class search_charger extends FragmentActivity implements OnMapReadyCallba
         }
     }
 
-    private void showResult(){
+    private void showResult() {
 
         try {
             JSONObject jsonObject = new JSONObject(mJsonString);
@@ -209,7 +240,7 @@ public class search_charger extends FragmentActivity implements OnMapReadyCallba
             // 맵에 있는 마커 모두 삭제
             map.clear();
             // 검색 결과 장소 모두 지도에 마커 추가
-            for (int i=0; i<mArrayList.size(); i++) {
+            for (int i = 0; i < mArrayList.size(); i++) {
                 // 배열에서 값 받아오기
                 String st_lat = mArrayList.get(i).getLat();
                 String st_lng = mArrayList.get(i).getLng();
@@ -226,9 +257,8 @@ public class search_charger extends FragmentActivity implements OnMapReadyCallba
 
             }
 
-
             CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(new LatLng(Double.parseDouble(mArrayList.get(0).getLat()), Double.parseDouble(mArrayList.get(0).getLng())) )      // Sets the center of the map to Mountain View
+                    .target(new LatLng(Double.parseDouble(mArrayList.get(0).getLat()), Double.parseDouble(mArrayList.get(0).getLng())))      // Sets the center of the map to Mountain View
                     .zoom(14)                   // Sets the zoom
                     .build();                   // Creates a CameraPosition from the builder
 
@@ -236,9 +266,8 @@ public class search_charger extends FragmentActivity implements OnMapReadyCallba
 
             return;
 
-        }
-        catch (JSONException e) {
-            Toast.makeText(search_charger.this, mJsonString, Toast.LENGTH_LONG).show();
+        } catch (JSONException e) {
+            Toast.makeText(search_charger_map.this, mJsonString, Toast.LENGTH_LONG).show();
             Log.d(TAG, "showResult: ", e);
         }
 
@@ -249,8 +278,6 @@ public class search_charger extends FragmentActivity implements OnMapReadyCallba
         map = googleMap;
 
         UiSettings mUiSettings = map.getUiSettings();
-
-        // Keep the UI Settings state in sync with the checkboxes.
         mUiSettings.setZoomControlsEnabled(true);
 
         LatLng cityhall = new LatLng(37.566826, 126.9786567);
@@ -258,14 +285,23 @@ public class search_charger extends FragmentActivity implements OnMapReadyCallba
 
         map.setOnInfoWindowClickListener(infoWindowClickListener);
 
+        // 현재위치
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            googleMap.setMyLocationEnabled(true);
+        } else {
+            checkLocationPermissionWithRationale();
+        }
+
+
     }
+
     GoogleMap.OnInfoWindowClickListener infoWindowClickListener = new GoogleMap.OnInfoWindowClickListener() {
         @Override
         public void onInfoWindowClick(Marker marker) {
             String name = marker.getTitle();
             String address = marker.getSnippet();
 
-            Intent intent = new Intent(search_charger.this, detailPage.class);
+            Intent intent = new Intent(search_charger_map.this, detailPage.class);
             intent.putExtra("place_address", address);
             intent.putExtra("place_name", name);
             intent.putExtra("theme", "충전소");
@@ -273,4 +309,43 @@ public class search_charger extends FragmentActivity implements OnMapReadyCallba
             startActivity(intent);
         }
 
-    };}
+    };
+
+    //현재위치
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+
+    private void checkLocationPermissionWithRationale() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+                new AlertDialog.Builder(this)
+                        .setTitle("위치정보")
+                        .setMessage("이 앱을 사용하기 위해서는 위치정보에 접근이 필요합니다. 위치정보 접근을 허용하여 주세요.")
+                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                ActivityCompat.requestPermissions(search_charger_map.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
+                            }
+                        }).create().show();
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode,permissions,grantResults);
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_LOCATION: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                        map.setMyLocationEnabled(true);
+                    }
+                } else {
+                    Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
+                }
+                return;
+            }
+        }
+    }
+}

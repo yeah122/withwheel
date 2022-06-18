@@ -2,39 +2,54 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.withwheel" >
 
-
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+    <uses-feature
+        android:name="android.hardware.location"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false"/>
 
     <application
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/ic_withwheel"
+        android:label="위드휠"
+        android:roundIcon="@mipmap/ic_withwheel_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WithWheel" >
+        android:theme="@style/Theme.WithWheel">
+
+        <uses-library android:name="com.google.android.maps"/>
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false"/>
-        <activity
-            android:name=".home"
-            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA_DHw1jp3ncMGYJ7fBTcjynqiAURYzabg" />
+            android:value="AIzaSyDLMI9urd5V0AJ-Y1vhG8xerRMKUErsthU" />
+        <meta-data
+            android:name="com.google.android.gms.vision"
+            android:value="@integer/google_play_services_version"/>
+
 
         <activity
-            android:name=".sangpe"
+            android:name=".home"
             android:exported="false" />
         <activity
             android:name=".search_list"
             android:exported="false" />
         <activity
-            android:name=".mypage"
+            android:name=".search_map"
+            android:exported="false" />
+        <activity
+            android:name=".search_charger_list"
+            android:exported="false" />
+        <activity
+            android:name=".search_charger_map"
             android:exported="false" />
         <activity
             android:name=".route"
@@ -43,44 +58,33 @@
             android:name=".route_result"
             android:exported="false" />
         <activity
-            android:name=".search_charger"
-            android:exported="false" />
-        <activity
             android:name=".bookmark"
             android:exported="false" />
         <activity
             android:name=".detailPage"
             android:exported="false" />
         <activity
-            android:name=".search_map"
+            android:name=".mypage"
             android:exported="false" />
         <activity
             android:name=".profile_change"
+            android:exported="false" />
+        <activity
+            android:name=".profile_login"
+            android:exported="false" />
+        <activity
+            android:name=".profile_insert"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <meta-data
-            android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="kju7s5d1h8" />
 
-        <activity
-            android:name=".profile_login"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".profile_insert" />
     </application>
 
 </manifest>

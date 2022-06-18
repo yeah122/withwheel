@@ -144,7 +144,7 @@ public class detailPage extends FragmentActivity{
             super.onPreExecute();
 
             progressDialog = ProgressDialog.show(detailPage.this,
-                    "Please Wait", null, true, true);
+                    "잠시만 기다려주세요.", null, true, true);
         }
 
         @Override
@@ -479,7 +479,6 @@ public class detailPage extends FragmentActivity{
                 Toast.makeText(detailPage.this, "즐겨찾기가 해제되었습니다.", Toast.LENGTH_SHORT).show();
             }
             else if(mJsonString.equals("logout")){
-                Toast.makeText(detailPage.this, "즐겨찾기는 로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
                 Toast.makeText(detailPage.this, "즐겨찾기는 로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
             }
             Log.d(TAG, "showResult: ", e);

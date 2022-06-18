@@ -69,16 +69,19 @@
             <Button
                 android:id="@+id/btn_login"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:backgroundTint="#e7ecef"
+                android:layout_height="45dp"
+                android:textColor="#515354"
+                android:background="@drawable/btn_before"
+                android:layout_marginRight="10dp"
                 android:text="로그인"
                 android:layout_weight="1"/>
 
             <Button
                 android:id="@+id/btn_register"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:backgroundTint="#e7ecef"
+                android:layout_height="45dp"
+                android:textColor="#515354"
+                android:background="@drawable/btn_before"
                 android:text="회원가입"/>
 
         </LinearLayout>

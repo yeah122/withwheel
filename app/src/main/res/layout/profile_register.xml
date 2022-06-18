@@ -91,8 +91,9 @@
                 android:id="@+id/button_main_insert"
                 android:layout_width="match_parent"
                 android:layout_marginVertical="20dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#e7ecef"
+                android:layout_height="45dp"
+                android:textColor="#515354"
+                android:background="@drawable/btn_before"
                 android:text="가입 완료"/>
 
         </LinearLayout>
