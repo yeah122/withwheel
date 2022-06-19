@@ -80,7 +80,7 @@ public class search_charger_map extends FragmentActivity implements OnMapReadyCa
         else{
             searchView.setQuery(address, true);
             search_charger_map.GetData task = new search_charger_map.GetData();
-            task.execute("http://192.168.219.104/charger.php", searchView.getQuery().toString());
+            task.execute("http://192.168.219.102/charger.php", searchView.getQuery().toString());
         }
 
         // 서치뷰 검색 버튼 눌렸을 때
@@ -94,7 +94,7 @@ public class search_charger_map extends FragmentActivity implements OnMapReadyCa
                     mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
                     search_charger_map.GetData task = new search_charger_map.GetData();
-                    task.execute("http://192.168.219.104/charger.php", location);
+                    task.execute("http://192.168.219.102/charger.php", location);
                 }
 
                 else{
@@ -332,7 +332,7 @@ public class search_charger_map extends FragmentActivity implements OnMapReadyCa
                         map.setMyLocationEnabled(true);
                     }
                 } else {
-                    Toast.makeText(this, "접근 권한이 거부되었습니다.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "위치 접근 권한이 거부되었습니다.", Toast.LENGTH_LONG).show();
                 }
                 return;
             }

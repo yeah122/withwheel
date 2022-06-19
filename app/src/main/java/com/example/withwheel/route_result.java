@@ -144,7 +144,7 @@ public class route_result extends AppCompatActivity implements OnMapReadyCallbac
         newAttrList.clear();
 
         route_result.GetData task = new route_result.GetData();
-        task.execute("http://192.168.219.104/route_re.php", keyword, newArr);
+        task.execute("http://192.168.219.102/route_re.php", keyword, newArr);
     }
 
     private void addNewMarker(ArrayList<LocationData> list){

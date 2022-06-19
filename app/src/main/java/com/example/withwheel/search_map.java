@@ -322,13 +322,13 @@ public class search_map extends FragmentActivity implements OnMapReadyCallback {
             String serverURL;
 
             if(theme.equals("식당")){
-                serverURL = "http://192.168.219.104/restaurant.php";
+                serverURL = "http://192.168.219.102/restaurant.php";
             }
             else if(theme.equals("관광지")){
-                serverURL = "http://192.168.219.104/attractive.php";
+                serverURL = "http://192.168.219.102/attractive.php";
             }
             else {//숙박일 때
-                serverURL = "http://192.168.219.104/hotel.php";
+                serverURL = "http://192.168.219.102/hotel.php";
             }
 
             String postParameters = "place_address=" + address;
@@ -503,7 +503,7 @@ public class search_map extends FragmentActivity implements OnMapReadyCallback {
                         map.setMyLocationEnabled(true);
                     }
                 } else {
-                    Toast.makeText(this, "접근 권한이 거부되었습니다.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "위치 접근 권한이 거부되었습니다.", Toast.LENGTH_LONG).show();
                 }
                 return;
             }

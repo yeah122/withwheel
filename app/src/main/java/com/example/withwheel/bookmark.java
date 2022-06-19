@@ -31,16 +31,12 @@ import java.util.ArrayList;
 public class bookmark extends AppCompatActivity {
 
     private static String TAG = "bookmark";
-    private TextView mTextViewResult;
     public String mJsonString;
     ArrayList<LocationData> mArrayList;
     ListView listView;
     bookmark_customview adapter;
 
     Button btnCharger, btnAttr, btnRes, btnHotel;
-
-    SharedPreferences preferences;
-    SharedPreferences.Editor editor;
 
     String btnWhat = "식당"; // 무슨 버튼이 눌렸는지 == theme, 초기화는 식당으로
 
@@ -75,7 +71,7 @@ public class bookmark extends AppCompatActivity {
 
         //맨처음에는 식당 정보 가져오기
         bookmark.GetData task = new bookmark.GetData();
-        task.execute("http://192.168.219.104/bookmark_search.php", userid, btnWhat);
+        task.execute("http://192.168.219.102/bookmark_search.php", userid, btnWhat);
         
         btnCharger = (Button) findViewById(R.id.btnCharger);
         btnCharger.setOnClickListener(new Button.OnClickListener() {
@@ -95,7 +91,7 @@ public class bookmark extends AppCompatActivity {
                 btnHotel.setTextColor(Color.parseColor("#515354"));
 
                 bookmark.GetData task = new bookmark.GetData();
-                task.execute("http://192.168.219.104/bookmark_search.php", userid, btnWhat);
+                task.execute("http://192.168.219.102/bookmark_search.php", userid, btnWhat);
             }
         });
 
@@ -117,7 +113,7 @@ public class bookmark extends AppCompatActivity {
                 btnHotel.setTextColor(Color.parseColor("#515354"));
 
                 bookmark.GetData task = new bookmark.GetData();
-                task.execute("http://192.168.219.104/bookmark_search.php", userid, btnWhat);
+                task.execute("http://192.168.219.102/bookmark_search.php", userid, btnWhat);
             }
         });
 
@@ -139,7 +135,7 @@ public class bookmark extends AppCompatActivity {
                 btnHotel.setTextColor(Color.parseColor("#515354"));
 
                 bookmark.GetData task = new bookmark.GetData();
-                task.execute("http://192.168.219.104/bookmark_search.php", userid, btnWhat);
+                task.execute("http://192.168.219.102/bookmark_search.php", userid, btnWhat);
             }
         });
 
@@ -161,7 +157,7 @@ public class bookmark extends AppCompatActivity {
                 btnRes.setTextColor(Color.parseColor("#515354"));
 
                 bookmark.GetData task = new bookmark.GetData();
-                task.execute("http://192.168.219.104/bookmark_search.php", userid, btnWhat);
+                task.execute("http://192.168.219.102/bookmark_search.php", userid, btnWhat);
             }
         });
     }
@@ -190,7 +186,7 @@ public class bookmark extends AppCompatActivity {
 
             if (result == null) {
 
-                mTextViewResult.setText(errorString);
+                System.out.println(errorString);
             }
             else {
                 mJsonString = result;

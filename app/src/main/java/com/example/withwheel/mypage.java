@@ -90,7 +90,7 @@ public class mypage extends AppCompatActivity {
                             password = editText.getText().toString();
                             URL = "Delete";
                             mypage.GetData task = new mypage.GetData();
-                            task.execute("http://192.168.219.104/profile_delete.php", name, password);
+                            task.execute("http://192.168.219.102/profile_delete.php", name, password);
                         }
                     });
                     builder.show();
@@ -115,7 +115,7 @@ public class mypage extends AppCompatActivity {
 
                             if(!password.equals("")){
                                 mypage.GetData task = new mypage.GetData();
-                                task.execute("http://192.168.219.104/profile_change_check.php", name, password);
+                                task.execute("http://192.168.219.102/profile_change_check.php", name, password);
                             }
                             else {
                                 Toast.makeText(getApplicationContext(), "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();

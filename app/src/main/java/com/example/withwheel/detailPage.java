@@ -86,25 +86,25 @@ public class detailPage extends FragmentActivity{
                 setContentView(R.layout.detailpage_attractive);
 
                 detailPage.GetData task = new detailPage.GetData();
-                task.execute("http://192.168.219.104/attractive.php", address, name);
+                task.execute("http://192.168.219.102/attractive.php", address, name);
             }
             else  if(theme.equals("숙박")){
                 setContentView(R.layout.detailpage_hotel);
 
                 detailPage.GetData task = new detailPage.GetData();
-                task.execute("http://192.168.219.104/hotel.php", address, name);
+                task.execute("http://192.168.219.102/hotel.php", address, name);
             }
             else if(theme.equals("식당")) {
                 setContentView(R.layout.detailpage_restaurant);
 
                 detailPage.GetData task = new detailPage.GetData();
-                task.execute("http://192.168.219.104/restaurant.php", address, name);
+                task.execute("http://192.168.219.102/restaurant.php", address, name);
             }
             else if(theme.equals("충전소")) {
                 setContentView(R.layout.detailpage_charger);
 
                 detailPage.GetData task = new detailPage.GetData();
-                task.execute("http://192.168.219.104/charger.php", address, name);
+                task.execute("http://192.168.219.102/charger.php", address, name);
             }
             else{ // 테마값이 빈 값으로 넘겨졌을 때
                 Toast.makeText(getApplicationContext(), "테마 값이 비었습니다.", Toast.LENGTH_SHORT).show();
@@ -127,7 +127,7 @@ public class detailPage extends FragmentActivity{
         switch (item.getItemId()) {
             case R.id.bookmark:
                 detailPage.GetData task = new detailPage.GetData();
-                task.execute("http://192.168.219.104/bookmark_onoff.php",
+                task.execute("http://192.168.219.102/bookmark_onoff.php",
                         mArrayList.get(0).getAddress(), mArrayList.get(0).getName(), theme, userid);
         }
         return true;
@@ -347,7 +347,7 @@ public class detailPage extends FragmentActivity{
                     @Override
                     public void onClick(View view) {
                         // 전화번호가 비어있지 않을 때만
-                        if(!Tplace_call.getText().toString().equals("") || Tplace_call != null){
+                        if(!Tplace_call.getText().toString().equals("") || Integer.parseInt(Tplace_call.getText().toString()) > 5){
                             Uri uri = Uri.parse("tel:" + Tplace_call.getText().toString());
                             Intent intentCAll = new Intent(Intent.ACTION_DIAL, uri);
                             startActivity(intentCAll);
@@ -358,7 +358,7 @@ public class detailPage extends FragmentActivity{
                 homepage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(!homepage.getText().toString().equals("") || Tplace_call != null){
+                        if(!homepage.getText().toString().equals("") || Integer.parseInt(homepage.getText().toString()) > 10){
                             Uri uri = Uri.parse(homepage.getText().toString());
                             Intent intentInternet = new Intent(Intent.ACTION_VIEW, uri);
                             startActivity(intentInternet);
@@ -388,17 +388,17 @@ public class detailPage extends FragmentActivity{
                 Tplace_address.setText(mArrayList.get(0).getAddress());
                 Tplace_call.setText(mArrayList.get(0).getPlace_call());
                 homepage.setText(mArrayList.get(0).getHomepage());
-                help.setText("안내 서비스: " + mArrayList.get(0).getGuide());
-                enter.setText("주출입구 접근로: " + mArrayList.get(0).getEntrance());
-                elevator.setText("장애인 엘리베이터: " + mArrayList.get(0).getElevator());
-                toilet.setText("장애인 화장실: " + mArrayList.get(0).getToilet());
-                parking.setText("장애인 전용 주차장: " + mArrayList.get(0).getParking());
+                help.setText(mArrayList.get(0).getGuide());
+                enter.setText(mArrayList.get(0).getEntrance());
+                elevator.setText(mArrayList.get(0).getElevator());
+                toilet.setText(mArrayList.get(0).getToilet());
+                parking.setText(mArrayList.get(0).getParking());
 
                 Tplace_call.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         // 전화번호가 비어있지 않을 때만
-                        if(!Tplace_call.getText().toString().equals("") || Tplace_call != null){
+                        if(!Tplace_call.getText().toString().equals("") || Integer.parseInt(Tplace_call.getText().toString()) > 5){
                             Uri uri = Uri.parse("tel:" + Tplace_call.getText().toString());
                             Intent intentCAll = new Intent(Intent.ACTION_DIAL, uri);
                             startActivity(intentCAll);
@@ -409,10 +409,15 @@ public class detailPage extends FragmentActivity{
                 homepage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(!homepage.getText().toString().equals("") || Tplace_call != null){
-                            Uri uri = Uri.parse(homepage.getText().toString());
-                            Intent intentInternet = new Intent(Intent.ACTION_VIEW, uri);
-                            startActivity(intentInternet);
+                        //홈페이지 값이 있으면
+                        if (homepage != null) {
+                            if(!homepage.getText().toString().equals("")){
+                                if(Integer.parseInt(homepage.getText().toString()) > 10){
+                                    Uri uri = Uri.parse(homepage.getText().toString());
+                                    Intent intentInternet = new Intent(Intent.ACTION_VIEW, uri);
+                                    startActivity(intentInternet);
+                                }
+                            }
                         }
                     }
                 });
@@ -472,7 +477,7 @@ public class detailPage extends FragmentActivity{
                     @Override
                     public void onClick(View view) {
                         // 전화번호가 비어있지 않을 때만
-                        if(!Tplace_call.getText().toString().equals("") || Tplace_call != null){
+                        if(!Tplace_call.getText().toString().equals("") || Integer.parseInt(Tplace_call.getText().toString()) > 5){
                             Uri uri = Uri.parse("tel:" + Tplace_call.getText().toString());
                             Intent intentCAll = new Intent(Intent.ACTION_DIAL, uri);
                             startActivity(intentCAll);

@@ -24,12 +24,13 @@
 
         <TextView
             android:id="@+id/place_name"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="시설명"
+            android:textStyle="bold"
             android:textColor="#0a1128"
-            android:textSize="25dp"/>
+            android:textSize="25dp" />
 
     </LinearLayout>
 
@@ -123,6 +124,14 @@
         android:layout_marginBottom="15dp"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="21dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="#0a1128"
+            android:text="편의 시설 정보"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -131,17 +140,23 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginHorizontal="10dp"
                 android:src="@drawable/icon_help"/>
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="안내 서비스 여부: "
+                android:textSize="20dp"/>
 
             <TextView
                 android:id="@+id/help"
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="안내 서비스 여부"
                 android:textSize="20dp"/>
 
         </LinearLayout>
@@ -153,17 +168,23 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginHorizontal="10dp"
                 android:src="@drawable/icon_enter_64"/>
 
             <TextView
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="주출입구 접근로 여부: "
+                android:textSize="20dp"/>
+
+            <TextView
                 android:id="@+id/enter"
                 android:layout_marginTop="5dp"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="주출입구 접근로 여부"
                 android:textSize="20dp"/>
 
         </LinearLayout>
@@ -174,17 +195,23 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginHorizontal="10dp"
                 android:src="@drawable/icons8_elevator"/>
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="장애인 엘리베이터 여부: "
+                android:textSize="20dp"/>
 
             <TextView
                 android:id="@+id/elevator"
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="장애인 엘리베이터 여부"
                 android:textSize="20dp"/>
 
         </LinearLayout>
@@ -196,35 +223,49 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginHorizontal="10dp"
                 android:src="@drawable/icon_toilet"/>
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="장애인 화장실 여부: "
+                android:textSize="20dp"/>
 
             <TextView
                 android:id="@+id/toilet"
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="장애인 화장실 여부"
                 android:textSize="20dp"/>
+
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginHorizontal="10dp"
                 android:src="@drawable/icons_parking"/>
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="장애인 전용 주차장 여부: "
+                android:textSize="20dp"/>
 
             <TextView
                 android:id="@+id/parking"
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="장애인 전용 주차장 여부"
                 android:textSize="20dp"/>
         </LinearLayout>
 

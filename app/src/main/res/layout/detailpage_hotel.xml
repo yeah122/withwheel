@@ -28,6 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="시설명"
+            android:textStyle="bold"
             android:textColor="#0a1128"
             android:textSize="25dp"/>
 
@@ -122,6 +123,15 @@
         android:layout_marginBottom="15dp"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="21dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="#0a1128"
+            android:text="편의 시설 정보"/>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -130,8 +140,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginHorizontal="10dp"
                 android:src="@drawable/icon_help"/>
 
@@ -152,8 +162,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginHorizontal="10dp"
                 android:src="@drawable/icon_enter_64"/>
 
@@ -173,8 +183,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginHorizontal="10dp"
                 android:src="@drawable/icons8_elevator"/>
 
@@ -195,8 +205,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginHorizontal="10dp"
                 android:src="@drawable/icon_toilet"/>
 
@@ -213,8 +223,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginHorizontal="10dp"
                 android:src="@drawable/icons_parking"/>
 
@@ -234,8 +244,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginHorizontal="10dp"
                 android:src="@drawable/icon_room"/>
 
@@ -252,8 +262,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginHorizontal="10dp"
                 android:src="@drawable/icons_wheel"/>
 

@@ -28,6 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="시설명"
+                android:textStyle="bold"
                 android:textColor="#0a1128"
                 android:textSize="25dp"/>
 
@@ -121,6 +122,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="21dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="#0a1128"
+                android:text="편의 시설 정보"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -129,10 +138,10 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginHorizontal="10dp"
-                    android:src="@drawable/icon_help"/>
+                    android:src="@drawable/icon_help" />
 
                 <TextView
                     android:id="@+id/help"
@@ -151,8 +160,8 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginHorizontal="10dp"
                     android:src="@drawable/icon_enter_64"/>
 
@@ -172,8 +181,8 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginHorizontal="10dp"
                     android:src="@drawable/icons8_elevator"/>
 
@@ -194,8 +203,8 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginHorizontal="10dp"
                     android:src="@drawable/icon_toilet"/>
 
@@ -212,8 +221,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginHorizontal="10dp"
                     android:src="@drawable/icons_parking"/>
 
@@ -245,9 +254,9 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="관광지 소개"
+                android:text="소개"
                 android:textColor="#0a1128"
-                android:textSize="20dp"/>
+                android:textSize="21dp"/>
 
             <TextView
                 android:id="@+id/introduction"
@@ -256,7 +265,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="소개글"
-                android:textSize="18dp"/>
+                android:textSize="20dp"/>
 
         </LinearLayout>
 

@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -33,6 +34,7 @@ public class search_list extends AppCompatActivity {
     Button btn_restaurant, btn_hotel, btn_attractive;
     ImageButton beforePage, nextPage, btn_toMap;
     SearchView searchView;
+    TextView pageCnt;
 
     private static String TAG = "listView";
 
@@ -48,6 +50,10 @@ public class search_list extends AppCompatActivity {
     String theme = "식당";
 
     int clickCnt = 0;
+
+    int max = 1; // 총 페이지 개수
+    int pageNum = 1;
+    String pageStr = "1 / 1"; // 문자열 형
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +71,8 @@ public class search_list extends AppCompatActivity {
         beforePage = (ImageButton) findViewById(R.id.beforePage); // 이전 버튼 누르면 이전 페이지로,
         nextPage = (ImageButton) findViewById(R.id.nextPage); // 다음 버튼 누르면 다음 페이지로,
         btn_toMap = (ImageButton) findViewById(R.id.btn_toMap);
+
+        pageCnt = (TextView) findViewById(R.id.pageCnt);
 
         Intent intent = getIntent();
         String address = intent.getStringExtra("searchQuery");
@@ -155,6 +163,8 @@ public class search_list extends AppCompatActivity {
         btn_restaurant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                pageNum = 1;
+                clickCnt = 0;
                 btn_restaurant.setEnabled(false);
                 btn_restaurant.setBackground(getResources().getDrawable(R.drawable.btn_after));
                 btn_restaurant.setTextColor(Color.parseColor("#E7ECEF"));
@@ -178,6 +188,8 @@ public class search_list extends AppCompatActivity {
         btn_hotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                pageNum = 1;
+                clickCnt = 0;
                 btn_restaurant.setEnabled(true);
                 btn_restaurant.setBackground(getResources().getDrawable(R.drawable.btn_before));
                 btn_restaurant.setTextColor(Color.parseColor("#515354"));
@@ -202,6 +214,8 @@ public class search_list extends AppCompatActivity {
         btn_attractive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                pageNum = 1;
+                clickCnt = 0;
                 btn_restaurant.setEnabled(true);
                 btn_restaurant.setBackground(getResources().getDrawable(R.drawable.btn_before));
                 btn_restaurant.setTextColor(Color.parseColor("#515354"));
@@ -229,15 +243,15 @@ public class search_list extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                String address = searchView.getQuery().toString();
+                String location = searchView.getQuery().toString();
 
                 // 검색한 지역이 제대로 입력 되었으면
-                if (address != null || !address.equals("")) {
+                if (location != null || !location.equals("")) {
                     mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
                     if(!theme.equals("")){
                         search_list.GetData task = new search_list.GetData();
-                        task.execute(address);
+                        task.execute(location);
                     }
                     else{
                         Toast.makeText(getApplicationContext(), "식당, 관광지, 숙박 중 하나를 선택해주세요.", Toast.LENGTH_SHORT).show();
@@ -271,6 +285,9 @@ public class search_list extends AppCompatActivity {
                     listView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
 
+                    pageNum--;
+                    pageStr = pageNum + " / " + max;
+                    pageCnt.setText(pageStr);
                 }
             }
         });
@@ -285,6 +302,10 @@ public class search_list extends AppCompatActivity {
                     adapter = new search_list_customview(mArrayList, clickCnt);
                     listView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
+
+                    pageNum++;
+                    pageStr = pageNum + " / " + max;
+                    pageCnt.setText(pageStr);
                 }
                 else{
                     clickCnt -= 20;
@@ -364,13 +385,13 @@ public class search_list extends AppCompatActivity {
             String serverURL;
 
             if(theme.equals("식당")){
-                serverURL = "http://192.168.219.104/restaurant.php";
+                serverURL = "http://192.168.219.102/restaurant.php";
             }
             else if(theme.equals("관광지")){
-                serverURL = "http://192.168.219.104/attractive.php";
+                serverURL = "http://192.168.219.102/attractive.php";
             }
             else {//숙박일 때
-                serverURL = "http://192.168.219.104/hotel.php";
+                serverURL = "http://192.168.219.102/hotel.php";
             }
             String postParameters = "place_address=" + address;
 
@@ -428,11 +449,9 @@ public class search_list extends AppCompatActivity {
         try {
             mArrayList.clear();
             clickCnt = 0;
-            //listView.setAdapter(null);
 
             JSONObject jsonObject = new JSONObject(mJsonString);
             JSONArray jsonArray = jsonObject.getJSONArray(TAG_JSON);
-            //JSONArray jsonArray = new JSONArray(TAG_JSON);
 
             for (int i = 0; i < jsonArray.length(); i++) {
 
@@ -452,10 +471,30 @@ public class search_list extends AppCompatActivity {
                 mArrayList.add(locationData);
             }
             //데이터 가져온 후 진행할 코드
+            if(mArrayList.size() != 0){
+                adapter = new search_list_customview(mArrayList, clickCnt);
+                listView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
 
-            adapter = new search_list_customview(mArrayList, clickCnt);
-            listView.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
+                //페이지 표시
+                if(mArrayList.size() <= 20){
+                    pageStr = "1 / 1";
+                }
+                else{
+                    if ((mArrayList.size() % 20) > 0){
+                        max = Integer.parseInt(String.valueOf(mArrayList.size())) / 20 + 1;
+                    }
+                    else{
+                        max = Integer.parseInt(String.valueOf(mArrayList.size()));
+                    }
+                    pageStr = "1 / " + max;
+                }
+                pageCnt.setText(pageStr);
+            }
+            else{
+                pageStr = "0 / 0";
+                pageCnt.setText(pageStr);
+            }
 
             return;
 

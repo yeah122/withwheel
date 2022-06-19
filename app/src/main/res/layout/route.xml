@@ -159,8 +159,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:textColor="#515354"
-        android:background="@drawable/btn_before"
+        android:textColor="#E7ECEF"
+        android:background="@drawable/btn_after"
         android:text="선택완료"/>
 
     <LinearLayout

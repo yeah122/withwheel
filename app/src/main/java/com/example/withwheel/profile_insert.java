@@ -23,7 +23,7 @@ import java.net.URL;
 
 public class profile_insert extends AppCompatActivity
 {
-    private static String IP_ADDRESS = "192.168.219.104";//다음 줄에 있는 IP 주소를 아파치 웹서버가 설치된  컴퓨터의 IP
+    private static String IP_ADDRESS = "192.168.219.102";//다음 줄에 있는 IP 주소를 아파치 웹서버가 설치된  컴퓨터의 IP
     private static String TAG = "withwheel";//
 
     private EditText mEditTextID;

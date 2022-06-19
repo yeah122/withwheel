@@ -69,7 +69,7 @@ public class profile_login extends AppCompatActivity {
             public void onClick(View view) {
                 mArrayList.clear();
                 GetData task = new GetData();
-                task.execute("http://192.168.219.104/login.php", mEditTextID.getText().toString(), mEditTextPass.getText().toString());
+                task.execute("http://192.168.219.102/login.php", mEditTextID.getText().toString(), mEditTextPass.getText().toString());
             }
         });
         mArrayList = new ArrayList<>();

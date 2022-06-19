@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +33,7 @@ public class search_charger_list extends AppCompatActivity {
 
     ImageButton beforePage, nextPage, btn_toMap;
     SearchView searchView;
+    TextView pageCnt;
 
     private static String TAG = "charger_list";
 
@@ -47,6 +49,10 @@ public class search_charger_list extends AppCompatActivity {
 
     int clickCnt = 0;
 
+    int max = 1; // 총 페이지 개수
+    int pageNum = 1;
+    String pageStr = "1 / 1"; // 문자열 형
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +67,8 @@ public class search_charger_list extends AppCompatActivity {
         nextPage = (ImageButton) findViewById(R.id.nextPage); // 다음 버튼 누르면 다음 페이지로,
         btn_toMap = (ImageButton) findViewById(R.id.btn_toMap);
 
+        pageCnt = (TextView) findViewById(R.id.pageCnt);
+
         Intent intent = getIntent();
         String address = intent.getStringExtra("searchQuery");
 
@@ -72,7 +80,7 @@ public class search_charger_list extends AppCompatActivity {
         else{
             searchView.setQuery(address, true);
             search_charger_list.GetData task = new search_charger_list.GetData();
-            task.execute("http://192.168.219.104/charger.php", searchView.getQuery().toString());
+            task.execute("http://192.168.219.102/charger.php", searchView.getQuery().toString());
         }
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -85,7 +93,7 @@ public class search_charger_list extends AppCompatActivity {
                     mArrayList.clear();// 검색 결과 담을 배열 비우고 새롭게 준비
 
                     search_charger_list.GetData task = new search_charger_list.GetData();
-                    task.execute("http://192.168.219.104/charger.php", address);
+                    task.execute("http://192.168.219.102/charger.php", address);
                 }
 
                 else{
@@ -115,6 +123,9 @@ public class search_charger_list extends AppCompatActivity {
                     listView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
 
+                    pageNum--;
+                    pageStr = pageNum + " / " + max;
+                    pageCnt.setText(pageStr);
                 }
             }
         });
@@ -129,6 +140,10 @@ public class search_charger_list extends AppCompatActivity {
                     adapter = new search_list_customview(mArrayList, clickCnt);
                     listView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
+
+                    pageNum++;
+                    pageStr = pageNum + " / " + max;
+                    pageCnt.setText(pageStr);
                 }
                 else{
                     clickCnt -= 20;
@@ -286,10 +301,30 @@ public class search_charger_list extends AppCompatActivity {
                 mArrayList.add(locationData);
             }
             //데이터 가져온 후 진행할 코드
+            if(mArrayList.size() != 0){
+                adapter = new search_list_customview(mArrayList, clickCnt);
+                listView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
 
-            adapter = new search_list_customview(mArrayList, clickCnt);
-            listView.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
+                //페이지 표시
+                if(mArrayList.size() <= 20){
+                    pageStr = "1 / 1";
+                }
+                else{
+                    if ((mArrayList.size() % 20) > 0){
+                        max = Integer.parseInt(String.valueOf(mArrayList.size())) / 20 + 1;
+                    }
+                    else{
+                        max = Integer.parseInt(String.valueOf(mArrayList.size()));
+                    }
+                    pageStr = "1 / " + max;
+                }
+                pageCnt.setText(pageStr);
+            }
+            else{
+                pageStr = "0 / 0";
+                pageCnt.setText(pageStr);
+            }
 
             return;
 

@@ -59,7 +59,7 @@ public class profile_change extends AppCompatActivity {
                     // 비밀번호가 같으면
                     if(editPass1.getText().toString().equals(editPass2.getText().toString())){
                         profile_change.GetData task = new profile_change.GetData();
-                        task.execute("http://192.168.219.104/profile_change.php", userid, editPass1.getText().toString());
+                        task.execute("http://192.168.219.102/profile_change.php", userid, editPass1.getText().toString());
                     }
                     else {//비밀번호가 다르면
                         Toast.makeText(getApplicationContext(), "비밀번호가 다릅니다.", Toast.LENGTH_SHORT).show();

@@ -71,7 +71,7 @@ public class route extends AppCompatActivity implements View.OnClickListener {
                     String size = String.valueOf(keyword_list.size());
 
                     route.GetData task = new route.GetData();
-                    task.execute("http://192.168.219.104/route.php", size, keyword_list.toString());
+                    task.execute("http://192.168.219.102/route.php", size, keyword_list.toString());
 
                 }
             }

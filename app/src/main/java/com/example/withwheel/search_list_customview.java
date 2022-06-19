@@ -58,11 +58,13 @@ public class search_list_customview extends BaseAdapter {
             convertView = layoutInflater.inflate(R.layout.search_list_customview, parent, false);
         }
 
-        TextView name = convertView.findViewById(R.id.name);
-        TextView address = convertView.findViewById(R.id.address);
+        if(mArrayList.size() != 0){
+            TextView name = convertView.findViewById(R.id.name);
+            TextView address = convertView.findViewById(R.id.address);
 
-        name.setText(mArrayList.get(position + click).getName());
-        address.setText(mArrayList.get(position + click).getAddress());
+            name.setText(mArrayList.get(position + click).getName());
+            address.setText(mArrayList.get(position + click).getAddress());
+        }
 
         return convertView;
     }

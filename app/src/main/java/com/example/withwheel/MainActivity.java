@@ -1,6 +1,7 @@
 package com.example.withwheel;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.TabActivity;
 import android.content.DialogInterface;
@@ -16,6 +17,7 @@ import androidx.core.content.ContextCompat;
 public class MainActivity extends TabActivity {
 
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,28 +35,28 @@ public class MainActivity extends TabActivity {
         //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
         intent = new Intent().setClass(this, home.class);
         spec = tabHost.newTabSpec("home"); // 객체를 생성
-        spec.setIndicator("메인", getApplicationContext().getResources().getDrawable(R.drawable.icon_home)); //탭의 이름 설정
+        spec.setIndicator("메인"); //탭의 이름 설정
         spec.setContent(intent);
         tabHost.addTab(spec);
 
         //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
         intent = new Intent().setClass(this, search_map.class);
         spec = tabHost.newTabSpec("map_search"); // 객체를 생성
-        spec.setIndicator("시설", getApplicationContext().getResources().getDrawable(R.drawable.icon_search)); //탭의 이름 설정
+        spec.setIndicator("시설"); //탭의 이름 설정
         spec.setContent(intent);
         tabHost.addTab(spec);
 
         //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
         intent = new Intent().setClass(this, route.class);
         spec = tabHost.newTabSpec("route"); // 객체를 생성
-        spec.setIndicator("경로\n추천", getApplicationContext().getResources().getDrawable(R.drawable.icon_gps)); //탭의 이름 설정
+        spec.setIndicator("경로\n추천"); //탭의 이름 설정
         spec.setContent(intent);
         tabHost.addTab(spec);
 
         //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
         intent = new Intent().setClass(this, search_charger_map.class);
         spec = tabHost.newTabSpec("rental_charge"); // 객체를 생성
-        spec.setIndicator("휠체어\n충전기", getApplicationContext().getResources().getDrawable(R.drawable.charge)); //탭의 이름 설정
+        spec.setIndicator("휠체어\n충전기"); //탭의 이름 설정
         spec.setContent(intent);
         tabHost.addTab(spec);
 
@@ -62,7 +64,7 @@ public class MainActivity extends TabActivity {
         //탭에서 액티비티를 사용할 수 있도록 인텐트 생성
         intent = new Intent().setClass(this, mypage.class);
         spec = tabHost.newTabSpec("mypage"); // 객체를 생성
-        spec.setIndicator("마이\n페이지", getApplicationContext().getResources().getDrawable(R.drawable.account)); //탭의 이름 설정
+        spec.setIndicator("마이\n페이지"); //탭의 이름 설정
         spec.setContent(intent);
         tabHost.addTab(spec);
 
@@ -99,9 +101,8 @@ public class MainActivity extends TabActivity {
                     if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
                     }
-                } else {
-                    Toast.makeText(this, "접근 권한이 거부되었습니다.", Toast.LENGTH_LONG).show();
                 }
+                else { }
                 return;
             }
         }
