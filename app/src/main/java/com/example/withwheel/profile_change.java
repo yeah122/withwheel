@@ -49,6 +49,9 @@ public class profile_change extends AppCompatActivity {
         preferences = getSharedPreferences("UserInfo", MODE_PRIVATE);
         editor = preferences.edit();
         userid = preferences.getString("id", "");
+        
+        Intent intent = getIntent();
+        String pw = intent.getStringExtra("pw");
 
         button_change = findViewById(R.id.button_main_insert_change);
         button_change.setOnClickListener(new View.OnClickListener() {
@@ -58,8 +61,21 @@ public class profile_change extends AppCompatActivity {
                 if(!editPass1.getText().toString().equals("") && !editPass2.getText().toString().equals("")){
                     // 비밀번호가 같으면
                     if(editPass1.getText().toString().equals(editPass2.getText().toString())){
-                        profile_change.GetData task = new profile_change.GetData();
-                        task.execute("http://192.168.219.102/profile_change.php", userid, editPass1.getText().toString());
+                        //비밀번호가 6자 이상이면
+                        if(editPass1.getText().length() >= 6){
+                            //기존 비밀번호와 같다면
+                            if(pw.equals(editPass1.getText().toString())){
+                                Toast.makeText(getApplicationContext(), "기존 비밀번호와 같습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                            //기존 비밀번호와 다르다면
+                            else {
+                                profile_change.GetData task = new profile_change.GetData();
+                                task.execute("http://192.168.219.102/profile_change.php", userid, editPass1.getText().toString());
+                            }
+                        }
+                        else {
+                            Toast.makeText(profile_change.this, "비밀번호는 6자 이상이어야 합니다.", Toast.LENGTH_SHORT).show();
+                        }
                     }
                     else {//비밀번호가 다르면
                         Toast.makeText(getApplicationContext(), "비밀번호가 다릅니다.", Toast.LENGTH_SHORT).show();

@@ -167,6 +167,7 @@ public class mypage extends AppCompatActivity {
 
         ProgressDialog progressDialog;
         String errorString = null;
+        String password;
 
         @Override
         protected void onPreExecute() {
@@ -211,6 +212,7 @@ public class mypage extends AppCompatActivity {
                     if(result.equals("확인")){//비밀번호 수정 완료됐을 때
                         Toast.makeText(mypage.this, "비밀번호가 확인되었습니다.", Toast.LENGTH_SHORT).show();
                         i = new Intent(mypage.this, profile_change.class);
+                        i.putExtra("pw", password);
                         startActivity(i);
                     }
                     else{//비번 다를 시
@@ -229,7 +231,7 @@ public class mypage extends AppCompatActivity {
         protected String doInBackground(String... params) {
 
             String userid = (String)params[1];
-            String password = (String)params[2];
+            password = (String)params[2];
             String serverURL = (String)params[0];
             String postParameters = "userid=" + userid + "&password=" + password;
 

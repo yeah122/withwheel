@@ -56,15 +56,22 @@ public class profile_insert extends AppCompatActivity
                 else {//아이디 입력 됐으면
                     //비밀번호가 빈 칸이 아니면
                     if(!password.equals("") && !password2.equals("")){
-                        // 비밀번호가 같으면
-                        if(password.equals(password2)){
-                            InsertData task = new InsertData();
-                            task.execute("http://" + IP_ADDRESS + "/insert.php", userid, password);
+                        //비밀번호가 6자 이상이면
+                        if(password.length() >= 6){
+                            // 비밀번호가 같으면
+                            if(password.equals(password2)){
+                                InsertData task = new InsertData();
+                                task.execute("http://" + IP_ADDRESS + "/insert.php", userid, password);
+                            }
+
+                            else {//비밀번호가 다르면
+                                Toast.makeText(profile_insert.this, "비밀번호가 다릅니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        else {
+                            Toast.makeText(profile_insert.this, "비밀번호는 6자 이상이어야 합니다.", Toast.LENGTH_SHORT).show();
                         }
 
-                        else {//비밀번호가 다르면
-                            Toast.makeText(profile_insert.this, "비밀번호가 다릅니다.", Toast.LENGTH_SHORT).show();
-                        }
                     }
                     else {
                         Toast.makeText(profile_insert.this, "비밀번호를 모두 입력하세요.", Toast.LENGTH_SHORT).show();
